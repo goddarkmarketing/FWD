@@ -12,8 +12,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: fwd-pages-deploy
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -32,6 +32,13 @@ jobs:
 
       - name: Build static site
         run: php scripts/build-static.php /FWD
+
+      - name: Verify build output
+        run: |
+          test -f docs/index.html
+          test -f docs/contact.html
+          grep -q 'plan-grid' docs/index.html
+          find docs -name '*.html' | wc -l
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

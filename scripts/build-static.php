@@ -81,19 +81,31 @@ function render_php(string $phpFile, array $get, string $scriptBasename): string
 {
     global $root, $baseUrl;
 
-    $phpBin = PHP_BINARY;
     $renderScript = $root . '/scripts/render-one.php';
     $queryJson = json_encode($get, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-    $cmd = escapeshellarg($phpBin) . ' '
-        . escapeshellarg($renderScript) . ' '
-        . escapeshellarg($baseUrl) . ' '
-        . escapeshellarg($phpFile) . ' '
-        . escapeshellarg($scriptBasename) . ' '
-        . escapeshellarg($queryJson);
+    $cmd = [PHP_BINARY, $renderScript, $baseUrl, $phpFile, $scriptBasename, $queryJson];
 
-    $html = shell_exec($cmd);
-    if (!is_string($html) || $html === '') {
-        throw new RuntimeException('Failed to render ' . $phpFile);
+    $descriptors = [
+        0 => ['pipe', 'r'],
+        1 => ['pipe', 'w'],
+        2 => ['pipe', 'w'],
+    ];
+    $process = proc_open($cmd, $descriptors, $pipes, $root);
+    if (!is_resource($process)) {
+        throw new RuntimeException('Failed to start render process for ' . $phpFile);
+    }
+
+    fclose($pipes[0]);
+    $html = stream_get_contents($pipes[1]);
+    $stderr = stream_get_contents($pipes[2]);
+    fclose($pipes[1]);
+    fclose($pipes[2]);
+    $exitCode = proc_close($process);
+
+    if ($exitCode !== 0 || !is_string($html) || $html === '') {
+        throw new RuntimeException(
+            'Failed to render ' . $phpFile . ' (exit ' . $exitCode . '): ' . trim((string) $stderr)
+        );
     }
 
     return postprocess_html($html);
