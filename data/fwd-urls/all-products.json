@@ -1,0 +1,261 @@
+[
+    {
+        "slug": "health-family-sharing",
+        "title": "Health Family Sharing",
+        "category": "health",
+        "category_label": "ประกันสุขภาพ",
+        "fwd_url": "https://www.fwd.co.th/th/health-insurance/health-family-sharing/"
+    },
+    {
+        "slug": "hospital-benefit",
+        "title": "Hospital Benefit",
+        "category": "health",
+        "category_label": "ประกันสุขภาพ",
+        "fwd_url": "https://www.fwd.co.th/th/health-insurance/hospital-benefit/"
+    },
+    {
+        "slug": "hospital-benefit-plus",
+        "title": "Hospital Benefit Plus",
+        "category": "health",
+        "category_label": "ประกันสุขภาพ",
+        "fwd_url": "https://www.fwd.co.th/th/health-insurance/hospital-benefit-plus/"
+    },
+    {
+        "slug": "opd-plus",
+        "title": "OPD Plus",
+        "category": "health",
+        "category_label": "ประกันสุขภาพ",
+        "fwd_url": "https://www.fwd.co.th/th/health-insurance/opd-plus/"
+    },
+    {
+        "slug": "precious-care",
+        "title": "FWD Precious Care",
+        "category": "health",
+        "category_label": "ประกันสุขภาพ",
+        "fwd_url": "https://www.fwd.co.th/th/health-insurance/precious-care/"
+    },
+    {
+        "slug": "precious-care-for-kids",
+        "title": "FWD Precious Care for Kids",
+        "category": "health",
+        "category_label": "ประกันสุขภาพ",
+        "fwd_url": "https://www.fwd.co.th/th/health-insurance/precious-care-for-kids/"
+    },
+    {
+        "slug": "precious-protection",
+        "title": "FWD Precious Protection",
+        "category": "health",
+        "category_label": "ประกันสุขภาพ",
+        "fwd_url": "https://www.fwd.co.th/th/health-insurance/precious-protection/"
+    },
+    {
+        "slug": "prima-care",
+        "title": "Prima Care",
+        "category": "health",
+        "category_label": "ประกันสุขภาพ",
+        "fwd_url": "https://www.fwd.co.th/th/health-insurance/prima-care/"
+    },
+    {
+        "slug": "cancer-fighter",
+        "title": "Cancer Fighter",
+        "category": "critical",
+        "category_label": "ประกันโรคร้ายแรง",
+        "fwd_url": "https://www.fwd.co.th/th/critical-illness-insurance/cancer-fighter/"
+    },
+    {
+        "slug": "cancer-knockout",
+        "title": "Cancer Knockout",
+        "category": "critical",
+        "category_label": "ประกันโรคร้ายแรง",
+        "fwd_url": "https://www.fwd.co.th/th/critical-illness-insurance/cancer-knockout/"
+    },
+    {
+        "slug": "ci-50",
+        "title": "CI 50",
+        "category": "critical",
+        "category_label": "ประกันโรคร้ายแรง",
+        "fwd_url": "https://www.fwd.co.th/th/critical-illness-insurance/ci-50/"
+    },
+    {
+        "slug": "ci-all-in-one",
+        "title": "CI All-in-One",
+        "category": "critical",
+        "category_label": "ประกันโรคร้ายแรง",
+        "fwd_url": "https://www.fwd.co.th/th/critical-illness-insurance/ci-all-in-one/"
+    },
+    {
+        "slug": "ci-cash-a-day",
+        "title": "CI Cash A Day",
+        "category": "critical",
+        "category_label": "ประกันโรคร้ายแรง",
+        "fwd_url": "https://www.fwd.co.th/th/critical-illness-insurance/ci-cash-a-day/"
+    },
+    {
+        "slug": "ci-fixed-pay",
+        "title": "CI Fixed Pay",
+        "category": "critical",
+        "category_label": "ประกันโรคร้ายแรง",
+        "fwd_url": "https://www.fwd.co.th/th/critical-illness-insurance/ci-fixed-pay/"
+    },
+    {
+        "slug": "ci-med-all",
+        "title": "CI Med-ALL",
+        "category": "critical",
+        "category_label": "ประกันโรคร้ายแรง",
+        "fwd_url": "https://www.fwd.co.th/th/critical-illness-insurance/ci-med-all/"
+    },
+    {
+        "slug": "ci-reclaim-recare",
+        "title": "CI Re-Claim Re-Care",
+        "category": "critical",
+        "category_label": "ประกันโรคร้ายแรง",
+        "fwd_url": "https://www.fwd.co.th/th/critical-illness-insurance/ci-reclaim-recare/"
+    },
+    {
+        "slug": "ci-reclaim-recare-plus",
+        "title": "CI Re-Claim Re-Care Plus",
+        "category": "critical",
+        "category_label": "ประกันโรคร้ายแรง",
+        "fwd_url": "https://www.fwd.co.th/th/critical-illness-insurance/ci-reclaim-recare-plus/"
+    },
+    {
+        "slug": "be-sure",
+        "title": "Be Sure",
+        "category": "life-accident",
+        "category_label": "ประกันชีวิตและอุบัติเหตุ",
+        "fwd_url": "https://www.fwd.co.th/th/life-and-accident-insurance/be-sure/"
+    },
+    {
+        "slug": "heritage-plus",
+        "title": "FWD Heritage Plus",
+        "category": "life-accident",
+        "category_label": "ประกันชีวิตและอุบัติเหตุ",
+        "fwd_url": "https://www.fwd.co.th/th/life-and-accident-insurance/heritage-plus/"
+    },
+    {
+        "slug": "prakan-kon-jing",
+        "title": "ประกันคนจริง",
+        "category": "life-accident",
+        "category_label": "ประกันชีวิตและอุบัติเหตุ",
+        "fwd_url": "https://www.fwd.co.th/th/life-and-accident-insurance/prakan-kon-jing/"
+    },
+    {
+        "slug": "prakan-kon-kla",
+        "title": "ประกันคนกล้า",
+        "category": "life-accident",
+        "category_label": "ประกันชีวิตและอุบัติเหตุ",
+        "fwd_url": "https://www.fwd.co.th/th/life-and-accident-insurance/prakan-kon-kla/"
+    },
+    {
+        "slug": "prakan-kon-kla-max",
+        "title": "ประกันคนกล้า MAX",
+        "category": "life-accident",
+        "category_label": "ประกันชีวิตและอุบัติเหตุ",
+        "fwd_url": "https://www.fwd.co.th/th/life-and-accident-insurance/prakan-kon-kla-max/"
+    },
+    {
+        "slug": "prakan-kon-klang",
+        "title": "ประกันคนกลาง",
+        "category": "life-accident",
+        "category_label": "ประกันชีวิตและอุบัติเหตุ",
+        "fwd_url": "https://www.fwd.co.th/th/life-and-accident-insurance/prakan-kon-klang/"
+    },
+    {
+        "slug": "value-protector",
+        "title": "Value Protector",
+        "category": "life-accident",
+        "category_label": "ประกันชีวิตและอุบัติเหตุ",
+        "fwd_url": "https://www.fwd.co.th/th/life-and-accident-insurance/value-protector/"
+    },
+    {
+        "slug": "whole-life",
+        "title": "Whole Life 99/99",
+        "category": "life-accident",
+        "category_label": "ประกันชีวิตและอุบัติเหตุ",
+        "fwd_url": "https://www.fwd.co.th/th/life-and-accident-insurance/whole-life/"
+    },
+    {
+        "slug": "whole-life-extra",
+        "title": "Whole Life Extra",
+        "category": "life-accident",
+        "category_label": "ประกันชีวิตและอุบัติเหตุ",
+        "fwd_url": "https://www.fwd.co.th/th/life-and-accident-insurance/whole-life-extra/"
+    },
+    {
+        "slug": "fwd-for-saving-25-15",
+        "title": "FWD For Saving 25/15",
+        "category": "savings",
+        "category_label": "ประกันสะสมทรัพย์",
+        "fwd_url": "https://www.fwd.co.th/th/savings-insurance/fwd-for-saving-25-15/"
+    },
+    {
+        "slug": "fwd-life-saving-18-9",
+        "title": "FWD Life Saving 18/9",
+        "category": "savings",
+        "category_label": "ประกันสะสมทรัพย์",
+        "fwd_url": "https://www.fwd.co.th/th/savings-insurance/fwd-life-saving-18-9/"
+    },
+    {
+        "slug": "fwd-life-saving-30-15",
+        "title": "FWD Life Saving 30/15",
+        "category": "savings",
+        "category_label": "ประกันสะสมทรัพย์",
+        "fwd_url": "https://www.fwd.co.th/th/savings-insurance/fwd-life-saving-30-15/"
+    },
+    {
+        "slug": "fwd-power-saving",
+        "title": "FWD Power Saving 12/6",
+        "category": "savings",
+        "category_label": "ประกันสะสมทรัพย์",
+        "fwd_url": "https://www.fwd.co.th/th/savings-insurance/fwd-power-saving/"
+    },
+    {
+        "slug": "fwd-savvy-pension",
+        "title": "FWD Savvy Pension",
+        "category": "savings",
+        "category_label": "ประกันสะสมทรัพย์",
+        "fwd_url": "https://www.fwd.co.th/th/savings-insurance/fwd-savvy-pension/"
+    },
+    {
+        "slug": "fwd-sure-pension",
+        "title": "FWD Sure Pension",
+        "category": "savings",
+        "category_label": "ประกันสะสมทรัพย์",
+        "fwd_url": "https://www.fwd.co.th/th/savings-insurance/fwd-sure-pension/"
+    },
+    {
+        "slug": "lifetime-return",
+        "title": "FWD Lifetime Return 99/15",
+        "category": "savings",
+        "category_label": "ประกันสะสมทรัพย์",
+        "fwd_url": "https://www.fwd.co.th/th/savings-insurance/lifetime-return/"
+    },
+    {
+        "slug": "fwd-freedom-linked-plus",
+        "title": "FWD Freedom Linked Plus 15/5",
+        "category": "investment",
+        "category_label": "ประกันชีวิตควบการลงทุน",
+        "fwd_url": "https://www.fwd.co.th/th/investment-linked-insurance/fwd-freedom-linked-plus/"
+    },
+    {
+        "slug": "fwd-future-linked-99-9",
+        "title": "FWD Future Linked 99/9",
+        "category": "investment",
+        "category_label": "ประกันชีวิตควบการลงทุน",
+        "fwd_url": "https://www.fwd.co.th/th/investment-linked-insurance/fwd-future-linked-99-9/"
+    },
+    {
+        "slug": "fwd-one-linked",
+        "title": "FWD One Linked",
+        "category": "investment",
+        "category_label": "ประกันชีวิตควบการลงทุน",
+        "fwd_url": "https://www.fwd.co.th/th/investment-linked-insurance/fwd-one-linked/"
+    },
+    {
+        "slug": "fwd-ultra-linked-99-99",
+        "title": "FWD Ultra Linked 99/99",
+        "category": "investment",
+        "category_label": "ประกันชีวิตควบการลงทุน",
+        "fwd_url": "https://www.fwd.co.th/th/investment-linked-insurance/fwd-ultra-linked-99-99/"
+    }
+]

@@ -1,0 +1,475 @@
+{
+  "downloaded_at": "2026-06-02T03:13:21.742Z",
+  "ok": 52,
+  "fail": 0,
+  "items": [
+    {
+      "slug": "easy-e-health",
+      "url": "https://www.fwd.co.th/th/health-insurance/easy-e-health/",
+      "status": "ok",
+      "bytes": 307734,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/easy-e-health.htm"
+    },
+    {
+      "slug": "e-health-eco",
+      "url": "https://www.fwd.co.th/th/health-insurance/e-health-eco/",
+      "status": "ok",
+      "bytes": 291298,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/e-health-eco.htm"
+    },
+    {
+      "slug": "e-health-add-up",
+      "url": "https://www.fwd.co.th/th/health-insurance/e-health-add-up/",
+      "status": "ok",
+      "bytes": 306168,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/e-health-add-up.htm"
+    },
+    {
+      "slug": "opd-plus",
+      "url": "https://www.fwd.co.th/th/health-insurance/opd-plus/",
+      "status": "ok",
+      "bytes": 2422640,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/opd-plus.htm"
+    },
+    {
+      "slug": "precious-care",
+      "url": "https://www.fwd.co.th/th/health-insurance/precious-care/",
+      "status": "ok",
+      "bytes": 2392010,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/precious-care.htm"
+    },
+    {
+      "slug": "precious-care-for-kids",
+      "url": "https://www.fwd.co.th/th/products/health/precious-care-for-kids/",
+      "status": "ok",
+      "bytes": 2668261,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/precious-care-for-kids.htm"
+    },
+    {
+      "slug": "precious-protection",
+      "url": "https://www.fwd.co.th/th/health-insurance/precious-protection/",
+      "status": "ok",
+      "bytes": 1577035,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/precious-protection.htm"
+    },
+    {
+      "slug": "prima-care",
+      "url": "https://www.fwd.co.th/th/health-insurance/prima-care/",
+      "status": "ok",
+      "bytes": 2462977,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/prima-care.htm"
+    },
+    {
+      "slug": "delight-care",
+      "url": "https://www.fwd.co.th/th/health-insurance/health-delight-care/",
+      "status": "ok",
+      "bytes": 2661449,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/delight-care.htm"
+    },
+    {
+      "slug": "hospital-benefit",
+      "url": "https://www.fwd.co.th/th/health-insurance/hospital-benefit/",
+      "status": "ok",
+      "bytes": 2041932,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/hospital-benefit.htm"
+    },
+    {
+      "slug": "mind-strength",
+      "url": "https://www.fwd.co.th/th/health-insurance/mind-strength/",
+      "status": "ok",
+      "bytes": 3363071,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/mind-strength.htm"
+    },
+    {
+      "slug": "health-family-sharing",
+      "url": "https://www.fwd.co.th/th/health-insurance/health-family-sharing/",
+      "status": "ok",
+      "bytes": 1420366,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/health-family-sharing.htm"
+    },
+    {
+      "slug": "easy-e-cancer",
+      "url": "https://www.fwd.co.th/th/critical-illness-insurance/fwd-easy-e-cancer/",
+      "status": "ok",
+      "bytes": 287970,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/easy-e-cancer.htm"
+    },
+    {
+      "slug": "fwd-easy-cancer-agent",
+      "url": "https://www.fwd.co.th/th/critical-illness-insurance/fwd-easy-cancer/agent-channel/",
+      "status": "ok",
+      "bytes": 1445671,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-easy-cancer-agent.htm"
+    },
+    {
+      "slug": "cancer-knockout",
+      "url": "https://www.fwd.co.th/th/critical-illness-insurance/cancer-knockout/",
+      "status": "ok",
+      "bytes": 2824949,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/cancer-knockout.htm"
+    },
+    {
+      "slug": "cancer-plus",
+      "url": "https://www.fwd.co.th/th/critical-illness-insurance/cancer-plus/",
+      "status": "ok",
+      "bytes": 671626,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/cancer-plus.htm"
+    },
+    {
+      "slug": "ci-fixed-pay",
+      "url": "https://www.fwd.co.th/th/critical-illness-insurance/ci-fixed-pay/",
+      "status": "ok",
+      "bytes": 2651966,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/ci-fixed-pay.htm"
+    },
+    {
+      "slug": "ci-complete-care",
+      "url": "https://www.fwd.co.th/th/critical-illness-insurance/ci-complete-care/",
+      "status": "ok",
+      "bytes": 671670,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/ci-complete-care.htm"
+    },
+    {
+      "slug": "ci-med-all",
+      "url": "https://www.fwd.co.th/th/critical-illness-insurance/ci-med-all/",
+      "status": "ok",
+      "bytes": 1446047,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/ci-med-all.htm"
+    },
+    {
+      "slug": "big-3",
+      "url": "https://www.fwd.co.th/th/critical-illness-insurance/big-3/",
+      "status": "ok",
+      "bytes": 303174,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/big-3.htm"
+    },
+    {
+      "slug": "easy-e-heart",
+      "url": "https://www.fwd.co.th/th/critical-illness-insurance/easy-e-heart/",
+      "status": "ok",
+      "bytes": 280275,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/easy-e-heart.htm"
+    },
+    {
+      "slug": "easy-e-stroke",
+      "url": "https://www.fwd.co.th/th/critical-illness-insurance/easy-e-stroke/",
+      "status": "ok",
+      "bytes": 279867,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/easy-e-stroke.htm"
+    },
+    {
+      "slug": "life-up",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/life-up/",
+      "status": "ok",
+      "bytes": 3411828,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/life-up.htm"
+    },
+    {
+      "slug": "fwd-healthy-max",
+      "url": "https://www.fwd.co.th/th/products/health/fwd-healthy-max/",
+      "status": "ok",
+      "bytes": 671542,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-healthy-max.htm"
+    },
+    {
+      "slug": "easy-e-life",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/easy-e-life/",
+      "status": "ok",
+      "bytes": 265024,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/easy-e-life.htm"
+    },
+    {
+      "slug": "easy-all-in-one",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/easy-all-in-one/",
+      "status": "ok",
+      "bytes": 299404,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/easy-all-in-one.htm"
+    },
+    {
+      "slug": "be-sure",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/be-sure/",
+      "status": "ok",
+      "bytes": 2590950,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/be-sure.htm"
+    },
+    {
+      "slug": "whole-life",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/whole-life/",
+      "status": "ok",
+      "bytes": 2593473,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/whole-life.htm"
+    },
+    {
+      "slug": "whole-life-extra",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/whole-life-extra/",
+      "status": "ok",
+      "bytes": 2729296,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/whole-life-extra.htm"
+    },
+    {
+      "slug": "value-protector",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/value-protector/",
+      "status": "ok",
+      "bytes": 2894474,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/value-protector.htm"
+    },
+    {
+      "slug": "prakan-kon-jing",
+      "url": "https://www.fwd.co.th/th/accident/prakan-kon-jing/",
+      "status": "ok",
+      "bytes": 2356002,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/prakan-kon-jing.htm"
+    },
+    {
+      "slug": "prakan-kon-kla",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/prakan-kon-kla/",
+      "status": "ok",
+      "bytes": 2318107,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/prakan-kon-kla.htm"
+    },
+    {
+      "slug": "prakan-kon-kla-max",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/prakan-kon-kla-max/",
+      "status": "ok",
+      "bytes": 2478946,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/prakan-kon-kla-max.htm"
+    },
+    {
+      "slug": "prakan-kon-klang",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/prakan-kon-klang/",
+      "status": "ok",
+      "bytes": 2265829,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/prakan-kon-klang.htm"
+    },
+    {
+      "slug": "easy-e-pa",
+      "url": "https://www.fwd.co.th/th/life-and-accident-insurance/easy-e-pa/",
+      "status": "ok",
+      "bytes": 246749,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/easy-e-pa.htm"
+    },
+    {
+      "slug": "easy-e-save",
+      "url": "https://www.fwd.co.th/th/savings-insurance/easy-e-save/",
+      "status": "ok",
+      "bytes": 301606,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/easy-e-save.htm"
+    },
+    {
+      "slug": "speed-saving-12-3",
+      "url": "https://www.fwd.co.th/th/savings-insurance/speed-saving-12-3/",
+      "status": "ok",
+      "bytes": 276681,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/speed-saving-12-3.htm"
+    },
+    {
+      "slug": "fwd-power-saving-12-6",
+      "url": "https://www.fwd.co.th/th/savings-insurance/fwd-power-saving/",
+      "status": "ok",
+      "bytes": 1453097,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-power-saving-12-6.htm"
+    },
+    {
+      "slug": "fwd-for-saving-20-10",
+      "url": "https://www.fwd.co.th/th/savings-insurance/fwd-for-saving-20-10/",
+      "status": "ok",
+      "bytes": 2034718,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-for-saving-20-10.htm"
+    },
+    {
+      "slug": "fwd-for-saving-25-15",
+      "url": "https://www.fwd.co.th/th/savings-insurance/fwd-for-saving-25-15/",
+      "status": "ok",
+      "bytes": 2032599,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-for-saving-25-15.htm"
+    },
+    {
+      "slug": "fwd-life-saving-18-9",
+      "url": "https://www.fwd.co.th/th/savings-insurance/fwd-life-saving-18-9/",
+      "status": "ok",
+      "bytes": 2034492,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-life-saving-18-9.htm"
+    },
+    {
+      "slug": "fwd-life-saving-30-15",
+      "url": "https://www.fwd.co.th/th/savings-insurance/fwd-life-saving-30-15/",
+      "status": "ok",
+      "bytes": 2032448,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-life-saving-30-15.htm"
+    },
+    {
+      "slug": "fwd-ultimate-saving-12-6",
+      "url": "https://www.fwd.co.th/th/savings-insurance/fwd-ultimate-saving-12-6/",
+      "status": "ok",
+      "bytes": 3270141,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-ultimate-saving-12-6.htm"
+    },
+    {
+      "slug": "whole-life-99-15",
+      "url": "https://www.fwd.co.th/th/savings-insurance/whole-life-99-15/",
+      "status": "ok",
+      "bytes": 671704,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/whole-life-99-15.htm"
+    },
+    {
+      "slug": "easy-e-retire-90-5",
+      "url": "https://www.fwd.co.th/th/savings-insurance/easy-e-retire-90-5/",
+      "status": "ok",
+      "bytes": 281660,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/easy-e-retire-90-5.htm"
+    },
+    {
+      "slug": "smart-e-retire-85-60",
+      "url": "https://www.fwd.co.th/th/savings-insurance/smart-e-retire-85-60/",
+      "status": "ok",
+      "bytes": 265609,
+      "has_next_data": true,
+      "has_product": true,
+      "file": "data/fwd-pages/smart-e-retire-85-60.htm"
+    },
+    {
+      "slug": "fwd-for-pension",
+      "url": "https://www.fwd.co.th/th/savings-insurance/fwd-for-pension/",
+      "status": "ok",
+      "bytes": 3270114,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-for-pension.htm"
+    },
+    {
+      "slug": "fwd-future-linked-99-9",
+      "url": "https://www.fwd.co.th/th/investment-linked-insurance/fwd-future-linked-99-9/",
+      "status": "ok",
+      "bytes": 2327887,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-future-linked-99-9.htm"
+    },
+    {
+      "slug": "fwd-one-linked",
+      "url": "https://www.fwd.co.th/th/investment-linked-insurance/fwd-one-linked/",
+      "status": "ok",
+      "bytes": 2321768,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-one-linked.htm"
+    },
+    {
+      "slug": "fwd-ultra-linked-99-99",
+      "url": "https://www.fwd.co.th/th/investment-linked-insurance/fwd-ultra-linked-99-99/",
+      "status": "ok",
+      "bytes": 2328321,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-ultra-linked-99-99.htm"
+    },
+    {
+      "slug": "fwd-freedom-linked",
+      "url": "https://www.fwd.co.th/th/investment-linked-insurance/fwd-freedom-linked/",
+      "status": "ok",
+      "bytes": 671566,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-freedom-linked.htm"
+    },
+    {
+      "slug": "fwd-freedom-linked-plus",
+      "url": "https://www.fwd.co.th/th/investment-linked-insurance/fwd-freedom-linked-plus/",
+      "status": "ok",
+      "bytes": 1484018,
+      "has_next_data": true,
+      "has_product": false,
+      "file": "data/fwd-pages/fwd-freedom-linked-plus.htm"
+    }
+  ]
+}

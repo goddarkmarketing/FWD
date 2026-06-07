@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "easy-e-stroke",
+    "url": "https://www.fwd.co.th/th/critical-illness-insurance/easy-e-stroke/",
+    "product_id": "T09A"
+  },
+  {
+    "slug": "easy-e-health",
+    "url": "https://www.fwd.co.th/th/health-insurance/easy-e-health/",
+    "product_id": "T12A"
+  },
+  {
+    "slug": "easy-all-in-one",
+    "url": "https://www.fwd.co.th/th/life-and-accident-insurance/easy-all-in-one/",
+    "product_id": "EAIO"
+  },
+  {
+    "slug": "easy-e-life",
+    "url": "https://www.fwd.co.th/th/life-and-accident-insurance/easy-e-life/",
+    "product_id": "E47A"
+  },
+  {
+    "slug": "easy-e-cancer",
+    "url": "https://www.fwd.co.th/th/critical-illness-insurance/easy-e-cancer/"
+  },
+  {
+    "slug": "easy-e-accident",
+    "url": "https://www.fwd.co.th/th/life-and-accident-insurance/easy-e-accident/"
+  }
+]

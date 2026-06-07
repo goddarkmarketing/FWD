@@ -1,0 +1,50 @@
+<?php
+/**
+ * โปรโมชัน — ใช้ร่วมกันหน้าแรกและหน้า promotions.php (ผลิตภัณฑ์ช่องทางตัวแทน)
+ */
+function promotions_all(): array
+{
+    return [
+        [
+            'badge' => 'แนะนำ',
+            'badge_variant' => 'orange',
+            'date' => 'ถึง 30 มิ.ย. 2026',
+            'title' => 'FWD Precious Care — ประกันสุขภาพระดับพรีเมียม',
+            'desc' => 'คุ้มครองค่ารักษาครบทั้ง IPD และ OPD วงเงินสูง ปรึกษาตัวแทน FWD ฟรี',
+            'url' => 'plan.php?slug=precious-care',
+            'cta' => 'ดูผลิตภัณฑ์',
+        ],
+        [
+            'badge' => 'โรคร้ายแรง',
+            'badge_variant' => 'aqua',
+            'date' => 'ตลอดปี 2026',
+            'title' => 'CI All-in-One — ครบในหนึ่งเดียว',
+            'desc' => 'คุ้มครอง 50 โรคร้ายแรง เงินก้อน ค่ารักษา และชดเชยรายวัน',
+            'url' => 'plan.php?slug=ci-all-in-one',
+            'cta' => 'ดูผลิตภัณฑ์',
+        ],
+        [
+            'badge' => 'มะเร็ง',
+            'badge_variant' => 'orange',
+            'date' => 'ถึง 31 ก.ค. 2026',
+            'title' => 'Cancer Knockout — สู้มะเร็งได้เต็มที่',
+            'desc' => 'คุ้มครองทั้งชีวิตและมะเร็งทุกระยะ สูงสุดถึง 3 ล้านบาท',
+            'url' => 'plan.php?slug=cancer-knockout',
+            'cta' => 'ดูผลิตภัณฑ์',
+        ],
+        [
+            'badge' => 'ปรึกษาฟรี',
+            'badge_variant' => 'green',
+            'date' => 'ตลอดปี 2026',
+            'title' => 'วางแผนประกันชีวิตกับตัวแทน FWD',
+            'desc' => 'Be Sure และแผนชีวิตอื่น ๆ — ออกแบบความคุ้มครองให้ตรงเป้าหมาย',
+            'url' => 'plan.php?slug=be-sure',
+            'cta' => 'ดูผลิตภัณฑ์',
+        ],
+    ];
+}
+
+function promotions_home(): array
+{
+    return array_slice(promotions_all(), 0, 2);
+}

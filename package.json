@@ -1,0 +1,13 @@
+{
+  "name": "fwd",
+  "version": "1.0.0",
+  "description": "เว็บไซต์หลายหน้าจำลองโทนและโครงสร้าง [FWD ประเทศไทย](https://www.fwd.co.th/th/) สำหรับรันบน XAMPP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

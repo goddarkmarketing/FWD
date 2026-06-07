@@ -1,0 +1,74 @@
+{
+    "easy-e-stroke": {
+        "url": "https:\/\/www.fwd.co.th\/th\/critical-illness-insurance\/easy-e-stroke\/",
+        "fetched_at": "2026-06-01T19:11:21+02:00",
+        "packages": [
+            {
+                "name": "Economy"
+            },
+            {
+                "name": "Standard"
+            },
+            {
+                "name": "Premium"
+            }
+        ],
+        "premium_examples": [
+            "\nเบี้ยประกันปีที่ 1 – ปีที่ 5: 665 บาท\/ปี"
+        ],
+        "product_id": "T09A"
+    },
+    "easy-e-health": {
+        "url": "https:\/\/www.fwd.co.th\/th\/health-insurance\/easy-e-health\/",
+        "fetched_at": "2026-06-01T19:11:23+02:00",
+        "packages": [
+            {
+                "name": "premium",
+                "sum": 500
+            },
+            {
+                "name": "premium",
+                "sum": 30000
+            }
+        ],
+        "premium_examples": [],
+        "product_id": "T12A"
+    },
+    "easy-all-in-one": {
+        "url": "https:\/\/www.fwd.co.th\/th\/life-and-accident-insurance\/easy-all-in-one\/",
+        "fetched_at": "2026-06-01T19:11:24+02:00",
+        "packages": [
+            {
+                "name": "premium",
+                "sum": 500
+            },
+            {
+                "name": "premium",
+                "sum": 30000
+            }
+        ],
+        "premium_examples": [],
+        "product_id": "EAIO"
+    },
+    "easy-e-life": {
+        "url": "https:\/\/www.fwd.co.th\/th\/life-and-accident-insurance\/easy-e-life\/",
+        "fetched_at": "2026-06-01T19:11:26+02:00",
+        "packages": [
+            {
+                "name": "Standard"
+            }
+        ],
+        "premium_examples": [],
+        "product_id": "E47A"
+    },
+    "easy-e-accident": {
+        "url": "https:\/\/www.fwd.co.th\/th\/life-and-accident-insurance\/easy-e-accident\/",
+        "fetched_at": "2026-06-01T19:11:27+02:00",
+        "packages": [],
+        "premium_examples": []
+    },
+    "easy-e-cancer": {
+        "error": "fetch failed",
+        "url": "https:\/\/www.fwd.co.th\/th\/critical-illness-insurance\/easy-e-cancer\/"
+    }
+}
