@@ -28,7 +28,7 @@ $interests = [
 <section class="page-hero page-hero--orange">
     <div class="container">
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
-            <a href="index.php">หน้าแรก</a> / ติดต่อเรา
+            <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> / ติดต่อเรา
         </nav>
         <h1>ขอคำปรึกษาฟรี</h1>
         <p class="page-hero__lead">ฝากข้อมูลไว้ ผู้เชี่ยวชาญของเราจะติดต่อกลับโดยเร็วที่สุด ไม่มีค่าใช้จ่าย</p>

@@ -7,7 +7,7 @@ require_once __DIR__ . '/includes/header.php';
 <section class="page-hero">
     <div class="container">
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
-            <a href="index.php">หน้าแรก</a> / การเคลม
+            <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> / การเคลม
         </nav>
         <h1>การเคลมประกัน</h1>
         <p class="page-hero__lead">เคลมออนไลน์ได้ตลอด 24 ชั่วโมง หรือติดต่อศูนย์บริการลูกค้า 1351</p>
@@ -53,7 +53,7 @@ require_once __DIR__ . '/includes/header.php';
                     <li>แจ้งเคลมประกันโรคร้ายแรง</li>
                     <li>ติดตามสถานะแบบเรียลไทม์</li>
                 </ul>
-                <a href="contact.php" class="btn btn--primary">ติดต่อศูนย์บริการ</a>
+                <a href="<?= htmlspecialchars(page_url('contact.php')) ?>" class="btn btn--primary">ติดต่อศูนย์บริการ</a>
             </div>
             <div class="feature-row__media">
                 <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80" alt="เคลมออนไลน์" loading="lazy">

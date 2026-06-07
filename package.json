@@ -4,6 +4,7 @@
   "description": "เว็บไซต์หลายหน้าจำลองโทนและโครงสร้าง [FWD ประเทศไทย](https://www.fwd.co.th/th/) สำหรับรันบน XAMPP",
   "main": "index.js",
   "scripts": {
+    "build:static": "php scripts/build-static.php /FWD",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -10,7 +10,7 @@ if (!isset($products)) {
 <section class="page-hero">
     <div class="container">
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
-            <a href="index.php">หน้าแรก</a> / <?= htmlspecialchars($category_title) ?>
+            <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> / <?= htmlspecialchars($category_title) ?>
         </nav>
         <h1><?= htmlspecialchars($category_title) ?></h1>
         <p class="page-hero__lead"><?= htmlspecialchars($category_lead) ?></p>
@@ -48,7 +48,7 @@ if (!isset($products)) {
             <div class="feature-row__content">
                 <h2>ไม่แน่ใจว่าแผนไหนเหมาะกับคุณ?</h2>
                 <p>ผู้เชี่ยวชาญของเราพร้อมช่วยเปรียบเทียบและแนะนำแผนที่ตรงกับความต้องการและงบประมาณของคุณ</p>
-                <a href="contact.php" class="btn btn--primary">ขอคำปรึกษาฟรี</a>
+                <a href="<?= htmlspecialchars(page_url('contact.php')) ?>" class="btn btn--primary">ขอคำปรึกษาฟรี</a>
             </div>
         </div>
     </div>

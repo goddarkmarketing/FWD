@@ -10,7 +10,7 @@ $articles = articles_all();
 <section class="page-hero page-hero--orange">
     <div class="container">
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
-            <a href="index.php">หน้าแรก</a> / บทความ
+            <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> / บทความ
         </nav>
         <h1>บทความความรู้เรื่องประกัน</h1>
         <p class="page-hero__lead">เคล็ดลับและข้อมูลที่ช่วยให้คุณเลือกประกันได้อย่างมั่นใจ</p>

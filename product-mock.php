@@ -25,8 +25,10 @@ $labels = [
 ];
 $label = $labels[$cat] ?? 'ผลิตภัณฑ์';
 
-header('Content-Type: image/svg+xml; charset=utf-8');
-header('Cache-Control: public, max-age=86400');
+if (php_sapi_name() !== 'cli') {
+    header('Content-Type: image/svg+xml; charset=utf-8');
+    header('Cache-Control: public, max-age=86400');
+}
 
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>

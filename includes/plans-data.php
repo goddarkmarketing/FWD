@@ -7,6 +7,10 @@
 
 function plan_mock_image_path(string $category, int $index): string
 {
+    if (defined('FWD_STATIC_BUILD') && FWD_STATIC_BUILD) {
+        return 'assets/mock/' . rawurlencode($category) . '-' . $index . '.svg';
+    }
+
     return 'product-mock.php?cat=' . rawurlencode($category) . '&n=' . $index;
 }
 

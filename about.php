@@ -7,7 +7,7 @@ require_once __DIR__ . '/includes/header.php';
 <section class="page-hero page-hero--orange">
     <div class="container">
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
-            <a href="index.php">หน้าแรก</a> / เกี่ยวกับ FWD
+            <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> / เกี่ยวกับ FWD
         </nav>
         <h1>เกี่ยวกับ FWD</h1>
         <p class="page-hero__lead">เราเชื่อว่าประกันไม่ควรซับซ้อน — ควรช่วยให้คุณใช้ชีวิตได้อย่างมั่นใจและมีความสุข</p>

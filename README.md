@@ -52,3 +52,25 @@ fwd/
 ```
 
 > **หมายเหตุ:** เว็บนี้เป็นเว็บตัวอย่างเพื่อการสาธิต ไม่ใช่เว็บอย่างเป็นทางการของ FWD
+
+## ส่งให้ลูกค้าดูบน GitHub Pages
+
+เว็บ PHP ถูก pre-render เป็น HTML สำหรับ GitHub Pages อัตโนมัติ
+
+**URL หลัง deploy:** https://goddarkmarketing.github.io/FWD/
+
+### Build เอง (ทดสอบก่อน push)
+
+```bash
+php scripts/build-static.php /FWD
+```
+
+ไฟล์ static จะอยู่ในโฟลเดอร์ `docs/` (ไม่ commit — GitHub Actions จะ build ให้ตอน push)
+
+### Deploy
+
+1. Push โค้ดขึ้น `main`
+2. GitHub → Settings → Pages → Source: **GitHub Actions**
+3. Action `Deploy GitHub Pages` จะ build และ deploy ให้อัตโนมัติ
+
+> รันบน XAMPP ตามปกติได้เหมือนเดิม — การ build static ไม่กระทบการพัฒนา PHP

@@ -15,7 +15,7 @@ $first_tab = array_key_first($tabs);
 <section class="page-hero">
     <div class="container">
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
-            <a href="index.php">หน้าแรก</a> /
+            <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> /
             <a href="<?= htmlspecialchars($category_url) ?>"><?= htmlspecialchars($category_name) ?></a> /
             <?= htmlspecialchars($product_name) ?>
         </nav>
@@ -70,7 +70,7 @@ $first_tab = array_key_first($tabs);
 
             <?php if (isset($tabs['promo'])): ?>
             <div class="tab-panel" data-panel="promo">
-                <p>โปรโมชันปัจจุบัน: <a href="promotions.php">ดูโปรโมชันทั้งหมด</a></p>
+                <p>โปรโมชันปัจจุบัน: <a href="<?= htmlspecialchars(page_url('promotions.php')) ?>">ดูโปรโมชันทั้งหมด</a></p>
             </div>
             <?php endif; ?>
         </div>
@@ -79,8 +79,8 @@ $first_tab = array_key_first($tabs);
             <span class="product-tile__tag">ซื้อออนไลน์</span>
             <h3><?= htmlspecialchars($product_name) ?></h3>
             <p class="price"><?= htmlspecialchars($product_price) ?> <small><?= htmlspecialchars($product_price_note ?? '/เดือน') ?></small></p>
-            <a href="contact.php" class="btn btn--primary">ซื้อออนไลน์</a>
-            <a href="contact.php" class="btn btn--outline" style="margin-top: 0.5rem;">ขอคำปรึกษา</a>
+            <a href="<?= htmlspecialchars(page_url('contact.php')) ?>" class="btn btn--primary">ซื้อออนไลน์</a>
+            <a href="<?= htmlspecialchars(page_url('contact.php')) ?>" class="btn btn--outline" style="margin-top: 0.5rem;">ขอคำปรึกษา</a>
             <p style="font-size: 0.8125rem; color: var(--fwd-gray-500); margin-top: 1rem;">เบี้ยประกันขึ้นอยู่กับอายุและแผนที่เลือก ราคาข้างต้นเป็นตัวอย่าง</p>
         </aside>
     </div>

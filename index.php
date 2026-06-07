@@ -161,7 +161,7 @@ $hero_src = $hero_image ?? $hero_mobile;
                     <li>เปรียบเทียบแผนประกันหลายแบบ</li>
                     <li>ซื้อออนไลน์ได้ภายในไม่กี่นาที</li>
                 </ul>
-                <a href="contact.php" class="btn btn--primary">ขอคำปรึกษาฟรี</a>
+                <a href="<?= htmlspecialchars(page_url('contact.php')) ?>" class="btn btn--primary">ขอคำปรึกษาฟรี</a>
             </div>
         </div>
     </div>

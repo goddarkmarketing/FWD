@@ -10,7 +10,7 @@ $all_promos = promotions_all();
 <section class="page-hero page-hero--orange">
     <div class="container">
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
-            <a href="index.php">หน้าแรก</a> / โปรโมชัน
+            <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> / โปรโมชัน
         </nav>
         <h1>โปรโมชันและข้อเสนอพิเศษ</h1>
         <p class="page-hero__lead">ข้อเสนอพิเศษสำหรับผลิตภัณฑ์ที่เลือกซื้อออนไลน์</p>

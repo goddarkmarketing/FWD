@@ -9,8 +9,49 @@ define('CONTACT_PHONE_2', '086-600-4939');
 define('CONTACT_PHONE_2_RAW', '0866004939');
 define('CONTACT_FACEBOOK', 'https://www.facebook.com/share/1DmTYRVhAt/?mibextid=wwXIfr');
 define('CONTACT_LINE', 'https://lin.ee/vYSHQ3O');
-define('BASE_PATH', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\'));
-define('BASE_URL', (BASE_PATH === '' || BASE_PATH === '/') ? '' : BASE_PATH);
+
+if (!defined('FWD_STATIC_BUILD')) {
+    define('FWD_STATIC_BUILD', getenv('FWD_STATIC_BUILD') === '1');
+}
+
+$fwdBaseOverride = getenv('FWD_BASE_URL');
+if ($fwdBaseOverride !== false && $fwdBaseOverride !== '') {
+    $fwdBase = rtrim(str_replace('\\', '/', $fwdBaseOverride), '/');
+    define('BASE_PATH', $fwdBase);
+    define('BASE_URL', $fwdBase === '' ? '' : $fwdBase);
+} else {
+    define('BASE_PATH', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\'));
+    define('BASE_URL', (BASE_PATH === '' || BASE_PATH === '/') ? '' : BASE_PATH);
+}
+
+function static_page_url(string $file): string
+{
+    $fragment = '';
+    if (($pos = strpos($file, '#')) !== false) {
+        $fragment = substr($file, $pos);
+        $file = substr($file, 0, $pos);
+    }
+
+    if (($qpos = strpos($file, '?')) !== false) {
+        $path = substr($file, 0, $qpos);
+        parse_str(substr($file, $qpos + 1), $params);
+        if ($path === 'plan.php' && !empty($params['slug'])) {
+            return BASE_URL . '/plan/' . rawurlencode($params['slug']) . '/' . $fragment;
+        }
+        if ($path === 'article.php' && !empty($params['slug'])) {
+            return BASE_URL . '/article/' . rawurlencode($params['slug']) . '/' . $fragment;
+        }
+        if ($path === 'contact.php') {
+            return BASE_URL . '/contact.html?' . http_build_query($params) . $fragment;
+        }
+    }
+
+    if ($file === '' || $file === 'index.php') {
+        return $fragment !== '' ? BASE_URL . '/' . $fragment : BASE_URL . '/';
+    }
+
+    return BASE_URL . '/' . preg_replace('/\.php$/', '.html', $file) . $fragment;
+}
 
 function asset(string $path): string
 {
@@ -37,6 +78,10 @@ function media_url(string $path): string
 
 function page_url(string $file): string
 {
+    if (FWD_STATIC_BUILD) {
+        return static_page_url($file);
+    }
+
     return BASE_URL . '/' . ltrim($file, '/');
 }
 
