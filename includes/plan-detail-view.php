@@ -119,14 +119,14 @@ $calcJson = htmlspecialchars(json_encode([
                 <a href="#plan-premium-table">ตารางเบี้ยประกันภัย</a>
                 <a href="#plan-compare">เปรียบเทียบแผน</a>
                 <?php endif; ?>
+                <?php if ($brochureUrl !== null): ?>
+                <a href="#plan-brochure">โบรชัวร์ผลิตภัณฑ์</a>
+                <?php endif; ?>
                 <?php if (!empty($p['coverage_blocks'])): ?>
                 <a href="#plan-coverage">รายละเอียดความคุ้มครอง</a>
                 <?php endif; ?>
                 <?php if (!empty($p['faq'])): ?>
                 <a href="#plan-faq">คำถามที่พบบ่อย</a>
-                <?php endif; ?>
-                <?php if ($brochureUrl !== null): ?>
-                <a href="#plan-brochure">โบรชัวร์ผลิตภัณฑ์</a>
                 <?php endif; ?>
                 <a href="#plan-contact-cta">ติดต่อสอบถาม</a>
             </nav>
@@ -239,6 +239,20 @@ $calcJson = htmlspecialchars(json_encode([
             </section>
             <?php endif; ?>
 
+            <?php if ($brochureUrl !== null): ?>
+            <section id="plan-brochure" class="plan-fwd-section plan-brochure">
+                <div class="plan-brochure__card">
+                    <p class="plan-brochure__eyebrow">เอกสาร PDF</p>
+                    <h2 class="plan-brochure__title">โบรชัวร์ผลิตภัณฑ์</h2>
+                    <p class="plan-brochure__desc">รับโบรชัวร์ผลิตภัณฑ์ สำหรับใช้ในการพิจารณาส่วนตัว หรือแบ่งปันให้กับเพื่อนและครอบครัว</p>
+                    <a href="<?= htmlspecialchars($brochureUrl) ?>" class="btn btn--primary plan-brochure__btn" download target="_blank" rel="noopener noreferrer">
+                        <?= icon_download(20) ?>
+                        <span>ดาวน์โหลดโบรชัวร์</span>
+                    </a>
+                </div>
+            </section>
+            <?php endif; ?>
+
             <?php if (!empty($p['coverage_blocks'])): ?>
             <section id="plan-coverage" class="plan-fwd-section plan-fwd-section--gray">
                 <h2 class="plan-fwd-section__title">รายละเอียดความคุ้มครอง</h2>
@@ -295,20 +309,6 @@ $calcJson = htmlspecialchars(json_encode([
                     <p><strong>โปรโมชัน:</strong> <?= $p['promo'] ?></p>
                 </div>
                 <?php endif; ?>
-            </section>
-            <?php endif; ?>
-
-            <?php if ($brochureUrl !== null): ?>
-            <section id="plan-brochure" class="plan-fwd-section plan-brochure">
-                <div class="plan-brochure__card">
-                    <p class="plan-brochure__eyebrow">เอกสาร PDF</p>
-                    <h2 class="plan-brochure__title">โบรชัวร์ผลิตภัณฑ์</h2>
-                    <p class="plan-brochure__desc">รับโบรชัวร์ผลิตภัณฑ์ สำหรับใช้ในการพิจารณาส่วนตัว หรือแบ่งปันให้กับเพื่อนและครอบครัว</p>
-                    <a href="<?= htmlspecialchars($brochureUrl) ?>" class="btn btn--primary plan-brochure__btn" download target="_blank" rel="noopener noreferrer">
-                        <?= icon_download(20) ?>
-                        <span>ดาวน์โหลดโบรชัวร์</span>
-                    </a>
-                </div>
             </section>
             <?php endif; ?>
 
