@@ -23,7 +23,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="steps reveal">
             <div class="step-item">
                 <h3>แจ้งเคลม</h3>
-                <p>แจ้งเคลมผ่านแอป FWD MAX หรือเว็บไซต์ หรือโทร 1351</p>
+                <p>แจ้งเคลมผ่านแอป FWD Omne หรือเว็บไซต์ หรือโทร 1351</p>
             </div>
             <div class="step-item">
                 <h3>ส่งเอกสาร</h3>
@@ -45,8 +45,8 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container">
         <div class="feature-row reveal">
             <div class="feature-row__content">
-                <h2>เคลมออนไลน์ผ่าน FWD MAX</h2>
-                <p>ดาวน์โหลดแอป FWD MAX เพื่อแจ้งเคลม ติดตามสถานะ และจัดการกรมธรรม์ได้ในที่เดียว</p>
+                <h2>เคลมออนไลน์ผ่าน FWD Omne</h2>
+                <p>ดาวน์โหลดแอป FWD Omne เพื่อแจ้งเคลม ติดตามสถานะ และจัดการกรมธรรม์ได้ในที่เดียว</p>
                 <ul class="feature-list">
                     <li>แจ้งเคลมค่ารักษาพยาบาล (ผู้ป่วยนอก/ใน)</li>
                     <li>แจ้งเคลมประกันอุบัติเหตุ</li>

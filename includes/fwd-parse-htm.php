@@ -73,6 +73,88 @@ function fwd_extract_next_data(string $html): ?array
     return is_array($data) ? $data : null;
 }
 
+/**
+ * Brochure PDF from product page __NEXT_DATA__ (call_to_action_links only, not related products).
+ *
+ * @return array{url:string,path:string,filename:?string,score:int}|null
+ */
+function fwd_extract_brochure_from_next_data(?array $data, string $slug = ''): ?array
+{
+    if ($data === null) {
+        return null;
+    }
+
+    $candidates = [];
+    $walk = static function ($node, string $path = '') use (&$walk, &$candidates): void {
+        if (!is_array($node)) {
+            return;
+        }
+        foreach ($node as $key => $value) {
+            $childPath = $path === '' ? (string) $key : $path . '.' . $key;
+            if ($key === 'url' && is_string($value) && preg_match('/\.pdf$/i', $value)
+                && str_contains($childPath, 'call_to_action_links')
+                && str_contains($childPath, '.file.url')
+                && !preg_match('/relatedProducts|recommended_products/i', $childPath)) {
+                $candidates[] = ['url' => $value, 'path' => $childPath, 'filename' => null, 'score' => 0];
+            }
+            if (is_array($value)) {
+                $walk($value, $childPath);
+            }
+        }
+    };
+    $walk($data);
+
+    if ($candidates === []) {
+        return null;
+    }
+
+    $slugTokens = array_values(array_filter(preg_split('/[^a-z0-9]+/i', $slug) ?: []));
+    $seen = [];
+    foreach ($candidates as &$row) {
+        if (isset($seen[$row['url']])) {
+            $row['score'] -= 50;
+        }
+        $seen[$row['url']] = true;
+
+        $path = $row['path'];
+        if (preg_match('/layout\.0\.dataComponent\.body\.\d+\.content_section\.call_to_action_links/', $path)) {
+            $row['score'] += 120;
+        } elseif (preg_match('/layout\.\d+\.dataComponent\.call_to_action_links/', $path)) {
+            $row['score'] += 100;
+        } elseif (str_contains($path, 'content_section.call_to_action_links')) {
+            $row['score'] += 80;
+        } else {
+            $row['score'] += 40;
+        }
+
+        if (preg_match('/\.body\.(\d+)\./', $path, $m)) {
+            $row['score'] += max(0, 30 - (int) $m[1]);
+        }
+
+        $filename = basename(rawurldecode(parse_url($row['url'], PHP_URL_PATH) ?: ''));
+        $row['filename'] = $filename;
+        $haystack = strtolower($filename . ' ' . $path);
+        foreach ($slugTokens as $token) {
+            if (strlen($token) >= 3 && str_contains($haystack, strtolower($token))) {
+                $row['score'] += 25;
+            }
+        }
+        if (preg_match('/TH[_ ]?Brochure|Brochure_/i', $filename)) {
+            $row['score'] += 10;
+        }
+    }
+    unset($row);
+
+    usort($candidates, static fn ($a, $b) => $b['score'] <=> $a['score']);
+
+    return $candidates[0];
+}
+
+function fwd_extract_brochure_from_page(string $html, string $slug = ''): ?array
+{
+    return fwd_extract_brochure_from_next_data(fwd_extract_next_data($html), $slug);
+}
+
 function fwd_meta_from_html(string $html): array
 {
     $meta = [];

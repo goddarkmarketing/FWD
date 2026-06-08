@@ -160,7 +160,7 @@ $interests = [
                 <span>แชทผ่านเว็บไซต์และแอป</span>
             </div>
             <div class="stat-item">
-                <strong>FWD MAX</strong>
+                <strong>FWD Omne</strong>
                 <span>จัดการกรมธรรม์ผ่านแอป</span>
             </div>
         </div>

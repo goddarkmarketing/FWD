@@ -99,7 +99,7 @@ require_once __DIR__ . '/icons.php';
                                     <span class="footer-contact__icon" aria-hidden="true"><?= icon_facebook_brand(20) ?></span>
                                     <span class="footer-contact__text">
                                         <span class="footer-contact__label">Facebook</span>
-                                        ประกันชีวิต ประกันสุขภาพ เบี้ยโคตรถูก
+                                        <?= htmlspecialchars(CONTACT_FACEBOOK_NAME) ?>
                                     </span>
                                 </a>
                             </li>

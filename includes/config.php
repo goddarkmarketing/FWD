@@ -8,6 +8,7 @@ define('CONTACT_PHONE_1', '062-7416223');
 define('CONTACT_PHONE_2', '086-600-4939');
 define('CONTACT_PHONE_2_RAW', '0866004939');
 define('CONTACT_FACEBOOK', 'https://www.facebook.com/share/1DmTYRVhAt/?mibextid=wwXIfr');
+define('CONTACT_FACEBOOK_NAME', 'FWD ประกันชีวิต Agent thailand');
 define('CONTACT_LINE', 'https://lin.ee/vYSHQ3O');
 
 if (!defined('FWD_STATIC_BUILD')) {
@@ -179,3 +180,4 @@ function hero_cover_image(): ?string
 }
 
 require_once __DIR__ . '/plan-helpers.php';
+require_once __DIR__ . '/plan-brochures.php';

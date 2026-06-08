@@ -8,6 +8,7 @@ $p = $plan;
 $slug = $p['slug'] ?? '';
 $categoryUrl = plan_category_url($p['category']);
 $contactUrl = plan_contact_url($slug, $p['title'] ?? '');
+$brochureUrl = plan_brochure_url($slug);
 $noCalc = !empty($p['no_calculator']);
 $heroImage = !empty($p['image']) ? image_url($p['image']) : '';
 $heroBullets = [];
@@ -123,6 +124,9 @@ $calcJson = htmlspecialchars(json_encode([
                 <?php endif; ?>
                 <?php if (!empty($p['faq'])): ?>
                 <a href="#plan-faq">คำถามที่พบบ่อย</a>
+                <?php endif; ?>
+                <?php if ($brochureUrl !== null): ?>
+                <a href="#plan-brochure">โบรชัวร์ผลิตภัณฑ์</a>
                 <?php endif; ?>
                 <a href="#plan-contact-cta">ติดต่อสอบถาม</a>
             </nav>
@@ -291,6 +295,20 @@ $calcJson = htmlspecialchars(json_encode([
                     <p><strong>โปรโมชัน:</strong> <?= $p['promo'] ?></p>
                 </div>
                 <?php endif; ?>
+            </section>
+            <?php endif; ?>
+
+            <?php if ($brochureUrl !== null): ?>
+            <section id="plan-brochure" class="plan-fwd-section plan-brochure">
+                <div class="plan-brochure__card">
+                    <p class="plan-brochure__eyebrow">เอกสาร PDF</p>
+                    <h2 class="plan-brochure__title">โบรชัวร์ผลิตภัณฑ์</h2>
+                    <p class="plan-brochure__desc">รับโบรชัวร์ผลิตภัณฑ์ สำหรับใช้ในการพิจารณาส่วนตัว หรือแบ่งปันให้กับเพื่อนและครอบครัว</p>
+                    <a href="<?= htmlspecialchars($brochureUrl) ?>" class="btn btn--primary plan-brochure__btn" download target="_blank" rel="noopener noreferrer">
+                        <?= icon_download(20) ?>
+                        <span>ดาวน์โหลดโบรชัวร์</span>
+                    </a>
+                </div>
             </section>
             <?php endif; ?>
 
