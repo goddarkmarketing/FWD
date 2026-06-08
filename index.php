@@ -1,6 +1,6 @@
 <?php
 $page_title = 'หน้าแรก';
-$page_description = 'เอฟดับบลิวดี ประเทศไทย — ประกันชีวิต ประกันสุขภาพ ซื้อออนไลน์ง่าย คุ้มครองครบ';
+$page_description = 'FWD AGENT ประเทศไทย — ประกันชีวิต ประกันสุขภาพ ซื้อออนไลน์ง่าย คุ้มครองครบ';
 
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/header.php';

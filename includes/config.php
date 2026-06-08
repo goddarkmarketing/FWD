@@ -1,5 +1,5 @@
 <?php
-define('SITE_NAME', 'FWD ประเทศไทย');
+define('SITE_NAME', 'FWD AGENT ประเทศไทย');
 define('SITE_TAGLINE', 'Celebrate living');
 define('SITE_LOGO_PATH', 'assets/images/fwd-logo-kruda.png');
 define('SITE_PHONE', '1351');
