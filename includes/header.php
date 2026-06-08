@@ -103,7 +103,10 @@ if (!isset($page_description)) {
                             <a href="<?= page_url('contact.php') ?>" class="site-nav__link <?= active_class('contact.php') ?>">ติดต่อเรา</a>
                         </li>
                     </ul>
-                    <a href="<?= page_url('contact.php') ?>" class="btn btn--primary header-cta">ขอคำปรึกษาฟรี</a>
+                    <div class="header-cta-group">
+                        <a href="<?= page_url('agent-apply.php') ?>" class="btn btn--outline header-cta header-cta--agent <?= active_class('agent-apply.php') ?>">สมัครตัวแทน</a>
+                        <a href="<?= page_url('contact.php') ?>" class="btn btn--primary header-cta">ขอคำปรึกษาฟรี</a>
+                    </div>
                 </nav>
             </div>
         </div>

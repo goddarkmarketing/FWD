@@ -199,7 +199,7 @@
     },
     "prakan-kon-klang": {
         "status": "found",
-        "title": "ประกันคนกลาง",
+        "title": "ประกันคนแกร่ง",
         "url": "https://assets.contentstack.io/v3/assets/blt331c1aa12dcfd37a/blt5c72dc4b9189cc45/66f239b660c749243d906550/TH_Brochure_ADD_Plu_2024.pdf",
         "filename": "TH_Brochure_ADD_Plu_2024.pdf",
         "path": "props.pageProps.data.data.layout.0.dataComponent.body.5.content_section.call_to_action_links.0.file.url",

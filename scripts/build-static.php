@@ -167,6 +167,7 @@ $staticPages = [
     'articles.php',
     'promotions.php',
     'contact.php',
+    'agent-apply.php',
     'claims.php',
     'about.php',
 ];

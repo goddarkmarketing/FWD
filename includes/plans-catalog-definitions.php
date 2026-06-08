@@ -181,8 +181,8 @@ return array (
       5 => 
       array (
         'slug' => 'prakan-kon-klang',
-        'title' => 'ประกันคนกลาง',
-        'desc' => 'ประกันอุบัติเหตุ ประกันคนกลาง',
+        'title' => 'ประกันคนแกร่ง',
+        'desc' => 'ประกันอุบัติเหตุ ประกันคนแกร่ง',
         'fwd_url' => 'https://www.fwd.co.th/th/life-and-accident-insurance/prakan-kon-klang/',
       ),
       6 => 

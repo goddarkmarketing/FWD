@@ -102,6 +102,44 @@
     });
   }
 
+  const agentDob = document.getElementById("agent_dob");
+  const agentAge = document.getElementById("agent_age");
+  if (agentDob && agentAge) {
+    function updateAgentAge() {
+      const value = agentDob.value;
+      if (!value) {
+        agentAge.value = "";
+        return;
+      }
+      const birth = new Date(value + "T00:00:00");
+      const today = new Date();
+      let age = today.getFullYear() - birth.getFullYear();
+      const monthDiff = today.getMonth() - birth.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+        age -= 1;
+      }
+      agentAge.value = age >= 0 ? String(age) : "";
+    }
+    agentDob.addEventListener("change", updateAgentAge);
+    agentDob.addEventListener("input", updateAgentAge);
+  }
+
+  const agentForm = document.getElementById("agent-apply-form");
+  if (agentForm) {
+    agentForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const msg = document.getElementById("agent-form-success");
+      if (msg) {
+        msg.hidden = false;
+        agentForm.reset();
+        if (agentAge) {
+          agentAge.value = "";
+        }
+        msg.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  }
+
   function initProductSlider(root) {
     if (!root || root.classList.contains("is-empty")) return null;
 
