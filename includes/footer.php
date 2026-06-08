@@ -57,10 +57,9 @@ require_once __DIR__ . '/icons.php';
                         <h3>เกี่ยวกับเรา</h3>
                         <ul>
                             <li><a href="<?= page_url('about.php') ?>">เกี่ยวกับ FWD</a></li>
-                            <li><a href="#">FWD Group</a></li>
-                            <li><a href="#">ร่วมงานกับเรา</a></li>
-                            <li><a href="#">ข่าวสารและกิจกรรม</a></li>
-                            <li><a href="#">นักลงทุนสัมพันธ์</a></li>
+                            <li><a href="https://www.fwd.com/" target="_blank" rel="noopener noreferrer">FWD Group</a></li>
+                            <li><a href="<?= page_url('agent-apply.php') ?>">ร่วมงานกับเรา</a></li>
+                            <li><a href="<?= page_url('articles.php') ?>">ข่าวสารและกิจกรรม</a></li>
                         </ul>
                     </div>
 
