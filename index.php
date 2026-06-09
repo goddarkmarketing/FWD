@@ -8,6 +8,23 @@ require_once __DIR__ . '/includes/header.php';
 $hero_image = hero_cover_image();
 $hero_mobile = hero_cover_mobile_image();
 $hero_src = $hero_image ?? $hero_mobile;
+$hp = cms_load('homepage') ?? [];
+$ps = $hp['plans_section'] ?? [];
+$plan_filters = $hp['plan_filters'] ?? [
+    ['id' => 'all', 'label' => 'ผลิตภัณฑ์ทั้งหมด', 'default' => true],
+    ['id' => 'life-accident', 'label' => 'ประกันชีวิตและอุบัติเหตุ'],
+    ['id' => 'health', 'label' => 'ประกันสุขภาพ'],
+    ['id' => 'critical', 'label' => 'ประกันโรคร้ายแรง'],
+    ['id' => 'investment', 'label' => 'การลงทุน'],
+    ['id' => 'savings', 'label' => 'ประกันสะสมทรัพย์'],
+];
+$plan_panel_copy = $hp['plan_panel_copy'] ?? [];
+$consult = $hp['consultation'] ?? [];
+$why = $hp['why_fwd'] ?? [];
+$reviewsSec = $hp['reviews'] ?? [];
+$customer_reviews = $reviewsSec['items'] ?? [];
+$promosSec = $hp['promos_section'] ?? [];
+$articlesSec = $hp['articles_section'] ?? [];
 ?>
 
 <?php if ($hero_src !== null): ?>
@@ -19,7 +36,7 @@ $hero_src = $hero_image ?? $hero_mobile;
             <?php endif; ?>
             <img
                 src="<?= htmlspecialchars(asset($hero_src)) ?>"
-                alt="FWD by kruda — ประกันที่เข้าใจง่าย ให้คุณใช้ชีวิตได้เต็มที่"
+                alt="<?= htmlspecialchars(defined('HERO_ALT') ? HERO_ALT : 'FWD — ประกันที่เข้าใจง่าย') ?>"
                 width="1200"
                 height="1200"
                 fetchpriority="high"
@@ -36,54 +53,25 @@ $hero_src = $hero_image ?? $hero_mobile;
         require_once __DIR__ . '/includes/filter-icons.php';
         $plan_products = require __DIR__ . '/includes/plans-data.php';
 
-        $plan_filters = [
-            ['id' => 'all', 'label' => 'ผลิตภัณฑ์ทั้งหมด', 'default' => true],
-            ['id' => 'life-accident', 'label' => 'ประกันชีวิตและอุบัติเหตุ'],
-            ['id' => 'health', 'label' => 'ประกันสุขภาพ'],
-            ['id' => 'critical', 'label' => 'ประกันโรคร้ายแรง'],
-            ['id' => 'investment', 'label' => 'การลงทุน'],
-            ['id' => 'savings', 'label' => 'ประกันสะสมทรัพย์'],
-        ];
-
-        $plan_panel_copy = [
-            'all' => [
-                'title' => 'ซื้อประกันออนไลน์ สมัครง่าย คุ้มครองทันที',
-                'desc' => 'แผนประกันออนไลน์ที่มีส่วนลดพิเศษ ครอบคลุมทุกประเภท',
-            ],
-            'life-accident' => [
-                'title' => 'ประกันชีวิตและอุบัติเหตุ',
-                'desc' => 'คุ้มครองชีวิต อุบัติเหตุ และค่าชดเชย — ซื้อออนไลน์ได้ทันที',
-            ],
-            'health' => [
-                'title' => 'ประกันสุขภาพ',
-                'desc' => 'ดูแลสุขภาพครบวงจร ค่ารักษา ค่าห้อง และโรคร้ายแรง',
-            ],
-            'critical' => [
-                'title' => 'ประกันโรคร้ายแรง',
-                'desc' => 'เงินก้อนชดเชยเมื่อวินิจฉัยโรคร้ายแรง ใช้จ่ายได้อิสระ',
-            ],
-            'investment' => [
-                'title' => 'การลงทุน',
-                'desc' => 'ผสมผสานความคุ้มครองกับการลงทุน สร้างโอกาสเติบโต',
-            ],
-            'savings' => [
-                'title' => 'ประกันสะสมทรัพย์',
-                'desc' => 'ออมและคุ้มครองไปพร้อมกัน วางแผนอนาคตอย่างมั่นใจ',
-            ],
-        ];
-        $default_panel = $plan_panel_copy['all'];
+        if ($plan_panel_copy === []) {
+            $plan_panel_copy = [
+                'all' => ['title' => 'ซื้อประกันออนไลน์ สมัครง่าย คุ้มครองทันที', 'desc' => 'แผนประกันออนไลน์ที่มีส่วนลดพิเศษ ครอบคลุมทุกประเภท'],
+            ];
+        }
+        $default_panel = $plan_panel_copy['all'] ?? ['title' => '', 'desc' => ''];
+        $searchPlaceholder = $ps['search_placeholder'] ?? 'กำลังมองหาอะไรอยู่...';
         ?>
 
         <header class="section__header reveal">
-            <p class="section__eyebrow">ผลิตภัณฑ์ของเรา</p>
-            <h2 class="section__title">ค้นหาแผนประกันที่เหมาะกับคุณ</h2>
-            <p class="section__desc">เลือกแผนประกันที่เหมาะกับคุณ ซื้อออนไลน์ได้ทันที หรือปรึกษาผู้เชี่ยวชาญฟรี</p>
+            <p class="section__eyebrow"><?= htmlspecialchars($ps['eyebrow'] ?? 'ผลิตภัณฑ์ของเรา') ?></p>
+            <h2 class="section__title"><?= htmlspecialchars($ps['title'] ?? 'ค้นหาแผนประกันที่เหมาะกับคุณ') ?></h2>
+            <p class="section__desc"><?= htmlspecialchars($ps['desc'] ?? '') ?></p>
         </header>
 
         <div class="plans-toolbar reveal" id="plans-toolbar">
             <div class="search-bar">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                <input type="search" id="product-search" placeholder="กำลังมองหาอะไรอยู่..." aria-label="ค้นหาผลิตภัณฑ์" autocomplete="off">
+                <input type="search" id="product-search" placeholder="<?= htmlspecialchars($searchPlaceholder) ?>" aria-label="ค้นหาผลิตภัณฑ์" autocomplete="off">
             </div>
             <div class="product-filters" id="product-filters" role="group" aria-label="กรองตามประเภท">
                 <?php foreach ($plan_filters as $filter):
@@ -150,18 +138,18 @@ $hero_src = $hero_image ?? $hero_mobile;
     <div class="container">
         <div class="feature-row reveal">
             <div class="feature-row__media">
-                <img src="<?= htmlspecialchars(image_url('assets/images/consultation.png')) ?>" alt="ปรึกษาประกันออนไลน์" loading="lazy">
+                <img src="<?= htmlspecialchars(image_url($consult['image'] ?? 'assets/images/consultation.png')) ?>" alt="ปรึกษาประกันออนไลน์" loading="lazy">
             </div>
             <div class="feature-row__content">
-                <p class="section__eyebrow">บริการของเรา</p>
-                <h2>รับคำปรึกษาฟรีจากผู้เชี่ยวชาญ</h2>
-                <p>ฝากข้อมูลไว้ ทีมงาน FWD จะติดต่อกลับเพื่อช่วยเลือกแผนที่เหมาะกับคุณ ไม่มีค่าใช้จ่าย ไม่มีข้อผูกมัด</p>
+                <p class="section__eyebrow"><?= htmlspecialchars($consult['eyebrow'] ?? 'บริการของเรา') ?></p>
+                <h2><?= htmlspecialchars($consult['title'] ?? 'รับคำปรึกษาฟรีจากผู้เชี่ยวชาญ') ?></h2>
+                <p><?= htmlspecialchars($consult['desc'] ?? '') ?></p>
                 <ul class="feature-list">
-                    <li>ปรึกษาทางโทรศัพท์หรือพบตัวต่อตัว</li>
-                    <li>เปรียบเทียบแผนประกันหลายแบบ</li>
-                    <li>ซื้อออนไลน์ได้ภายในไม่กี่นาที</li>
+                    <?php foreach ($consult['bullets'] ?? [] as $bullet): ?>
+                    <li><?= htmlspecialchars($bullet) ?></li>
+                    <?php endforeach; ?>
                 </ul>
-                <a href="<?= htmlspecialchars(page_url('contact.php')) ?>" class="btn btn--primary">ขอคำปรึกษาฟรี</a>
+                <a href="<?= htmlspecialchars(page_url('contact.php')) ?>" class="btn btn--primary"><?= htmlspecialchars($consult['cta'] ?? 'ขอคำปรึกษาฟรี') ?></a>
             </div>
         </div>
     </div>
@@ -170,82 +158,37 @@ $hero_src = $hero_image ?? $hero_mobile;
 <section class="section section--why-fwd">
     <div class="container">
         <header class="section__header reveal">
-            <p class="section__eyebrow">ทำไมต้อง FWD</p>
-            <h2 class="section__title">ประกันที่ออกแบบมาเพื่อคุณ</h2>
-            <p class="section__desc">มั่นใจได้ด้วยบริการที่ทันสมัย ครอบคลุม และเข้าถึงง่าย</p>
+            <p class="section__eyebrow"><?= htmlspecialchars($why['eyebrow'] ?? 'ทำไมต้อง FWD') ?></p>
+            <h2 class="section__title"><?= htmlspecialchars($why['title'] ?? 'ประกันที่ออกแบบมาเพื่อคุณ') ?></h2>
+            <p class="section__desc"><?= htmlspecialchars($why['desc'] ?? '') ?></p>
         </header>
 
         <div class="why-cards">
+            <?php
+            $whyIcons = [
+                '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+                '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>',
+                '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+                '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>',
+            ];
+            foreach ($why['cards'] ?? [] as $wi => $card):
+            ?>
             <article class="why-card reveal">
-                <div class="why-card__icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-                <p class="why-card__value">10M+</p>
-                <p class="why-card__label">ลูกค้าทั่วโลกในเครือ FWD</p>
+                <div class="why-card__icon" aria-hidden="true"><?= $whyIcons[$wi] ?? $whyIcons[0] ?></div>
+                <p class="why-card__value"><?= htmlspecialchars($card['value'] ?? '') ?></p>
+                <p class="why-card__label"><?= htmlspecialchars($card['label'] ?? '') ?></p>
             </article>
-
-            <article class="why-card reveal">
-                <div class="why-card__icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
-                </div>
-                <p class="why-card__value">24/7</p>
-                <p class="why-card__label">บริการเคลมออนไลน์</p>
-            </article>
-
-            <article class="why-card reveal">
-                <div class="why-card__icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                </div>
-                <p class="why-card__value">1351</p>
-                <p class="why-card__label">สายด่วนตลอด 24 ชม.</p>
-            </article>
-
-            <article class="why-card reveal">
-                <div class="why-card__icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-                </div>
-                <p class="why-card__value">100%</p>
-                <p class="why-card__label">ซื้อออนไลน์ได้บางผลิตภัณฑ์</p>
-            </article>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
 
-<?php
-$customer_reviews = [
-    [
-        'rating' => 5,
-        'text' => 'ซื้อประกันสุขภาพออนไลน์ได้ภายใน 10 นาที เอกสารเข้าใจง่าย ตอนป่วยเคลมผ่านแอปไม่ต้องสำรองจ่ายเลย ประทับใจมากครับ',
-        'name' => 'คุณธนกร',
-        'meta' => 'ประกันสุขภาพ · กรุงเทพฯ',
-    ],
-    [
-        'rating' => 5,
-        'text' => 'ทีมงานโทรมาอธิบายเปรียบเทียบแผนให้ชัดเจน ไม่กดดัน ได้แผนที่เหมาะกับงบประมาณจริงๆ บริการเป็นมิตรมากค่ะ',
-        'name' => 'คุณพิมพ์ใจ',
-        'meta' => 'ประกันชีวิต · เชียงใหม่',
-    ],
-    [
-        'rating' => 5,
-        'text' => 'เคลมประกันอุบัติเหตุเร็วมาก ส่งเอกสารออนไลน์วันจันทร์ วันพุธเงินเข้าบัญชีแล้ว ติดตามสถานะในแอปได้ตลอด',
-        'name' => 'คุณอนุชา',
-        'meta' => 'ประกันอุบัติเหตุ · ชลบุรี',
-    ],
-    [
-        'rating' => 4,
-        'text' => 'เพิ่งซื้อประกันโรคร้ายแรงครั้งแรก หน้าเว็บใช้ง่าย มีโปรตรวจสุขภาพฟรีด้วย รู้สึกมั่นใจขึ้นเยอะเลยค่ะ',
-        'name' => 'คุณมณี',
-        'meta' => 'ประกันโรคร้ายแรง · ขอนแก่น',
-    ],
-];
-?>
-
 <section class="section section--reviews" id="reviews">
     <div class="container">
         <header class="section__header reveal">
-            <p class="section__eyebrow">รีวิวจากลูกค้า</p>
-            <h2 class="section__title">เสียงจากผู้ที่ไว้วางใจ FWD</h2>
-            <p class="section__desc">ประสบการณ์จริงจากลูกค้าที่ใช้บริการซื้อประกันและเคลมกับเรา</p>
+            <p class="section__eyebrow"><?= htmlspecialchars($reviewsSec['eyebrow'] ?? 'รีวิวจากลูกค้า') ?></p>
+            <h2 class="section__title"><?= htmlspecialchars($reviewsSec['title'] ?? 'เสียงจากผู้ที่ไว้วางใจ FWD') ?></h2>
+            <p class="section__desc"><?= htmlspecialchars($reviewsSec['desc'] ?? '') ?></p>
         </header>
 
         <div class="review-grid">
@@ -288,8 +231,8 @@ $customer_reviews = [
     <div class="review-gallery reveal">
         <div class="container">
             <header class="review-gallery__header">
-                <p class="section__eyebrow">แกลเลอรี</p>
-                <h3 class="review-gallery__title">ภาพรีวิวจริงจากลูกค้า</h3>
+                <p class="section__eyebrow"><?= htmlspecialchars($reviewsSec['gallery']['eyebrow'] ?? 'แกลเลอรี') ?></p>
+                <h3 class="review-gallery__title"><?= htmlspecialchars($reviewsSec['gallery']['title'] ?? 'ภาพรีวิวจริงจากลูกค้า') ?></h3>
             </header>
         </div>
         <div class="gallery-marquee" aria-label="แกลเลอรีรีวิวลูกค้า">
@@ -312,8 +255,8 @@ $home_articles = articles_all();
 <section class="section section--gray">
     <div class="container">
         <header class="section__header reveal">
-            <p class="section__eyebrow">โปรโมชัน</p>
-            <h2 class="section__title">ข้อเสนอพิเศษประจำเดือน</h2>
+            <p class="section__eyebrow"><?= htmlspecialchars($promosSec['eyebrow'] ?? 'โปรโมชัน') ?></p>
+            <h2 class="section__title"><?= htmlspecialchars($promosSec['title'] ?? 'ข้อเสนอพิเศษประจำเดือน') ?></h2>
         </header>
         <div class="promo-grid promo-grid--home reveal">
             <?php foreach ($home_promos as $promo): ?>
@@ -321,7 +264,7 @@ $home_articles = articles_all();
             <?php endforeach; ?>
         </div>
         <div class="section__footer reveal">
-            <a href="<?= htmlspecialchars(page_url('promotions.php')) ?>" class="btn btn--outline">โปรโมชั่นเพิ่มเติม</a>
+            <a href="<?= htmlspecialchars(page_url('promotions.php')) ?>" class="btn btn--outline"><?= htmlspecialchars($promosSec['cta'] ?? 'โปรโมชั่นเพิ่มเติม') ?></a>
         </div>
     </div>
 </section>
@@ -329,9 +272,9 @@ $home_articles = articles_all();
 <section class="section" id="articles">
     <div class="container">
         <header class="section__header reveal">
-            <p class="section__eyebrow">บทความ</p>
-            <h2 class="section__title">ความรู้เรื่องประกัน</h2>
-            <p class="section__lead">เคล็ดลับและข้อมูลที่ช่วยให้คุณเลือกประกันได้อย่างมั่นใจ</p>
+            <p class="section__eyebrow"><?= htmlspecialchars($articlesSec['eyebrow'] ?? 'บทความ') ?></p>
+            <h2 class="section__title"><?= htmlspecialchars($articlesSec['title'] ?? 'ความรู้เรื่องประกัน') ?></h2>
+            <p class="section__lead"><?= htmlspecialchars($articlesSec['lead'] ?? '') ?></p>
         </header>
         <div class="article-grid reveal">
             <?php foreach ($home_articles as $article): ?>
@@ -339,7 +282,7 @@ $home_articles = articles_all();
             <?php endforeach; ?>
         </div>
         <div class="section__footer reveal">
-            <a href="<?= htmlspecialchars(page_url('articles.php')) ?>" class="btn btn--outline">ดูบทความทั้งหมด</a>
+            <a href="<?= htmlspecialchars(page_url('articles.php')) ?>" class="btn btn--outline"><?= htmlspecialchars($articlesSec['cta'] ?? 'ดูบทความทั้งหมด') ?></a>
         </div>
     </div>
 </section>

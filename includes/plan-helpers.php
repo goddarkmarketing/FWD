@@ -13,7 +13,10 @@ function plan_categories(): array
 {
     static $categories;
     if ($categories === null) {
-        $categories = require __DIR__ . '/plan-categories.php';
+        require_once __DIR__ . '/cms-loader.php';
+        $defaults = require __DIR__ . '/plan-categories.php';
+        $cms = cms_load('categories');
+        $categories = cms_merge_defaults($defaults, is_array($cms) ? $cms : null);
     }
     return $categories;
 }
@@ -62,6 +65,23 @@ function plan_details_all(): array
             $imported = require $importedFile;
             foreach ($imported as $slug => $row) {
                 $details[$slug] = array_merge($details[$slug] ?? [], $row);
+            }
+        }
+
+        require_once __DIR__ . '/cms-loader.php';
+        $plansDir = cms_root() . '/plans';
+        if (is_dir($plansDir)) {
+            foreach (glob($plansDir . '/*.json') ?: [] as $cmsFile) {
+                $slug = basename($cmsFile, '.json');
+                $override = json_decode((string) file_get_contents($cmsFile), true);
+                if (!is_array($override)) {
+                    continue;
+                }
+                if (isset($details[$slug])) {
+                    $details[$slug] = array_merge($details[$slug], $override);
+                } else {
+                    $details[$slug] = $override;
+                }
             }
         }
     }

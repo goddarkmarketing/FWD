@@ -3,15 +3,25 @@
 <?php
 require_once __DIR__ . '/logo.php';
 require_once __DIR__ . '/icons.php';
+$cmsFooter = cms_load('footer') ?? [];
+$footerCtaTitle = $cmsFooter['cta_title'] ?? 'ให้ผู้เชี่ยวชาญช่วยเลือกแผนที่เหมาะกับคุณ';
+$footerCtaDesc = $cmsFooter['cta_desc'] ?? 'ฝากข้อมูลไว้ เราจะติดต่อกลับโดยเร็วที่สุด ไม่มีค่าใช้จ่าย';
+$footerCtaButton = $cmsFooter['cta_button'] ?? 'ขอคำปรึกษาฟรี';
+$footerCopyright = $cmsFooter['copyright'] ?? ('© ' . date('Y') . ' เอฟดับบลิวดี ประเทศไทย สงวนลิขสิทธิ์');
+$footerDisclaimer = $cmsFooter['disclaimer'] ?? 'FWD Life Insurance Public Company Limited — เว็บไซต์ตัวอย่างเพื่อการสาธิต';
+$footerCookieText = $cmsFooter['cookie_text'] ?? 'เราใช้คุกกี้เพื่อมอบประสบการณ์ที่ดีที่สุดบนเว็บไซต์ การใช้งานต่อถือว่าคุณยอมรับนโยบายความเป็นส่วนตัวของเรา';
+$footerCookieAccept = $cmsFooter['cookie_accept'] ?? 'ตกลง';
+$footerPrivacyUrl = $cmsFooter['privacy_url'] ?? '#';
+$footerTermsUrl = $cmsFooter['terms_url'] ?? '#';
 ?>
     <footer class="site-footer">
         <div class="footer-cta">
             <div class="container footer-cta__inner">
                 <div class="footer-cta__text">
-                    <h2>ให้ผู้เชี่ยวชาญช่วยเลือกแผนที่เหมาะกับคุณ</h2>
-                    <p>ฝากข้อมูลไว้ เราจะติดต่อกลับโดยเร็วที่สุด ไม่มีค่าใช้จ่าย</p>
+                    <h2><?= htmlspecialchars($footerCtaTitle) ?></h2>
+                    <p><?= htmlspecialchars($footerCtaDesc) ?></p>
                 </div>
-                <a href="<?= page_url('contact.php') ?>" class="btn btn--white">ขอคำปรึกษาฟรี</a>
+                <a href="<?= page_url('contact.php') ?>" class="btn btn--white"><?= htmlspecialchars($footerCtaButton) ?></a>
             </div>
         </div>
 
@@ -24,6 +34,10 @@ require_once __DIR__ . '/icons.php';
                         <p class="footer-phone">
                             <a href="tel:1351"><?= icon_svg('phone', 16) ?> สายด่วน FWD <?= SITE_PHONE ?></a>
                         </p>
+                        <div class="footer-agent">
+                            <p class="footer-agent__office"><?= htmlspecialchars(AGENT_OFFICE_NAME) ?></p>
+                            <p class="footer-agent__license">เลขที่ใบอนุญาต: <?= htmlspecialchars(AGENT_LICENSE_NO) ?></p>
+                        </div>
                     </div>
 
                     <div class="footer-col">
@@ -48,8 +62,8 @@ require_once __DIR__ . '/icons.php';
                             <li><a href="<?= page_url('promotions.php') ?>">โปรโมชัน</a></li>
                             <li><a href="<?= page_url('articles.php') ?>">บทความ</a></li>
                             <li><a href="<?= page_url('contact.php') ?>">ติดต่อเรา</a></li>
-                            <li><a href="#">นโยบายความเป็นส่วนตัว</a></li>
-                            <li><a href="#">ข้อกำหนดและเงื่อนไข</a></li>
+                            <li><a href="<?= htmlspecialchars($footerPrivacyUrl) ?>">นโยบายความเป็นส่วนตัว</a></li>
+                            <li><a href="<?= htmlspecialchars($footerTermsUrl) ?>">ข้อกำหนดและเงื่อนไข</a></li>
                         </ul>
                     </div>
 
@@ -118,8 +132,8 @@ require_once __DIR__ . '/icons.php';
                 <div class="footer-bottom">
                     <?php render_contact_icons('footer-bar'); ?>
                     <div class="footer-bottom__copy">
-                        <p>&copy; <?= date('Y') ?> เอฟดับบลิวดี ประเทศไทย สงวนลิขสิทธิ์</p>
-                        <p class="footer-note">FWD Life Insurance Public Company Limited — เว็บไซต์ตัวอย่างเพื่อการสาธิต</p>
+                        <p><?= htmlspecialchars($footerCopyright) ?></p>
+                        <p class="footer-note"><?= htmlspecialchars($footerDisclaimer) ?></p>
                     </div>
                 </div>
             </div>
@@ -129,8 +143,8 @@ require_once __DIR__ . '/icons.php';
     <?php require __DIR__ . '/contact-fab.php'; ?>
 
     <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="คุกกี้">
-        <p>เราใช้คุกกี้เพื่อมอบประสบการณ์ที่ดีที่สุดบนเว็บไซต์ การใช้งานต่อถือว่าคุณยอมรับนโยบายความเป็นส่วนตัวของเรา</p>
-        <button type="button" class="btn btn--primary btn--sm" id="cookie-accept">ตกลง</button>
+        <p><?= htmlspecialchars($footerCookieText) ?></p>
+        <button type="button" class="btn btn--primary btn--sm" id="cookie-accept"><?= htmlspecialchars($footerCookieAccept) ?></button>
     </div>
 
     <script src="<?= asset('assets/js/main.js') ?>"></script>

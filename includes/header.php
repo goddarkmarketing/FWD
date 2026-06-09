@@ -8,6 +8,13 @@ if (!isset($page_title)) {
 if (!isset($page_description)) {
     $page_description = 'บริษัทประกันชีวิตและประกันสุขภาพ — ออกแบบประกันให้เข้าใจง่าย ซื้อออนไลน์ได้';
 }
+$page_robots = $page_robots ?? 'index, follow';
+$page_canonical = $page_canonical ?? '';
+$page_og_title = $page_og_title ?? ($page_title . ' | ' . SITE_NAME);
+$page_og_description = $page_og_description ?? $page_description;
+$page_og_image = $page_og_image ?? '';
+$page_og_type = $page_og_type ?? 'website';
+$page_og_url = $page_og_url ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="th">
@@ -15,7 +22,26 @@ if (!isset($page_description)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?= htmlspecialchars($page_description) ?>">
-    <title><?= htmlspecialchars($page_title) ?> | <?= SITE_NAME ?></title>
+    <meta name="robots" content="<?= htmlspecialchars($page_robots) ?>">
+    <?php if ($page_canonical !== ''): ?>
+    <link rel="canonical" href="<?= htmlspecialchars($page_canonical) ?>">
+    <?php endif; ?>
+    <title><?= htmlspecialchars($page_og_title) ?></title>
+    <meta property="og:type" content="<?= htmlspecialchars($page_og_type) ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($page_og_title) ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($page_og_description) ?>">
+    <?php if ($page_og_image !== ''): ?>
+    <meta property="og:image" content="<?= htmlspecialchars($page_og_image) ?>">
+    <?php endif; ?>
+    <?php if ($page_og_url !== ''): ?>
+    <meta property="og:url" content="<?= htmlspecialchars($page_og_url) ?>">
+    <?php endif; ?>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= htmlspecialchars($page_og_title) ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars($page_og_description) ?>">
+    <?php if (!empty($page_schema_json)): ?>
+    <script type="application/ld+json"><?= $page_schema_json ?></script>
+    <?php endif; ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">

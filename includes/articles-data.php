@@ -2,6 +2,8 @@
 /**
  * บทความความรู้เรื่องประกัน
  */
+require_once __DIR__ . '/article-helpers.php';
+
 function article_stock_image(int $index): string
 {
     static $pool;
@@ -35,6 +37,20 @@ function articles_all(): array
 {
     static $articles;
     if ($articles !== null) {
+        return $articles;
+    }
+
+    require_once __DIR__ . '/cms-loader.php';
+    $cms = cms_load('articles');
+    if (is_array($cms) && !empty($cms['items'])) {
+        $articles = [];
+        foreach ($cms['items'] as $i => $article) {
+            $article = article_normalize($article);
+            if ($article['image'] === '') {
+                $article['image'] = article_stock_image($i + 8);
+            }
+            $articles[] = $article;
+        }
         return $articles;
     }
 
@@ -94,6 +110,7 @@ function articles_all(): array
     ];
 
     foreach ($articles as $i => &$article) {
+        $article = article_normalize($article);
         $article['image'] = article_stock_image($i + 8);
     }
     unset($article);

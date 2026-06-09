@@ -1,6 +1,11 @@
 node_modules/
 .env
 .env.*
+data/cms/auth.json
+data/cms/_backup-restore-test.json
+data/backups/*
+!data/backups/.htaccess
+!data/backups/index.html
 docs/
 *.log
 .DS_Store

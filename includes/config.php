@@ -1,15 +1,40 @@
 <?php
-define('SITE_NAME', 'FWD AGENT ประเทศไทย');
-define('SITE_TAGLINE', 'Celebrate living');
-define('SITE_LOGO_PATH', 'assets/images/fwd-logo-kruda.png');
-define('SITE_PHONE', '1351');
-define('CONTACT_EMAIL', 'Supakitraksorn@gmail.com');
-define('CONTACT_PHONE_1', '062-7416223');
-define('CONTACT_PHONE_2', '086-600-4939');
-define('CONTACT_PHONE_2_RAW', '0866004939');
-define('CONTACT_FACEBOOK', 'https://www.facebook.com/share/1DmTYRVhAt/?mibextid=wwXIfr');
-define('CONTACT_FACEBOOK_NAME', 'FWD ประกันชีวิต Agent thailand');
-define('CONTACT_LINE', 'https://lin.ee/vYSHQ3O');
+require_once __DIR__ . '/cms-loader.php';
+
+$cmsSite = cms_load('site') ?? [];
+$siteCfg = array_merge([
+    'site_name' => 'FWD AGENT ประเทศไทย',
+    'site_tagline' => 'Celebrate living',
+    'site_logo_path' => 'assets/images/fwd-logo-kruda.png',
+    'site_phone' => '1351',
+    'contact_email' => 'Supakitraksorn@gmail.com',
+    'contact_phone_1' => '062-7416223',
+    'contact_phone_2' => '086-600-4939',
+    'contact_phone_2_raw' => '0866004939',
+    'contact_facebook' => 'https://www.facebook.com/share/1DmTYRVhAt/?mibextid=wwXIfr',
+    'contact_facebook_name' => 'FWD ประกันชีวิต Agent thailand',
+    'contact_line' => 'https://lin.ee/vYSHQ3O',
+    'agent_office_name' => 'สำนักงานตัวแทน FWD (สาขา รามอินทรา กม.4.5)',
+    'agent_license_no' => '6201009124',
+    'agent_license_image' => 'assets/images/agent-license.png',
+    'hero_alt' => 'FWD by kruda — ประกันที่เข้าใจง่าย ให้คุณใช้ชีวิตได้เต็มที่',
+], $cmsSite);
+
+define('SITE_NAME', $siteCfg['site_name']);
+define('SITE_TAGLINE', $siteCfg['site_tagline']);
+define('SITE_LOGO_PATH', $siteCfg['site_logo_path']);
+define('SITE_PHONE', $siteCfg['site_phone']);
+define('CONTACT_EMAIL', $siteCfg['contact_email']);
+define('CONTACT_PHONE_1', $siteCfg['contact_phone_1']);
+define('CONTACT_PHONE_2', $siteCfg['contact_phone_2']);
+define('CONTACT_PHONE_2_RAW', $siteCfg['contact_phone_2_raw']);
+define('CONTACT_FACEBOOK', $siteCfg['contact_facebook']);
+define('CONTACT_FACEBOOK_NAME', $siteCfg['contact_facebook_name']);
+define('CONTACT_LINE', $siteCfg['contact_line']);
+define('AGENT_OFFICE_NAME', $siteCfg['agent_office_name']);
+define('AGENT_LICENSE_NO', $siteCfg['agent_license_no']);
+define('AGENT_LICENSE_IMAGE', $siteCfg['agent_license_image']);
+define('HERO_ALT', $siteCfg['hero_alt']);
 
 if (!defined('FWD_STATIC_BUILD')) {
     define('FWD_STATIC_BUILD', getenv('FWD_STATIC_BUILD') === '1');

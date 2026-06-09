@@ -1,6 +1,8 @@
 <?php
-$page_title = 'การเคลมประกัน';
-$page_description = 'วิธีเคลมประกันกับ FWD — ง่าย รวดเร็ว เคลมออนไลน์ได้ 24 ชั่วโมง';
+require_once __DIR__ . '/includes/config.php';
+$p = cms_page('claims', []);
+$page_title = $p['page_title'] ?? 'การเคลมประกัน';
+$page_description = $p['meta_description'] ?? '';
 require_once __DIR__ . '/includes/header.php';
 ?>
 
@@ -9,34 +11,24 @@ require_once __DIR__ . '/includes/header.php';
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
             <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> / การเคลม
         </nav>
-        <h1>การเคลมประกัน</h1>
-        <p class="page-hero__lead">เคลมออนไลน์ได้ตลอด 24 ชั่วโมง หรือติดต่อศูนย์บริการลูกค้า 1351</p>
+        <h1><?= htmlspecialchars($p['hero_title'] ?? 'การเคลมประกัน') ?></h1>
+        <p class="page-hero__lead"><?= htmlspecialchars($p['hero_lead'] ?? '') ?></p>
     </div>
 </section>
 
 <section class="section">
     <div class="container">
         <header class="section__header reveal">
-            <p class="section__eyebrow">ขั้นตอน</p>
-            <h2 class="section__title">เคลมประกันใน 4 ขั้นตอน</h2>
+            <p class="section__eyebrow"><?= htmlspecialchars($p['steps_eyebrow'] ?? 'ขั้นตอน') ?></p>
+            <h2 class="section__title"><?= htmlspecialchars($p['steps_title'] ?? 'เคลมประกันใน 4 ขั้นตอน') ?></h2>
         </header>
         <div class="steps reveal">
+            <?php foreach ($p['steps'] ?? [] as $step): ?>
             <div class="step-item">
-                <h3>แจ้งเคลม</h3>
-                <p>แจ้งเคลมผ่านแอป FWD Omne หรือเว็บไซต์ หรือโทร 1351</p>
+                <h3><?= htmlspecialchars($step['title'] ?? '') ?></h3>
+                <p><?= htmlspecialchars($step['desc'] ?? '') ?></p>
             </div>
-            <div class="step-item">
-                <h3>ส่งเอกสาร</h3>
-                <p>อัปโหลดเอกสารที่จำเป็น เช่น ใบรับรองแพทย์ ใบเสร็จ</p>
-            </div>
-            <div class="step-item">
-                <h3>ตรวจสอบ</h3>
-                <p>ทีมงานตรวจสอบเอกสารและแจ้งผลภายในระยะเวลาที่กำหนด</p>
-            </div>
-            <div class="step-item">
-                <h3>รับเงิน</h3>
-                <p>รับเงินค่าสินไหมทดแทนผ่านบัญชีธนาคารที่ลงทะเบียน</p>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -45,18 +37,17 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container">
         <div class="feature-row reveal">
             <div class="feature-row__content">
-                <h2>เคลมออนไลน์ผ่าน FWD Omne</h2>
-                <p>ดาวน์โหลดแอป FWD Omne เพื่อแจ้งเคลม ติดตามสถานะ และจัดการกรมธรรม์ได้ในที่เดียว</p>
+                <h2><?= htmlspecialchars($p['app_title'] ?? 'เคลมออนไลน์ผ่าน FWD Omne') ?></h2>
+                <p><?= htmlspecialchars($p['app_desc'] ?? '') ?></p>
                 <ul class="feature-list">
-                    <li>แจ้งเคลมค่ารักษาพยาบาล (ผู้ป่วยนอก/ใน)</li>
-                    <li>แจ้งเคลมประกันอุบัติเหตุ</li>
-                    <li>แจ้งเคลมประกันโรคร้ายแรง</li>
-                    <li>ติดตามสถานะแบบเรียลไทม์</li>
+                    <?php foreach ($p['app_bullets'] ?? [] as $bullet): ?>
+                    <li><?= htmlspecialchars($bullet) ?></li>
+                    <?php endforeach; ?>
                 </ul>
-                <a href="<?= htmlspecialchars(page_url('contact.php')) ?>" class="btn btn--primary">ติดต่อศูนย์บริการ</a>
+                <a href="<?= htmlspecialchars(page_url('contact.php')) ?>" class="btn btn--primary"><?= htmlspecialchars($p['app_cta'] ?? 'ติดต่อศูนย์บริการ') ?></a>
             </div>
             <div class="feature-row__media">
-                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80" alt="เคลมออนไลน์" loading="lazy">
+                <img src="<?= htmlspecialchars($p['app_image'] ?? '') ?>" alt="เคลมออนไลน์" loading="lazy">
             </div>
         </div>
     </div>

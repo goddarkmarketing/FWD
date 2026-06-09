@@ -4,6 +4,12 @@
  */
 function promotions_all(): array
 {
+    require_once __DIR__ . '/cms-loader.php';
+    $cms = cms_load('promotions');
+    if (is_array($cms) && !empty($cms['items'])) {
+        return $cms['items'];
+    }
+
     return [
         [
             'badge' => 'แนะนำ',
@@ -46,5 +52,8 @@ function promotions_all(): array
 
 function promotions_home(): array
 {
-    return array_slice(promotions_all(), 0, 2);
+    require_once __DIR__ . '/cms-loader.php';
+    $cms = cms_load('promotions');
+    $count = max(1, (int) ($cms['home_count'] ?? 2));
+    return array_slice(promotions_all(), 0, $count);
 }

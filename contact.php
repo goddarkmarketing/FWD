@@ -10,18 +10,14 @@ if ($prefill_plan !== '' && $prefill_name === '') {
     }
 }
 
-$page_title = 'ติดต่อเรา';
-$page_description = 'ขอคำปรึกษาประกันฟรีจาก FWD — ฝากข้อมูล เราจะติดต่อกลับโดยเร็ว';
+$p = cms_page('contact', []);
+$page_title = $p['page_title'] ?? 'ติดต่อเรา';
+$page_description = $p['meta_description'] ?? '';
 require_once __DIR__ . '/includes/header.php';
 
-$interests = [
-    'ประกันชีวิต',
-    'ประกันสุขภาพ',
-    'ประกันโรคร้ายแรง',
-    'ประกันอุบัติเหตุ',
-    'ประกันลงทุน',
-    'ประกันออมทรัพย์',
-    'ประกันบำนาญ',
+$interests = $p['interests'] ?? [
+    'ประกันชีวิต', 'ประกันสุขภาพ', 'ประกันโรคร้ายแรง', 'ประกันอุบัติเหตุ',
+    'ประกันลงทุน', 'ประกันออมทรัพย์', 'ประกันบำนาญ',
 ];
 ?>
 
@@ -30,16 +26,16 @@ $interests = [
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
             <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> / ติดต่อเรา
         </nav>
-        <h1>ขอคำปรึกษาฟรี</h1>
-        <p class="page-hero__lead">ฝากข้อมูลไว้ ผู้เชี่ยวชาญของเราจะติดต่อกลับโดยเร็วที่สุด ไม่มีค่าใช้จ่าย</p>
+        <h1><?= htmlspecialchars($p['hero_title'] ?? 'ขอคำปรึกษาฟรี') ?></h1>
+        <p class="page-hero__lead"><?= htmlspecialchars($p['hero_lead'] ?? '') ?></p>
     </div>
 </section>
 
 <section class="section section--contact">
     <div class="container">
         <div id="form-success" class="contact-form__alert contact-form__alert--success" hidden role="alert">
-            <h4>ส่งข้อมูลเรียบร้อยแล้ว</h4>
-            <p>ขอบคุณที่สนใจ FWD ทีมงานจะติดต่อกลับภายใน 1–2 วันทำการ (เว็บไซต์ตัวอย่าง)</p>
+            <h4><?= htmlspecialchars($p['success_title'] ?? 'ส่งข้อมูลเรียบร้อยแล้ว') ?></h4>
+            <p><?= htmlspecialchars($p['success_message'] ?? '') ?></p>
         </div>
 
         <?php if ($prefill_name !== ''): ?>
@@ -113,11 +109,12 @@ $interests = [
                             <label for="province">จังหวัด</label>
                             <select id="province" name="province">
                                 <option value="">เลือกจังหวัด</option>
-                                <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
-                                <option value="เชียงใหม่">เชียงใหม่</option>
-                                <option value="ขอนแก่น">ขอนแก่น</option>
-                                <option value="ภูเก็ต">ภูเก็ต</option>
-                                <option value="ชลบุรี">ชลบุรี</option>
+                                <?php
+                                require_once __DIR__ . '/includes/thai-provinces.php';
+                                foreach (thai_provinces() as $provinceName):
+                                ?>
+                                <option value="<?= htmlspecialchars($provinceName) ?>"><?= htmlspecialchars($provinceName) ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="form-group">

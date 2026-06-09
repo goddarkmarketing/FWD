@@ -30,6 +30,9 @@ jobs:
         with:
           php-version: '8.2'
 
+      - name: Run CMS tests
+        run: php scripts/run-cms-tests.php
+
       - name: Build static site
         run: php scripts/build-static.php /FWD
 

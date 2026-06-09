@@ -1,18 +1,12 @@
 <?php
-$page_title = 'สมัครตัวแทน';
-$page_description = 'สมัครเป็นตัวแทนประกันชีวิต FWD — เริ่มต้นอาชีพที่มั่นคง พร้อมทีมสนับสนุนและผลิตภัณฑ์ครบวงจร';
+require_once __DIR__ . '/includes/config.php';
+$p = cms_page('agent-apply', []);
+$page_title = $p['page_title'] ?? 'สมัครตัวแทน';
+$page_description = $p['meta_description'] ?? '';
 require_once __DIR__ . '/includes/header.php';
 
-$education_levels = [
-    'ประถมศึกษา',
-    'ม.3',
-    'ม.6',
-    'ปวช.',
-    'ปวส.',
-    'ปริญญาตรี',
-    'ปริญญาโท',
-    'ปริญญาเอก',
-    'อื่นๆ',
+$education_levels = $p['education_levels'] ?? [
+    'ประถมศึกษา', 'ม.3', 'ม.6', 'ปวช.', 'ปวส.', 'ปริญญาตรี', 'ปริญญาโท', 'ปริญญาเอก', 'อื่นๆ',
 ];
 ?>
 
@@ -21,16 +15,16 @@ $education_levels = [
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
             <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> / สมัครตัวแทน
         </nav>
-        <h1>สมัครตัวแทน</h1>
-        <p class="page-hero__lead">เริ่มต้นอาชีพตัวแทนประกันชีวิตกับ FWD — กรอกแบบฟอร์มด้านล่าง ทีมงานจะติดต่อกลับเพื่อแนะนำขั้นตอนต่อไป</p>
+        <h1><?= htmlspecialchars($p['hero_title'] ?? 'สมัครตัวแทน') ?></h1>
+        <p class="page-hero__lead"><?= htmlspecialchars($p['hero_lead'] ?? '') ?></p>
     </div>
 </section>
 
 <section class="section section--agent-apply">
     <div class="container">
             <div id="agent-form-success" class="contact-form__alert contact-form__alert--success reveal" hidden role="alert">
-                <h4>ส่งใบสมัครเรียบร้อยแล้ว</h4>
-                <p>ขอบคุณที่สนใจเป็นตัวแทน FWD ทีมงานจะติดต่อกลับภายใน 1–2 วันทำการ (เว็บไซต์ตัวอย่าง)</p>
+                <h4><?= htmlspecialchars($p['success_title'] ?? 'ส่งใบสมัครเรียบร้อยแล้ว') ?></h4>
+                <p><?= htmlspecialchars($p['success_message'] ?? '') ?></p>
             </div>
 
             <form id="agent-apply-form" class="agent-apply-form reveal" action="#" method="post" novalidate>
@@ -83,13 +77,12 @@ $education_levels = [
                             <label for="agent_province">จังหวัด <span class="required">*</span></label>
                             <input type="text" id="agent_province" name="province" required list="agent-province-list" placeholder="เลือกหรือพิมพ์จังหวัด">
                             <datalist id="agent-province-list">
-                                <option value="กรุงเทพมหานคร">
-                                <option value="เชียงใหม่">
-                                <option value="ขอนแก่น">
-                                <option value="ชลบุรี">
-                                <option value="ภูเก็ต">
-                                <option value="นครราชสีมา">
-                                <option value="สงขลา">
+                                <?php
+                                require_once __DIR__ . '/includes/thai-provinces.php';
+                                foreach (thai_provinces() as $provinceName):
+                                ?>
+                                <option value="<?= htmlspecialchars($provinceName) ?>">
+                                <?php endforeach; ?>
                             </datalist>
                         </div>
                         <div class="form-group">

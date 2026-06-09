@@ -104,6 +104,26 @@ function plans_build_catalog(): array
         }
     }
 
+    require_once __DIR__ . '/cms-loader.php';
+    $overrides = cms_load('catalog', []);
+    if (is_array($overrides) && $overrides !== []) {
+        foreach ($catalog as $i => $item) {
+            $slug = $item['slug'] ?? '';
+            if ($slug === '' || empty($overrides[$slug])) {
+                continue;
+            }
+            $o = $overrides[$slug];
+            foreach (['title', 'desc', 'discount', 'image'] as $field) {
+                if (isset($o[$field]) && $o[$field] !== '') {
+                    $catalog[$i][$field] = $o[$field];
+                }
+            }
+            if (!empty($o['tags']) && is_array($o['tags'])) {
+                $catalog[$i]['tags'] = $o['tags'];
+            }
+        }
+    }
+
     return $catalog;
 }
 

@@ -1,6 +1,8 @@
 <?php
-$page_title = 'เกี่ยวกับ FWD';
-$page_description = 'ทำความรู้จัก FWD ประเทศไทย — บริษัทประกันที่มุ่งให้คุณใช้ชีวิตได้เต็มที่';
+require_once __DIR__ . '/includes/config.php';
+$p = cms_page('about', []);
+$page_title = $p['page_title'] ?? 'เกี่ยวกับ FWD';
+$page_description = $p['meta_description'] ?? '';
 require_once __DIR__ . '/includes/header.php';
 ?>
 
@@ -9,8 +11,8 @@ require_once __DIR__ . '/includes/header.php';
         <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
             <a href="<?= htmlspecialchars(page_url('index.php')) ?>">หน้าแรก</a> / เกี่ยวกับ FWD
         </nav>
-        <h1>เกี่ยวกับ FWD</h1>
-        <p class="page-hero__lead">เราเชื่อว่าประกันไม่ควรซับซ้อน — ควรช่วยให้คุณใช้ชีวิตได้อย่างมั่นใจและมีความสุข</p>
+        <h1><?= htmlspecialchars($p['hero_title'] ?? 'เกี่ยวกับ FWD') ?></h1>
+        <p class="page-hero__lead"><?= htmlspecialchars($p['hero_lead'] ?? '') ?></p>
     </div>
 </section>
 
@@ -18,13 +20,14 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container">
         <div class="feature-row reveal">
             <div class="feature-row__content">
-                <p class="section__eyebrow">วิสัยทัศน์</p>
-                <h2>Celebrate living</h2>
-                <p>FWD ก่อตั้งขึ้นด้วยความเชื่อว่าประกันควรเป็นเรื่องง่าย เข้าใจได้ และเข้าถึงได้สำหรับทุกคน เราออกแบบผลิตภัณฑ์และบริการให้สอดคล้องกับไลฟ์สไตล์สมัยใหม่ รวมถึงการซื้อและเคลมออนไลน์</p>
-                <p>ในประเทศไทย FWD Life Insurance Public Company Limited ให้บริการประกันชีวิต ประกันสุขภาพ และผลิตภัณฑ์ออมทรัพย์แก่ลูกค้าทั่วประเทศ</p>
+                <p class="section__eyebrow"><?= htmlspecialchars($p['vision_eyebrow'] ?? 'วิสัยทัศน์') ?></p>
+                <h2><?= htmlspecialchars($p['vision_title'] ?? 'Celebrate living') ?></h2>
+                <?php foreach ($p['vision_paragraphs'] ?? [] as $para): ?>
+                <p><?= htmlspecialchars($para) ?></p>
+                <?php endforeach; ?>
             </div>
             <div class="feature-row__media">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="สำนักงาน FWD" loading="lazy">
+                <img src="<?= htmlspecialchars($p['vision_image'] ?? '') ?>" alt="สำนักงาน FWD" loading="lazy">
             </div>
         </div>
     </div>
@@ -33,25 +36,15 @@ require_once __DIR__ . '/includes/header.php';
 <section class="section section--gray">
     <div class="container">
         <header class="section__header reveal">
-            <h2 class="section__title">ค่านิยมของเรา</h2>
+            <h2 class="section__title"><?= htmlspecialchars($p['values_title'] ?? 'ค่านิยมของเรา') ?></h2>
         </header>
         <div class="highlight-grid reveal">
+            <?php foreach ($p['values'] ?? [] as $value): ?>
             <div class="highlight-item">
-                <h4>เรียบง่าย</h4>
-                <p>ผลิตภัณฑ์และกระบวนการที่เข้าใจง่าย ไม่ซับซ้อนเกินจำเป็น</p>
+                <h4><?= htmlspecialchars($value['title'] ?? '') ?></h4>
+                <p><?= htmlspecialchars($value['desc'] ?? '') ?></p>
             </div>
-            <div class="highlight-item">
-                <h4>รวดเร็ว</h4>
-                <p>ซื้อออนไลน์ เคลมออนไลน์ ตอบสนองลูกค้าอย่างทันที</p>
-            </div>
-            <div class="highlight-item">
-                <h4>โปร่งใส</h4>
-                <p>เงื่อนไขชัดเจน ไม่มีข้อยกเว้นที่ซ่อนเร้น</p>
-            </div>
-            <div class="highlight-item">
-                <h4>ใส่ใจ</h4>
-                <p>ทีมงานพร้อมให้คำปรึกษาและสนับสนุนตลอดเส้นทาง</p>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -60,13 +53,14 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container">
         <div class="feature-row feature-row--reverse reveal">
             <div class="feature-row__media">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="ทีมงาน FWD" loading="lazy">
+                <img src="<?= htmlspecialchars($p['group_image'] ?? '') ?>" alt="ทีมงาน FWD" loading="lazy">
             </div>
             <div class="feature-row__content">
-                <h2>เครือ FWD Group</h2>
-                <p>FWD ดำเนินธุรกิจประกันชีวิตในหลายประเทศทั่วเอเชีย รวมถึงฮ่องกง สิงคโปร์ ไทย เวียดนาม อินโดนีเซีย และฟิลิปปินส์</p>
-                <p>เรามุ่งมั่นสร้างประสบการณ์ประกันที่แตกต่าง — ให้ลูกค้ามองประกันในมุมใหม่ที่สดใสและเป็นมิตร</p>
-                <a href="#" class="btn btn--outline">เยี่ยมชม FWD Group</a>
+                <h2><?= htmlspecialchars($p['group_title'] ?? 'เครือ FWD Group') ?></h2>
+                <?php foreach ($p['group_paragraphs'] ?? [] as $para): ?>
+                <p><?= htmlspecialchars($para) ?></p>
+                <?php endforeach; ?>
+                <a href="<?= htmlspecialchars($p['group_url'] ?? '#') ?>" class="btn btn--outline"><?= htmlspecialchars($p['group_cta'] ?? 'เยี่ยมชม FWD Group') ?></a>
             </div>
         </div>
     </div>

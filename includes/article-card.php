@@ -10,7 +10,7 @@ function render_article_card(array $article): void
     ?>
 <article class="article-card">
     <a href="<?= htmlspecialchars($href) ?>" class="article-card__media">
-        <img src="<?= htmlspecialchars(image_url($article['image'])) ?>" alt="" loading="lazy">
+        <img src="<?= htmlspecialchars(image_url($article['image'])) ?>" alt="<?= htmlspecialchars($article['image_alt'] ?? $article['title'] ?? '') ?>" loading="lazy">
     </a>
     <div class="article-card__body">
         <p class="article-card__meta">
