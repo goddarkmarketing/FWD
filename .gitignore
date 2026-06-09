@@ -1,4 +1,5 @@
 node_modules/
+.ftp-deploy-sync-state
 .env
 .env.*
 data/cms/auth.json

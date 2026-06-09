@@ -1,0 +1,62 @@
+# Deploy หลังบ้าน PHP (admin + CMS) ไปโฮสต์ staging สำหรับให้ลูกค้าทดสอบ
+# หน้าบ้านยังใช้ GitHub Pages (workflow pages.yml) — ไฟล์นี้ส่งเฉพาะ PHP
+#
+# ตั้ง GitHub Secrets (Settings → Secrets → Actions):
+#   STAGING_FTP_SERVER      เช่น ftp.example.com
+#   STAGING_FTP_USERNAME
+#   STAGING_FTP_PASSWORD
+#   STAGING_FTP_REMOTE_DIR  เช่น /public_html/fwd-staging/  (ต้องลงท้ายด้วย /)
+#   STAGING_ADMIN_EMAIL     (ไม่บังคับ) อีเมล login แอดมิน staging
+#   STAGING_ADMIN_PASSWORD  (ไม่บังคับ) รหัสผ่าน staging — ส่งให้ลูกค้าทดสอบ
+
+name: Deploy Staging PHP
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - staging
+
+concurrency:
+  group: fwd-staging-php
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Run CMS tests
+        run: php scripts/run-cms-tests.php
+
+      - name: Generate staging admin auth
+        env:
+          STAGING_ADMIN_EMAIL: ${{ secrets.STAGING_ADMIN_EMAIL }}
+          STAGING_ADMIN_PASSWORD: ${{ secrets.STAGING_ADMIN_PASSWORD }}
+        run: php scripts/generate-staging-auth.php
+
+      - name: Deploy to staging (FTP)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.STAGING_FTP_SERVER }}
+          username: ${{ secrets.STAGING_FTP_USERNAME }}
+          password: ${{ secrets.STAGING_FTP_PASSWORD }}
+          server-dir: ${{ secrets.STAGING_FTP_REMOTE_DIR }}
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/.cursor/**
+            **/docs/**
+            **/tests/**
+            **/node_modules/**
+            **/data/backups/**
+            **/*.md
+            **/agent-transcripts/**
+            .ftp-deploy-sync-state

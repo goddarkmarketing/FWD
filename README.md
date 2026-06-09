@@ -74,3 +74,65 @@ php scripts/build-static.php /FWD
 3. Action `Deploy GitHub Pages` จะ build และ deploy ให้อัตโนมัติ
 
 > รันบน XAMPP ตามปกติได้เหมือนเดิม — การ build static ไม่กระทบการพัฒนา PHP
+
+## ให้ลูกค้าทดสอบหลังบ้าน (ก่อนขึ้นโฮสต์จริง)
+
+GitHub Pages แสดงได้แค่ **หน้าบ้าน (HTML)** — แอดมิน CMS ต้องรันบน **โฮสต์ PHP** แยกต่างหาก  
+ใช้ GitHub ส่งหลังบ้านให้ลูกค้าทดสอบได้ผ่าน workflow **Deploy Staging PHP**
+
+### URL ที่ส่งให้ลูกค้า
+
+| ส่วน | URL ตัวอย่าง |
+|------|----------------|
+| **หน้าบ้าน (อัตโนมัติเมื่อ push `main`)** | https://goddarkmarketing.github.io/FWD/ |
+| **หลังบ้าน CMS (staging)** | `https://โดเมน-staging-ของคุณ/fwd/admin/` |
+| **หน้าเว็บ PHP บน staging (ดูทันทีหลังแก้ในแอดมิน)** | `https://โดเมน-staging-ของคุณ/fwd/` |
+
+### ตั้งค่าครั้งเดียว
+
+1. สร้าง **subdomain staging** บนโฮสต์ (เช่น `staging.yourdomain.com`) หรือโฟลเดอร์ `fwd-staging` บน cPanel
+2. GitHub repo → **Settings → Secrets and variables → Actions** → เพิ่ม:
+
+| Secret | ตัวอย่าง |
+|--------|----------|
+| `STAGING_FTP_SERVER` | `ftp.yourdomain.com` |
+| `STAGING_FTP_USERNAME` | ชื่อ FTP |
+| `STAGING_FTP_PASSWORD` | รหัส FTP |
+| `STAGING_FTP_REMOTE_DIR` | `/public_html/fwd-staging/` (ลงท้าย `/`) |
+| `STAGING_ADMIN_EMAIL` | อีเมล login แอดมิน staging |
+| `STAGING_ADMIN_PASSWORD` | รหัสผ่านทดสอบ (ส่งให้ลูกค้า) |
+
+3. (แนะนำ) สร้าง **Environment** ชื่อ `staging` ใน GitHub → Settings → Environments
+
+### วิธี deploy หลังบ้านให้ลูกค้าทดสอบ
+
+**แบบ A — กด deploy เอง**
+
+1. GitHub → **Actions** → **Deploy Staging PHP** → **Run workflow**
+
+**แบบ B — push branch `staging`**
+
+```bash
+git checkout -b staging
+git push -u origin staging
+```
+
+ทุกครั้งที่ push branch `staging` จะ deploy หลังบ้านขึ้นโฮสต์ staging อัตโนมัติ
+
+### ขั้นตอนงานแนะนำ
+
+```
+แก้เนื้อหาในแอดมิน (staging URL)
+        ↓
+ลูกค้าทดสอบหน้าบ้าน (GitHub Pages) + หลังบ้าน (staging)
+        ↓
+ลูกค้าอนุมัติ → deploy ชุดเดียวกันขึ้นโฮสต์จริง (FTP/cPanel เหมือน staging)
+        ↓
+commit data/cms/ + push main → หน้า GitHub Pages อัปเดตตาม
+```
+
+### หมายเหตุ
+
+- ไฟล์ `data/cms/auth.json` ไม่ commit ใน git — workflow สร้างจาก Secrets ตอน deploy (หรือรัน `php scripts/setup-cms.php` บนเซิร์ฟเวอร์ครั้งแรก)
+- แก้ในแอดมิน staging แล้วอยากให้ **GitHub Pages** ตรงกัน → commit `data/cms/*.json` แล้ว push `main`
+- โฮสต์ staging ต้องรัน **PHP 8+** และ Apache mod_rewrite (หรือตั้ง Document Root ชี้โฟลเดอร์โปรเจกต์)
