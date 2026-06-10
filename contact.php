@@ -124,6 +124,7 @@ $interests = $p['interests'] ?? [
                                 <option value="09-12">09:00 – 12:00</option>
                                 <option value="12-15">12:00 – 15:00</option>
                                 <option value="15-18">15:00 – 18:00</option>
+                                <option value="19-21">19:00 – 21:00</option>
                             </select>
                         </div>
                     </div>
