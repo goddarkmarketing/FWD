@@ -37,9 +37,6 @@ $footerTermsUrl = $cmsFooter['terms_url'] ?? '#';
                         <div class="footer-agent">
                             <p class="footer-agent__office"><?= htmlspecialchars(AGENT_OFFICE_NAME) ?></p>
                             <p class="footer-agent__license">เลขที่ใบอนุญาต: <?= htmlspecialchars(AGENT_LICENSE_NO) ?></p>
-                            <?php if (AGENT_LICENSE_IMAGE !== ''): ?>
-                            <button type="button" class="btn btn--outline btn--sm footer-agent__btn" id="agent-license-open" aria-haspopup="dialog" aria-controls="agent-license-modal">ใบอนุญาต</button>
-                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -142,20 +139,6 @@ $footerTermsUrl = $cmsFooter['terms_url'] ?? '#';
             </div>
         </div>
     </footer>
-
-    <?php if (defined('AGENT_LICENSE_IMAGE') && AGENT_LICENSE_IMAGE !== ''): ?>
-    <div class="license-modal" id="agent-license-modal" role="dialog" aria-modal="true" aria-labelledby="agent-license-title" aria-hidden="true">
-        <div class="license-modal__backdrop" data-license-close></div>
-        <div class="license-modal__panel">
-            <button type="button" class="license-modal__close" data-license-close aria-label="ปิด">&times;</button>
-            <h2 class="license-modal__title" id="agent-license-title">ใบอนุญาตตัวแทนประกันชีวิต</h2>
-            <p class="license-modal__meta"><?= htmlspecialchars(AGENT_OFFICE_NAME) ?> · เลขที่ <?= htmlspecialchars(AGENT_LICENSE_NO) ?></p>
-            <div class="license-modal__image-wrap">
-                <img src="<?= htmlspecialchars(image_url(AGENT_LICENSE_IMAGE)) ?>" alt="ใบอนุญาตตัวแทนประกันชีวิต เลขที่ <?= htmlspecialchars(AGENT_LICENSE_NO) ?>" width="640" height="400" loading="lazy" decoding="async">
-            </div>
-        </div>
-    </div>
-    <?php endif; ?>
 
     <?php require __DIR__ . '/contact-fab.php'; ?>
 

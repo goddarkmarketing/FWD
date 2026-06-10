@@ -140,30 +140,6 @@
     });
   }
 
-  const licenseOpen = document.getElementById("agent-license-open");
-  const licenseModal = document.getElementById("agent-license-modal");
-  if (licenseOpen && licenseModal) {
-    function openLicenseModal() {
-      licenseModal.classList.add("is-open");
-      licenseModal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    }
-    function closeLicenseModal() {
-      licenseModal.classList.remove("is-open");
-      licenseModal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
-    licenseOpen.addEventListener("click", openLicenseModal);
-    licenseModal.querySelectorAll("[data-license-close]").forEach(function (el) {
-      el.addEventListener("click", closeLicenseModal);
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && licenseModal.classList.contains("is-open")) {
-        closeLicenseModal();
-      }
-    });
-  }
-
   function initProductSlider(root) {
     if (!root || root.classList.contains("is-empty")) return null;
 
