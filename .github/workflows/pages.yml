@@ -41,6 +41,11 @@ jobs:
           test -f docs/index.html
           test -f docs/contact.html
           grep -q 'plan-grid' docs/index.html
+          grep -q 'id="province"' docs/contact.html
+          grep -q 'กรุงเทพมหานคร' docs/contact.html
+          grep -q 'footer-agent' docs/index.html
+          grep -q 'agent-license-open' docs/index.html
+          test -f docs/assets/images/agent-license.png
           find docs -name '*.html' | wc -l
 
       - name: Configure Pages
