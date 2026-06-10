@@ -32,6 +32,11 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
+          extensions: zip, mbstring
+          ini-values: disable_functions=""
+
+      - name: Prepare CMS auth for CI
+        run: php scripts/prepare-ci-auth.php
 
       - name: Run CMS tests
         run: php scripts/run-cms-tests.php

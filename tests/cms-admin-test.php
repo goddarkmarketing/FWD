@@ -99,16 +99,16 @@ return function (TestRunner $t): void {
     });
 
     $t->group('Admin PHP Files', function (TestRunner $t) use ($root): void {
+        require_once $root . '/tests/render-helper.php';
         $adminFiles = glob($root . '/admin/*.php') ?: [];
         $t->assertGreaterThan(10, count($adminFiles));
 
         foreach ($adminFiles as $file) {
             $base = basename($file);
-            $t->test("syntax OK: admin/{$base}", function (TestRunner $t) use ($file, $base): void {
+            $t->test("syntax OK: admin/{$base}", function (TestRunner $t) use ($root, $file, $base): void {
                 $php = defined('TEST_PHP_BINARY') ? TEST_PHP_BINARY : 'php';
-                $cmd = escapeshellarg($php) . ' -l ' . escapeshellarg($file) . ' 2>&1';
-                $out = shell_exec($cmd) ?? '';
-                $t->assertContains('No syntax errors', $out, "Syntax error in {$base}");
+                $result = test_run_proc([$php, '-l', $file], $root);
+                $t->assertContains('No syntax errors', $result['combined'], "Syntax error in {$base}");
             });
         }
     });

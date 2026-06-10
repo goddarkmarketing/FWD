@@ -4,7 +4,7 @@ declare(strict_types=1);
 /**
  * Render PHP pages for tests without shell quoting issues (Windows-safe).
  */
-function test_render_proc(array $cmd, string $cwd): string
+function test_run_proc(array $cmd, string $cwd): array
 {
     $descriptors = [
         0 => ['pipe', 'r'],
@@ -13,7 +13,7 @@ function test_render_proc(array $cmd, string $cwd): string
     ];
     $process = proc_open($cmd, $descriptors, $pipes, $cwd);
     if (!is_resource($process)) {
-        return '';
+        return ['exit' => 1, 'stdout' => '', 'stderr' => '', 'combined' => ''];
     }
 
     fclose($pipes[0]);
@@ -23,11 +23,26 @@ function test_render_proc(array $cmd, string $cwd): string
     fclose($pipes[2]);
     $exitCode = proc_close($process);
 
-    if ($exitCode !== 0) {
-        return is_string($stderr) ? $stderr : '';
+    $stdout = is_string($stdout) ? $stdout : '';
+    $stderr = is_string($stderr) ? $stderr : '';
+    $combined = trim($stdout . ($stderr !== '' ? "\n" . $stderr : ''));
+
+    return [
+        'exit' => $exitCode,
+        'stdout' => $stdout,
+        'stderr' => $stderr,
+        'combined' => $combined,
+    ];
+}
+
+function test_render_proc(array $cmd, string $cwd): string
+{
+    $result = test_run_proc($cmd, $cwd);
+    if ($result['exit'] !== 0) {
+        return $result['stderr'];
     }
 
-    return is_string($stdout) ? $stdout : '';
+    return $result['stdout'];
 }
 
 function test_render_admin_page(string $root, string $file, array $get = []): string
