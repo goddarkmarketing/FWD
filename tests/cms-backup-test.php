@@ -10,8 +10,8 @@ return function (TestRunner $t): void {
 
         $t->test('backup_root และ backup_project_root', function (TestRunner $t): void {
             $t->assertDirectoryExists(backup_root());
-            $t->assertTrue(str_ends_with(str_replace('\\', '/', backup_project_root()), '/fwd')
-                || str_ends_with(str_replace('\\', '/', backup_project_root()), 'fwd'));
+            $projectRoot = strtolower(str_replace('\\', '/', backup_project_root()));
+            $t->assertTrue(str_ends_with($projectRoot, '/fwd'), 'backup_project_root should end with /fwd');
         });
 
         $t->test('backup_customer_asset_dirs()', function (TestRunner $t): void {
