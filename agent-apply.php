@@ -75,15 +75,15 @@ $education_levels = $p['education_levels'] ?? [
                         </div>
                         <div class="form-group">
                             <label for="agent_province">จังหวัด <span class="required">*</span></label>
-                            <input type="text" id="agent_province" name="province" required list="agent-province-list" placeholder="เลือกหรือพิมพ์จังหวัด">
-                            <datalist id="agent-province-list">
+                            <select id="agent_province" name="province" required>
+                                <option value="">เลือกจังหวัด</option>
                                 <?php
                                 require_once __DIR__ . '/includes/thai-provinces.php';
                                 foreach (thai_provinces() as $provinceName):
                                 ?>
-                                <option value="<?= htmlspecialchars($provinceName) ?>">
+                                <option value="<?= htmlspecialchars($provinceName) ?>"><?= htmlspecialchars($provinceName) ?></option>
                                 <?php endforeach; ?>
-                            </datalist>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="agent_postal">รหัสไปรษณีย์ <span class="required">*</span></label>
