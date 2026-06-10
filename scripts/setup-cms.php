@@ -28,8 +28,8 @@ $site = [
     'contact_facebook' => 'https://www.facebook.com/share/1DmTYRVhAt/?mibextid=wwXIfr',
     'contact_facebook_name' => 'FWD ประกันชีวิต Agent thailand',
     'contact_line' => 'https://lin.ee/vYSHQ3O',
-    'agent_office_name' => 'สำนักงานตัวแทน FWD (สาขา รามอินทรา กม.4.5)',
-    'agent_license_no' => '6201009124',
+    'agent_office_name' => 'คุณ ลัดดา รักซ้อน',
+    'agent_license_no' => '5801089096',
     'agent_license_image' => 'assets/images/agent-license.png',
     'hero_alt' => 'FWD by kruda — ประกันที่เข้าใจง่าย ให้คุณใช้ชีวิตได้เต็มที่',
 ];
