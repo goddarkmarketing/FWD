@@ -20,7 +20,7 @@ $userInitial = $userEmail !== '' ? strtoupper(mb_substr($userEmail, 0, 1, 'UTF-8
     <title><?= admin_h($page_title) ?> — CMS</title>
     <link rel="stylesheet" href="<?= admin_h('../assets/css/admin.css') ?>?v=2">
 </head>
-<body class="admin-body">
+<body class="admin-body" data-admin-csrf="<?= admin_h(admin_csrf_token()) ?>" data-admin-upload-url="<?= admin_h(admin_url('media-upload.php')) ?>">
     <div class="admin-sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
     <div class="admin-shell">
         <aside class="admin-sidebar" id="admin-sidebar">
@@ -93,6 +93,6 @@ $userInitial = $userEmail !== '' ? strtoupper(mb_substr($userEmail, 0, 1, 'UTF-8
             </div>
         </div>
     </div>
-    <script src="<?= admin_h('../assets/js/admin.js') ?>?v=4"></script>
+    <script src="<?= admin_h('../assets/js/admin.js') ?>?v=5"></script>
 </body>
 </html>

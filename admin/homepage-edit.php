@@ -158,21 +158,12 @@ ob_start();
         <?php
         $heroDesktop = hero_cover_image();
         $heroMobile = hero_cover_mobile_image();
-        if ($heroDesktop !== null || $heroMobile !== null):
         ?>
-        <div class="form-row">
-            <label>รูป Hero ปัจจุบัน</label>
-            <?php if ($heroDesktop !== null): ?>
-            <p class="form-hint" style="margin:0 0 .35rem">Desktop</p>
-            <?php admin_image_preview($heroDesktop, 'Hero desktop', 'lg'); ?>
-            <?php endif; ?>
-            <?php if ($heroMobile !== null): ?>
-            <p class="form-hint" style="margin:.75rem 0 .35rem">Mobile</p>
-            <?php admin_image_preview($heroMobile, 'Hero mobile', 'sm'); ?>
-            <?php endif; ?>
+        <div class="form-grid-2">
+            <?php admin_inline_image_upload('Hero Desktop', 'cover', $heroDesktop, ['fixed_name' => 'hero-banner', 'size' => 'lg']); ?>
+            <?php admin_inline_image_upload('Hero Mobile', 'cover', $heroMobile, ['fixed_name' => 'hero-banner-mobile', 'size' => 'sm']); ?>
         </div>
-        <?php endif; ?>
-        <p class="form-hint">อัปโหลดรูปที่ <a href="<?= admin_h(admin_url('media.php')) ?>">สื่อ & รูปภาพ</a> — ตั้งชื่อ <code>hero-banner.jpg</code> ในโฟลเดอร์ <code>assets/cover/</code></p>
+        <p class="form-hint">อัปโหลดแล้วใช้ทันทีบนหน้าแรก — Desktop แนะนำ 1440×480 px, Mobile แนะนำ 1:1</p>
 
         <?php elseif ($id === 'plans_section'):
             $ps = $data['plans_section'] ?? [];
@@ -220,7 +211,7 @@ ob_start();
         <div class="form-row"><label>คำอธิบาย</label><textarea name="desc"><?= admin_h($c['desc'] ?? '') ?></textarea></div>
         <div class="form-row"><label>รายการ (บรรทัดละ 1)</label><textarea name="bullets"><?= admin_h(implode("\n", $c['bullets'] ?? [])) ?></textarea></div>
         <div class="form-grid-2">
-            <?php admin_image_field('image', 'รูปภาพ (path)', $c['image'] ?? '', null, ['size' => 'wide']); ?>
+            <?php admin_image_field('image', 'รูปภาพ', $c['image'] ?? '', null, ['size' => 'wide', 'subdir' => 'uploads', 'hide_path' => true]); ?>
             <div class="form-row"><label>ปุ่ม CTA</label><input type="text" name="cta" value="<?= admin_h($c['cta'] ?? '') ?>"></div>
         </div>
 
@@ -300,7 +291,11 @@ ob_start();
             </div>
         </div>
         <?php endif; ?>
-        <p class="form-hint">รูปแกลเลอรี: อัปโหลดที่ <a href="<?= admin_h(admin_url('media.php')) ?>">สื่อ & รูปภาพ</a> → <code>assets/รีวิว/</code></p>
+        <div class="form-row admin-image-field" data-admin-gallery-upload data-admin-reload-on-upload>
+            <label>เพิ่มรูปแกลเลอรีรีวิว</label>
+            <?php admin_inline_upload_control('รีวิว', ['multiple' => true]); ?>
+            <p class="form-hint">เลือกได้หลายรูป — อัปโหลดแล้วหน้าเว็บจะแสดงอัตโนมัติ</p>
+        </div>
 
         <?php elseif ($id === 'promos_section'):
             $p = $data['promos_section'] ?? [];

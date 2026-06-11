@@ -89,18 +89,103 @@
     });
   }
 
-  const contactForm = document.getElementById("contact-form");
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
+  function bindLeadForm(form, successId, errorId, onReset) {
+    if (!form) return;
+
+    const endpoint = document.body.dataset.formEndpoint || "";
+    const formType = form.dataset.formType || "";
+    const successEl = document.getElementById(successId);
+    const errorEl = document.getElementById(errorId);
+    const submitBtn = form.querySelector('[type="submit"]');
+
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
-      const msg = document.getElementById("form-success");
-      if (msg) {
-        msg.hidden = false;
-        contactForm.reset();
-        msg.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (!form.reportValidity()) return;
+
+      if (errorEl) {
+        errorEl.hidden = true;
+        errorEl.textContent = "";
       }
+      if (successEl) {
+        successEl.hidden = true;
+      }
+
+      if (!endpoint) {
+        if (errorEl) {
+          errorEl.textContent = "ไม่พบปลายทางสำหรับส่งฟอร์ม กรุณาติดต่อเจ้าหน้าที่โดยตรง";
+          errorEl.hidden = false;
+        }
+        return;
+      }
+
+      const formData = new FormData(form);
+      formData.set("form_type", formType);
+
+      const isFormSubmit = endpoint.indexOf("formsubmit.co") !== -1;
+      if (isFormSubmit) {
+        formData.set(
+          "_subject",
+          formType === "agent-apply"
+            ? "[FWD AGENT] ใบสมัครตัวแทนใหม่"
+            : "[FWD AGENT] คำขอปรึกษาใหม่"
+        );
+        formData.set("_template", "table");
+        formData.set("_captcha", "false");
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute("aria-busy", "true");
+      }
+
+      fetch(endpoint, {
+        method: "POST",
+        body: formData,
+        headers: isFormSubmit ? { Accept: "application/json" } : { Accept: "application/json" },
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            return { ok: res.ok, data: data };
+          });
+        })
+        .then(function (result) {
+          const payload = result.data || {};
+          if (!result.ok || payload.ok === false) {
+            throw new Error(payload.error || "ส่งข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง");
+          }
+
+          form.reset();
+          if (typeof onReset === "function") {
+            onReset();
+          }
+          if (successEl) {
+            successEl.hidden = false;
+            successEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        })
+        .catch(function (err) {
+          if (errorEl) {
+            errorEl.textContent = err.message || "ส่งข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง";
+            errorEl.hidden = false;
+            errorEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.removeAttribute("aria-busy");
+          }
+        });
     });
   }
+
+  bindLeadForm(document.getElementById("contact-form"), "form-success", "form-error");
+  bindLeadForm(document.getElementById("agent-apply-form"), "agent-form-success", "agent-form-error", function () {
+    const agentAgeField = document.getElementById("agent_age");
+    if (agentAgeField) {
+      agentAgeField.value = "";
+    }
+  });
 
   const agentDob = document.getElementById("agent_dob");
   const agentAge = document.getElementById("agent_age");
@@ -122,22 +207,7 @@
     }
     agentDob.addEventListener("change", updateAgentAge);
     agentDob.addEventListener("input", updateAgentAge);
-  }
-
-  const agentForm = document.getElementById("agent-apply-form");
-  if (agentForm) {
-    agentForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const msg = document.getElementById("agent-form-success");
-      if (msg) {
-        msg.hidden = false;
-        agentForm.reset();
-        if (agentAge) {
-          agentAge.value = "";
-        }
-        msg.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    });
+    agentDob.addEventListener("blur", updateAgentAge);
   }
 
   function initProductSlider(root) {

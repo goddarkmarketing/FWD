@@ -37,6 +37,7 @@ $interests = $p['interests'] ?? [
             <h4><?= htmlspecialchars($p['success_title'] ?? 'ส่งข้อมูลเรียบร้อยแล้ว') ?></h4>
             <p><?= htmlspecialchars($p['success_message'] ?? '') ?></p>
         </div>
+        <div id="form-error" class="contact-form__alert contact-form__alert--error" hidden role="alert"></div>
 
         <?php if ($prefill_name !== ''): ?>
         <div class="contact-form__alert contact-form__alert--plan reveal" role="status">
@@ -45,7 +46,8 @@ $interests = $p['interests'] ?? [
         </div>
         <?php endif; ?>
 
-        <form id="contact-form" class="contact-form reveal" action="#" method="post" novalidate>
+        <form id="contact-form" class="contact-form reveal" action="#" method="post" novalidate data-form-type="contact">
+            <input type="text" name="_hp" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="form-honeypot">
             <?php if ($prefill_plan !== ''): ?>
             <input type="hidden" name="plan_slug" value="<?= htmlspecialchars($prefill_plan) ?>">
             <input type="hidden" name="plan_name" value="<?= htmlspecialchars($prefill_name) ?>">

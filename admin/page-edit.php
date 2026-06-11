@@ -63,7 +63,7 @@ function page_field(array $data, string $key, string $label, string $type = 'tex
 {
     $val = $data[$key] ?? '';
     if ($type === 'image') {
-        admin_image_field($key, $label, $val, null, ['id' => $key, 'size' => 'wide']);
+        admin_image_field($key, $label, $val, null, ['id' => $key, 'size' => 'wide', 'subdir' => 'uploads', 'hide_path' => true]);
         return;
     }
     echo '<div class="form-row"><label for="' . admin_h($key) . '">' . admin_h($label) . '</label>';

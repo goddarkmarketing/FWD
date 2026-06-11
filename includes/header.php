@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/form-mailer.php';
 require_once __DIR__ . '/logo.php';
 require_once __DIR__ . '/icons.php';
 if (!isset($page_title)) {
@@ -48,7 +49,7 @@ $page_og_url = $page_og_url ?? '';
     <link rel="stylesheet" href="<?= asset('assets/css/fonts.css') ?>">
     <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
 </head>
-<body>
+<body data-form-endpoint="<?= htmlspecialchars(form_submit_endpoint()) ?>">
     <a class="skip-link" href="#main">ข้ามไปเนื้อหาหลัก</a>
 
     <header class="site-header" id="site-header">

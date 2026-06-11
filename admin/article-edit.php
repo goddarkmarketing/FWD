@@ -318,7 +318,7 @@ ob_start();
 
         <div class="form-grid-2">
 
-            <?php admin_image_field('image', 'รูปปก (path)', $data['image'], null, ['size' => 'wide', 'id' => 'image']); ?>
+            <?php admin_image_field('image', 'รูปปก', $data['image'], null, ['size' => 'wide', 'id' => 'image', 'subdir' => 'uploads', 'hide_path' => true]); ?>
 
             <div class="form-row">
 
@@ -328,7 +328,7 @@ ob_start();
 
             </div>
 
-            <?php admin_image_field('og_image', 'รูป OG / แชร์โซเชียล (ไม่บังคับ)', $data['og_image'], null, ['size' => 'md', 'id' => 'og_image', 'hint' => 'เว้นว่าง = ใช้รูปปก']); ?>
+            <?php admin_image_field('og_image', 'รูป OG / แชร์โซเชียล (ไม่บังคับ)', $data['og_image'], null, ['size' => 'md', 'id' => 'og_image', 'subdir' => 'uploads', 'hide_path' => true, 'hint' => 'เว้นว่าง = ใช้รูปปก']); ?>
 
         </div>
 

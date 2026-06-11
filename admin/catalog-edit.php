@@ -37,10 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && admin_csrf_verify()) {
         'image' => admin_post_string('image'),
         'tags' => array_values(array_filter(array_map('trim', explode(',', admin_post_string('tags'))))),
     ];
-    $upload = cms_upload('image_upload', 'images/products2');
-    if ($upload) {
-        $overrides[$slug]['image'] = $upload;
-    }
     cms_save('catalog', $overrides);
     admin_flash('success', 'บันทึกแคตตาล็อกเรียบร้อย');
     admin_redirect('catalog-edit.php?slug=' . urlencode($slug));
@@ -48,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && admin_csrf_verify()) {
 
 ob_start();
 ?>
-<form method="post" enctype="multipart/form-data" class="admin-form">
+<form method="post" class="admin-form">
     <input type="hidden" name="_csrf" value="<?= admin_h(admin_csrf_token()) ?>">
     <div class="admin-card">
         <p style="margin:0 0 1rem;color:var(--admin-muted)">Slug: <code><?= admin_h($slug) ?></code></p>
@@ -58,7 +54,7 @@ ob_start();
             <div class="form-row"><label>ส่วนลด</label><input type="text" name="discount" value="<?= admin_h($data['discount'] ?? '') ?>" placeholder="เช่น ลด 15%"></div>
             <div class="form-row"><label>แท็ก (คั่นด้วย comma)</label><input type="text" name="tags" value="<?= admin_h(is_array($data['tags'] ?? null) ? implode(', ', $data['tags']) : ($data['tags'] ?? '')) ?>"></div>
         </div>
-        <?php admin_image_field('image', 'รูปภาพ (path)', $data['image'] ?? '', 'image_upload', ['size' => 'wide']); ?>
+        <?php admin_image_field('image', 'รูปภาพ', $data['image'] ?? '', null, ['size' => 'wide', 'subdir' => 'images/products2', 'hide_path' => true]); ?>
     </div>
     <div class="admin-actions">
         <a href="<?= admin_h(admin_url('catalog.php')) ?>" class="admin-btn admin-btn--outline">กลับ</a>

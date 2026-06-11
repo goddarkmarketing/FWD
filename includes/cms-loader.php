@@ -116,7 +116,20 @@ function cms_plan_override(string $slug): array
     return cms_load('plans/' . $slug, []) ?? [];
 }
 
-function cms_upload(string $fieldName, string $subdir = 'uploads'): ?string
+/** @return list<string> */
+function cms_upload_subdirs(): array
+{
+    return ['cover', 'uploads', 'images', 'images/products2', 'รีวิว'];
+}
+
+function cms_upload_subdir_allowed(string $subdir): bool
+{
+    $subdir = trim(str_replace('\\', '/', $subdir), '/');
+
+    return in_array($subdir, cms_upload_subdirs(), true);
+}
+
+function cms_upload(string $fieldName, string $subdir = 'uploads', ?string $fixedBasename = null, bool $imagesOnly = false): ?string
 {
     if (empty($_FILES[$fieldName]['tmp_name']) || !is_uploaded_file($_FILES[$fieldName]['tmp_name'])) {
         return null;
@@ -127,25 +140,38 @@ function cms_upload(string $fieldName, string $subdir = 'uploads'): ?string
         return null;
     }
 
-    $allowed = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'pdf'];
+    $subdir = trim(str_replace('\\', '/', $subdir), '/');
+    if (!cms_upload_subdir_allowed($subdir)) {
+        return null;
+    }
+
+    $allowed = $imagesOnly
+        ? ['jpg', 'jpeg', 'png', 'webp', 'gif']
+        : ['jpg', 'jpeg', 'png', 'webp', 'gif', 'pdf'];
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     if (!in_array($ext, $allowed, true)) {
         return null;
     }
 
-    $destDir = dirname(__DIR__) . '/assets/' . trim($subdir, '/');
+    $destDir = dirname(__DIR__) . '/assets/' . $subdir;
     if (!is_dir($destDir) && !mkdir($destDir, 0755, true) && !is_dir($destDir)) {
         return null;
     }
 
-    $basename = preg_replace('/[^a-z0-9\-]+/i', '-', pathinfo($file['name'], PATHINFO_FILENAME));
-    $basename = trim($basename, '-') ?: 'file';
-    $filename = $basename . '-' . date('Ymd-His') . '.' . $ext;
+    if ($fixedBasename !== null && $fixedBasename !== '') {
+        $fixedBasename = preg_replace('/[^a-z0-9\-]+/i', '-', trim($fixedBasename, '-.'));
+        $filename = ($fixedBasename !== '' ? $fixedBasename : 'file') . '.' . $ext;
+    } else {
+        $basename = preg_replace('/[^a-z0-9\-]+/i', '-', pathinfo($file['name'], PATHINFO_FILENAME));
+        $basename = trim($basename, '-') ?: 'file';
+        $filename = $basename . '-' . date('Ymd-His') . '.' . $ext;
+    }
+
     $dest = $destDir . '/' . $filename;
 
     if (!move_uploaded_file($file['tmp_name'], $dest)) {
         return null;
     }
 
-    return 'assets/' . trim($subdir, '/') . '/' . $filename;
+    return 'assets/' . $subdir . '/' . $filename;
 }

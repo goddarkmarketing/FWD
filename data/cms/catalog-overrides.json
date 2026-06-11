@@ -1,1 +1,13 @@
-[]
+{
+    "health-family-sharing": {
+        "title": "Health Family Sharing",
+        "desc": "แชร์วงเงินสุขภาพในครอบครัว",
+        "discount": "",
+        "image": "assets\/images\/products2\/CI50-Banner-1440x480-CI50.jpg",
+        "tags": [
+            "ค่ารักษา",
+            "ไม่สำรองจ่าย",
+            "คุ้มครอง IPD"
+        ]
+    }
+}

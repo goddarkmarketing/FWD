@@ -897,6 +897,31 @@ body.admin-login-body {
 .admin-img-preview-wrap--lg .admin-img-preview { max-height: 360px; }
 .admin-img-preview-wrap--wide .admin-img-preview { max-height: 160px; max-width: 480px; }
 
+.admin-upload-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 0.35rem;
+}
+
+.admin-upload-label {
+    cursor: pointer;
+    margin: 0;
+}
+
+.admin-upload-status {
+    font-size: 0.8125rem;
+    color: var(--admin-muted);
+}
+
+.admin-upload-status.is-success { color: #0d7a4f; }
+.admin-upload-status.is-error { color: #c0392b; }
+
+.admin-image-path-input {
+    margin-top: 0.35rem;
+}
+
 /* —— Article editor —— */
 .article-editor {
     min-height: 360px;

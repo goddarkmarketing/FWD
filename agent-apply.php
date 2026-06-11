@@ -26,8 +26,10 @@ $education_levels = $p['education_levels'] ?? [
                 <h4><?= htmlspecialchars($p['success_title'] ?? 'ส่งใบสมัครเรียบร้อยแล้ว') ?></h4>
                 <p><?= htmlspecialchars($p['success_message'] ?? '') ?></p>
             </div>
+            <div id="agent-form-error" class="contact-form__alert contact-form__alert--error reveal" hidden role="alert"></div>
 
-            <form id="agent-apply-form" class="agent-apply-form reveal" action="#" method="post" novalidate>
+            <form id="agent-apply-form" class="agent-apply-form reveal" action="#" method="post" novalidate data-form-type="agent-apply">
+                <input type="text" name="_hp" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="form-honeypot">
                 <div class="agent-apply-form__section">
                     <h2 class="agent-apply-form__section-title">ข้อมูลส่วนตัว</h2>
                     <div class="agent-apply-form__grid">
@@ -41,7 +43,7 @@ $education_levels = $p['education_levels'] ?? [
                         </div>
                         <div class="form-group">
                             <label for="agent_age">อายุ</label>
-                            <input type="text" id="agent_age" name="age" readonly placeholder="—" aria-readonly="true">
+                            <input type="number" id="agent_age" name="age" min="18" max="100" inputmode="numeric" placeholder="เช่น 30" autocomplete="off">
                         </div>
                         <div class="form-group form-group--full">
                             <label for="agent_phone">เบอร์โทรศัพท์ <span class="required">*</span></label>

@@ -136,4 +136,86 @@
             });
         }
     });
+
+    var csrfToken = document.body.getAttribute('data-admin-csrf') || '';
+    var uploadUrl = document.body.getAttribute('data-admin-upload-url') || 'media-upload.php';
+
+    function setUploadStatus(el, message, isError) {
+        if (!el) return;
+        el.textContent = message || '';
+        el.classList.toggle('is-error', !!isError);
+        el.classList.toggle('is-success', !!message && !isError);
+    }
+
+    function uploadImageFile(file, subdir, fixedName) {
+        var fd = new FormData();
+        fd.append('_csrf', csrfToken);
+        fd.append('image', file);
+        fd.append('subdir', subdir);
+        if (fixedName) {
+            fd.append('fixed_name', fixedName);
+        }
+        return fetch(uploadUrl, { method: 'POST', body: fd, credentials: 'same-origin' })
+            .then(function (res) {
+                return res.json().then(function (data) {
+                    if (!res.ok || !data.ok) {
+                        throw new Error((data && data.error) || 'อัปโหลดไม่สำเร็จ');
+                    }
+                    return data;
+                });
+            });
+    }
+
+    document.querySelectorAll('[data-admin-inline-upload]').forEach(function (input) {
+        input.addEventListener('change', function () {
+            var files = input.files ? Array.from(input.files) : [];
+            if (!files.length) return;
+
+            var field = input.closest('[data-admin-image-field]') || input.closest('[data-admin-gallery-upload]');
+            var subdir = input.getAttribute('data-admin-upload-subdir') || 'uploads';
+            var fixedName = input.getAttribute('data-admin-upload-fixed') || '';
+            var pathInput = field && field.querySelector('[data-admin-image-path]');
+            var wrap = field && field.querySelector('[data-admin-preview]');
+            var status = field && field.querySelector('[data-admin-upload-status]');
+            var reloadOnDone = field && field.hasAttribute('data-admin-reload-on-upload');
+            var isMultiple = files.length > 1 || input.hasAttribute('multiple');
+
+            setUploadStatus(status, 'กำลังอัปโหลด…', false);
+            input.disabled = true;
+
+            var chain = Promise.resolve();
+            var uploaded = 0;
+            files.forEach(function (file, index) {
+                chain = chain.then(function () {
+                    var useFixed = !isMultiple && fixedName ? fixedName : '';
+                    return uploadImageFile(file, subdir, useFixed).then(function (data) {
+                        uploaded += 1;
+                        if (pathInput) {
+                            pathInput.value = data.path;
+                        }
+                        if (wrap && data.preview) {
+                            showPreview(wrap, data.preview + (data.preview.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now());
+                        }
+                    });
+                });
+            });
+
+            chain
+                .then(function () {
+                    setUploadStatus(status, 'อัปโหลดสำเร็จ ' + uploaded + ' รูป', false);
+                    if (reloadOnDone) {
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 600);
+                    }
+                })
+                .catch(function (err) {
+                    setUploadStatus(status, err.message || 'อัปโหลดไม่สำเร็จ', true);
+                })
+                .finally(function () {
+                    input.disabled = false;
+                    input.value = '';
+                });
+        });
+    });
 })();

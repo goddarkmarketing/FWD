@@ -2077,6 +2077,20 @@ a:hover {
   border-left: 4px solid #2a9d5c;
 }
 
+.contact-form__alert--error {
+  border-left: 4px solid #c0392b;
+  background: #fff5f5;
+  color: #7f1d1d;
+}
+
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .contact-form__alert--plan {
   border-left: 4px solid var(--fwd-orange);
   background: var(--fwd-orange-light);

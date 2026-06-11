@@ -78,7 +78,7 @@ ob_start();
     </form>
     <p class="form-hint" style="margin:0 0 1rem">
         <a href="../index.php" target="_blank" rel="noopener">ดูหน้าแรก ↗</a>
-        · รูป Hero / แกลเลอรีรีวิว อัปโหลดที่ <a href="<?= admin_h(admin_url('media.php')) ?>">สื่อ & รูปภาพ</a>
+        · รูป Hero / แกลเลอรีรีวิว อัปโหลดได้ในหน้าแก้ไขแต่ละส่วน
     </p>
     <div class="admin-table-wrap">
         <table class="admin-table">

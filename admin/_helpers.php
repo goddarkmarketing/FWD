@@ -44,21 +44,73 @@ function admin_image_preview(?string $path, string $alt = '', string $size = 'md
 }
 
 /**
+ * Inline upload control (AJAX → media-upload.php).
+ *
+ * @param array{fixed_name?: string, multiple?: bool} $opts
+ */
+function admin_inline_upload_control(string $subdir, array $opts = []): void
+{
+    $fixedName = $opts['fixed_name'] ?? '';
+    $multiple = !empty($opts['multiple']);
+    $attrs = 'accept="image/*" data-admin-inline-upload data-admin-upload-subdir="' . admin_h($subdir) . '"';
+    if ($fixedName !== '') {
+        $attrs .= ' data-admin-upload-fixed="' . admin_h($fixedName) . '"';
+    }
+    if ($multiple) {
+        $attrs .= ' multiple';
+    }
+
+    echo '<div class="admin-upload-row">';
+    echo '<label class="admin-btn admin-btn--outline admin-btn--sm admin-upload-label">';
+    echo '<input type="file" ' . $attrs . ' hidden>';
+    echo 'อัปโหลดรูป</label>';
+    echo '<span class="admin-upload-status" data-admin-upload-status aria-live="polite"></span>';
+    echo '</div>';
+}
+
+/**
+ * Preview + inline upload (no path field) — e.g. Hero banner.
+ *
+ * @param array{fixed_name?: string, size?: string} $opts
+ */
+function admin_inline_image_upload(string $label, string $subdir, ?string $currentPath = null, array $opts = []): void
+{
+    $size = $opts['size'] ?? 'md';
+    $uploadOpts = [];
+    if (!empty($opts['fixed_name'])) {
+        $uploadOpts['fixed_name'] = $opts['fixed_name'];
+    }
+
+    echo '<div class="form-row admin-image-field" data-admin-image-field data-admin-upload-only>';
+    echo '<label>' . admin_h($label) . '</label>';
+    admin_image_preview($currentPath, $label, $size);
+    admin_inline_upload_control($subdir, $uploadOpts);
+    echo '</div>';
+}
+
+/**
  * Path text field + optional file upload + preview.
  *
- * @param array{id?: string, hint?: string, size?: string} $opts
+ * @param array{id?: string, hint?: string, size?: string, subdir?: string, hide_path?: bool} $opts
  */
 function admin_image_field(string $name, string $label, ?string $value = '', ?string $uploadName = null, array $opts = []): void
 {
     $id = $opts['id'] ?? $name;
     $size = $opts['size'] ?? 'md';
+    $subdir = $opts['subdir'] ?? null;
     $value = $value ?? '';
 
     echo '<div class="form-row admin-image-field" data-admin-image-field>';
     echo '<label for="' . admin_h($id) . '">' . admin_h($label) . '</label>';
     admin_image_preview($value, $label, $size);
-    echo '<input type="text" id="' . admin_h($id) . '" name="' . admin_h($name) . '" value="' . admin_h($value) . '" data-admin-image-path>';
-    if ($uploadName !== null) {
+    if (!empty($opts['hide_path'])) {
+        echo '<input type="hidden" id="' . admin_h($id) . '" name="' . admin_h($name) . '" value="' . admin_h($value) . '" data-admin-image-path>';
+    } else {
+        echo '<input type="text" id="' . admin_h($id) . '" name="' . admin_h($name) . '" value="' . admin_h($value) . '" data-admin-image-path class="admin-image-path-input">';
+    }
+    if ($subdir !== null) {
+        admin_inline_upload_control($subdir);
+    } elseif ($uploadName !== null) {
         echo '<input type="file" name="' . admin_h($uploadName) . '" accept="image/*" data-admin-image-upload style="margin-top:.5rem">';
     }
     if (!empty($opts['hint'])) {

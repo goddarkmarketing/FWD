@@ -11,18 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && admin_csrf_verify()) {
         'site_name', 'site_tagline', 'site_logo_path', 'site_phone',
         'contact_email', 'contact_phone_1', 'contact_phone_2', 'contact_phone_2_raw',
         'contact_facebook', 'contact_facebook_name', 'contact_line',
-        'agent_office_name', 'agent_license_no', 'agent_license_image', 'hero_alt',
+        'agent_office_name', 'agent_license_no', 'hero_alt',
     ];
     foreach ($fields as $f) {
         $data[$f] = admin_post_string($f);
-    }
-    $upload = cms_upload('logo_upload', 'images');
-    if ($upload) {
-        $data['site_logo_path'] = $upload;
-    }
-    $licenseUpload = cms_upload('license_upload', 'images');
-    if ($licenseUpload) {
-        $data['agent_license_image'] = $licenseUpload;
     }
     cms_save('site', $data);
     admin_flash('success', 'บันทึกข้อมูลเว็บไซต์เรียบร้อย');
@@ -31,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && admin_csrf_verify()) {
 
 ob_start();
 ?>
-<form method="post" enctype="multipart/form-data" class="admin-form">
+<form method="post" class="admin-form">
     <input type="hidden" name="_csrf" value="<?= admin_h(admin_csrf_token()) ?>">
 
     <div class="admin-card">
@@ -46,7 +38,7 @@ ob_start();
                 <input type="text" id="site_tagline" name="site_tagline" value="<?= admin_h($data['site_tagline'] ?? '') ?>">
             </div>
         </div>
-        <?php admin_image_field('site_logo_path', 'โลโก้ (path)', $data['site_logo_path'] ?? '', 'logo_upload', ['id' => 'site_logo_path', 'size' => 'logo']); ?>
+        <?php admin_image_field('site_logo_path', 'โลโก้', $data['site_logo_path'] ?? '', null, ['id' => 'site_logo_path', 'size' => 'logo', 'subdir' => 'images', 'hide_path' => true]); ?>
         <div class="form-row">
             <label for="hero_alt">ข้อความ alt รูป Hero</label>
             <input type="text" id="hero_alt" name="hero_alt" value="<?= admin_h($data['hero_alt'] ?? '') ?>">
@@ -97,12 +89,9 @@ ob_start();
             <label for="agent_office_name">ชื่อสำนักงาน</label>
             <input type="text" id="agent_office_name" name="agent_office_name" value="<?= admin_h($data['agent_office_name'] ?? '') ?>">
         </div>
-        <div class="form-grid-2">
-            <div class="form-row">
-                <label for="agent_license_no">เลขใบอนุญาต</label>
-                <input type="text" id="agent_license_no" name="agent_license_no" value="<?= admin_h($data['agent_license_no'] ?? '') ?>">
-            </div>
-            <?php admin_image_field('agent_license_image', 'รูปใบอนุญาต (path)', $data['agent_license_image'] ?? '', 'license_upload', ['id' => 'agent_license_image', 'size' => 'md']); ?>
+        <div class="form-row">
+            <label for="agent_license_no">เลขใบอนุญาต</label>
+            <input type="text" id="agent_license_no" name="agent_license_no" value="<?= admin_h($data['agent_license_no'] ?? '') ?>">
         </div>
     </div>
 
