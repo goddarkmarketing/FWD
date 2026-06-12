@@ -89,6 +89,139 @@
     });
   }
 
+  const FORM_LABELS = {
+    contact: {
+      contact_method: "ช่องทางติดต่อกลับ",
+      interest: "สนใจผลิตภัณฑ์",
+      first_name: "ชื่อ",
+      last_name: "นามสกุล",
+      dob: "วันเกิด",
+      phone: "เบอร์โทรศัพท์",
+      email: "อีเมล",
+      province: "จังหวัด",
+      preferred_time: "เวลาที่สะดวก",
+      plan_slug: "แผนที่สนใจ (slug)",
+      plan_name: "แผนที่สนใจ",
+    },
+    "agent-apply": {
+      full_name: "ชื่อ-นามสกุล",
+      dob: "วันเกิด",
+      age: "อายุ",
+      phone: "เบอร์โทรศัพท์",
+      email: "อีเมล",
+      address_no: "บ้านเลขที่ / หมู่",
+      street: "ถนน",
+      subdistrict: "ตำบล / แขวง",
+      district: "อำเภอ / เขต",
+      province: "จังหวัด",
+      postal: "รหัสไปรษณีย์",
+      education: "วุฒิการศึกษา",
+      major: "สาขาวิชา",
+      experience: "ประสบการณ์การทำงาน",
+    },
+  };
+
+  function formDataToFields(formData) {
+    const data = {};
+    formData.forEach(function (value, key) {
+      if (key === "_hp" || key === "consent" || key === "form_type") {
+        return;
+      }
+      const fieldKey = key.endsWith("[]") ? key.slice(0, -2) : key;
+      if (key.endsWith("[]")) {
+        if (!data[fieldKey]) {
+          data[fieldKey] = [];
+        }
+        data[fieldKey].push(value);
+        return;
+      }
+      data[fieldKey] = value;
+    });
+    return data;
+  }
+
+  function formatFormFieldValue(key, value) {
+    if (Array.isArray(value)) {
+      value = value.join(", ");
+    }
+    value = String(value || "").trim();
+    if (value === "") {
+      return "—";
+    }
+    if (key === "contact_method") {
+      return value === "phone" ? "โทรศัพท์" : value === "face" ? "พบตัวต่อตัว" : value;
+    }
+    if (key === "preferred_time") {
+      const times = {
+        "09-12": "09:00 – 12:00",
+        "12-15": "12:00 – 15:00",
+        "15-18": "15:00 – 18:00",
+        "19-21": "19:00 – 21:00",
+      };
+      return times[value] || value;
+    }
+    return value;
+  }
+
+  function buildFormEmailBody(formType, data) {
+    const labels = FORM_LABELS[formType] || {};
+    const siteName = document.body.dataset.siteName || "FWD AGENT ประเทศไทย";
+    const title =
+      formType === "agent-apply"
+        ? "ใบสมัครตัวแทนใหม่จากเว็บไซต์"
+        : "คำขอปรึกษาใหม่จากเว็บไซต์";
+    const lines = [title, "=".repeat(40), ""];
+
+    Object.keys(labels).forEach(function (key) {
+      if (!Object.prototype.hasOwnProperty.call(data, key)) {
+        return;
+      }
+      lines.push(labels[key] + ": " + formatFormFieldValue(key, data[key]));
+    });
+
+    const now = new Date();
+    const sentAt =
+      String(now.getDate()).padStart(2, "0") +
+      "/" +
+      String(now.getMonth() + 1).padStart(2, "0") +
+      "/" +
+      now.getFullYear() +
+      " " +
+      String(now.getHours()).padStart(2, "0") +
+      ":" +
+      String(now.getMinutes()).padStart(2, "0") +
+      ":" +
+      String(now.getSeconds()).padStart(2, "0");
+
+    lines.push("");
+    lines.push("ส่งเมื่อ: " + sentAt);
+    lines.push("จาก: " + siteName);
+
+    return lines.join("\n");
+  }
+
+  function buildFormSubmitPayload(formType, formData) {
+    const siteName = document.body.dataset.siteName || "FWD AGENT ประเทศไทย";
+    const data = formDataToFields(formData);
+    const body = buildFormEmailBody(formType, data);
+    const replyEmail = String(data.email || "").trim();
+    const out = new FormData();
+
+    out.set(
+      "_subject",
+      formType === "agent-apply"
+        ? "[" + siteName + "] ใบสมัครตัวแทนใหม่"
+        : "[" + siteName + "] คำขอปรึกษาใหม่"
+    );
+    out.set("_captcha", "false");
+    if (replyEmail) {
+      out.set("_replyto", replyEmail);
+    }
+    out.set("รายละเอียด", body);
+
+    return out;
+  }
+
   function bindLeadForm(form, successId, errorId, onReset) {
     if (!form) return;
 
@@ -118,19 +251,12 @@
         return;
       }
 
-      const formData = new FormData(form);
+      const isFormSubmit = endpoint.indexOf("formsubmit.co") !== -1;
+      let formData = new FormData(form);
       formData.set("form_type", formType);
 
-      const isFormSubmit = endpoint.indexOf("formsubmit.co") !== -1;
       if (isFormSubmit) {
-        formData.set(
-          "_subject",
-          formType === "agent-apply"
-            ? "[FWD AGENT] ใบสมัครตัวแทนใหม่"
-            : "[FWD AGENT] คำขอปรึกษาใหม่"
-        );
-        formData.set("_template", "table");
-        formData.set("_captcha", "false");
+        formData = buildFormSubmitPayload(formType, formData);
       }
 
       if (submitBtn) {

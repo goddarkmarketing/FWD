@@ -49,7 +49,7 @@ $page_og_url = $page_og_url ?? '';
     <link rel="stylesheet" href="<?= asset('assets/css/fonts.css') ?>">
     <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
 </head>
-<body data-form-endpoint="<?= htmlspecialchars(form_submit_endpoint()) ?>">
+<body data-form-endpoint="<?= htmlspecialchars(form_submit_endpoint()) ?>" data-site-name="<?= htmlspecialchars(SITE_NAME) ?>">
     <a class="skip-link" href="#main">ข้ามไปเนื้อหาหลัก</a>
 
     <header class="site-header" id="site-header">
