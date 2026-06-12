@@ -102,6 +102,127 @@ function media_url(string $path): string
     return BASE_URL . '/' . implode('/', array_map('rawurlencode', $parts));
 }
 
+function site_origin(): string
+{
+    static $origin = null;
+    if ($origin !== null) {
+        return $origin;
+    }
+
+    $override = getenv('FWD_SITE_ORIGIN');
+    if ($override !== false && $override !== '') {
+        $origin = rtrim(str_replace('\\', '/', $override), '/');
+        return $origin;
+    }
+
+    if (PHP_SAPI === 'cli' || (defined('FWD_STATIC_BUILD') && FWD_STATIC_BUILD)) {
+        $origin = 'https://goddarkmarketing.github.io';
+        return $origin;
+    }
+
+    $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $origin = $scheme . '://' . $host;
+
+    return $origin;
+}
+
+function ensure_absolute_url(string $url): string
+{
+    if (preg_match('#^https?://#i', $url)) {
+        return $url;
+    }
+
+    if ($url === '') {
+        return site_origin() . (BASE_URL === '' ? '/' : rtrim(BASE_URL, '/') . '/');
+    }
+
+    if ($url[0] !== '/') {
+        $url = '/' . $url;
+    }
+
+    return site_origin() . $url;
+}
+
+function current_canonical_url(): string
+{
+    $file = basename($_SERVER['PHP_SELF'] ?? 'index.php');
+    if ($file === 'index.php') {
+        return ensure_absolute_url(BASE_URL === '' ? '/' : rtrim(BASE_URL, '/') . '/');
+    }
+    if ($file === 'plan.php' && !empty($_GET['slug'])) {
+        return ensure_absolute_url(rtrim(BASE_URL, '/') . '/plan/' . rawurlencode((string) $_GET['slug']) . '/');
+    }
+    if ($file === 'article.php' && !empty($_GET['slug'])) {
+        return ensure_absolute_url(rtrim(BASE_URL, '/') . '/article/' . rawurlencode((string) $_GET['slug']) . '/');
+    }
+
+    return ensure_absolute_url(page_url($file));
+}
+
+function site_share_image_path(): ?string
+{
+    static $resolved = false;
+    static $path = null;
+
+    if ($resolved) {
+        return $path;
+    }
+    $resolved = true;
+
+    $custom = trim((string) cms_get('site', 'og_image', ''));
+    if ($custom !== '') {
+        $path = $custom;
+        return $path;
+    }
+
+    $candidates = [
+        'assets/images/og-share.jpg',
+        'assets/images/og-share.png',
+        'assets/images/og-share.webp',
+    ];
+    foreach ($candidates as $candidate) {
+        if (is_file(dirname(__DIR__) . '/' . $candidate)) {
+            $path = $candidate;
+            return $path;
+        }
+    }
+
+    $hero = hero_cover_image();
+    if ($hero !== null) {
+        $path = $hero;
+        return $path;
+    }
+
+    return null;
+}
+
+function site_share_image_meta(): ?array
+{
+    $relativePath = site_share_image_path();
+    if ($relativePath === null) {
+        return null;
+    }
+
+    $absoluteFile = dirname(__DIR__) . '/' . str_replace('\\', '/', ltrim($relativePath, '/'));
+    $width = 1200;
+    $height = 630;
+    if (is_file($absoluteFile) && function_exists('getimagesize')) {
+        $info = @getimagesize($absoluteFile);
+        if (is_array($info) && !empty($info[0]) && !empty($info[1])) {
+            $width = (int) $info[0];
+            $height = (int) $info[1];
+        }
+    }
+
+    return [
+        'url' => ensure_absolute_url(image_url($relativePath)),
+        'width' => $width,
+        'height' => $height,
+        'alt' => defined('HERO_ALT') ? HERO_ALT : SITE_NAME,
+    ];
+}
+
 function page_url(string $file): string
 {
     if (FWD_STATIC_BUILD) {

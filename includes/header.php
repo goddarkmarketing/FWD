@@ -14,8 +14,30 @@ $page_canonical = $page_canonical ?? '';
 $page_og_title = $page_og_title ?? ($page_title . ' | ' . SITE_NAME);
 $page_og_description = $page_og_description ?? $page_description;
 $page_og_image = $page_og_image ?? '';
+$page_og_image_width = $page_og_image_width ?? null;
+$page_og_image_height = $page_og_image_height ?? null;
+$page_og_image_alt = $page_og_image_alt ?? (defined('HERO_ALT') ? HERO_ALT : SITE_NAME);
 $page_og_type = $page_og_type ?? 'website';
 $page_og_url = $page_og_url ?? '';
+
+if ($page_og_image === '') {
+    $shareMeta = site_share_image_meta();
+    if ($shareMeta !== null) {
+        $page_og_image = $shareMeta['url'];
+        $page_og_image_width = $shareMeta['width'];
+        $page_og_image_height = $shareMeta['height'];
+        $page_og_image_alt = $shareMeta['alt'];
+    }
+} elseif (!preg_match('#^https?://#i', $page_og_image)) {
+    $page_og_image = ensure_absolute_url($page_og_image);
+}
+
+if ($page_og_url === '') {
+    $page_og_url = current_canonical_url();
+}
+if ($page_canonical === '') {
+    $page_canonical = $page_og_url;
+}
 ?>
 <!DOCTYPE html>
 <html lang="th">
@@ -29,17 +51,28 @@ $page_og_url = $page_og_url ?? '';
     <?php endif; ?>
     <title><?= htmlspecialchars($page_og_title) ?></title>
     <meta property="og:type" content="<?= htmlspecialchars($page_og_type) ?>">
+    <meta property="og:site_name" content="<?= htmlspecialchars(SITE_NAME) ?>">
+    <meta property="og:locale" content="th_TH">
     <meta property="og:title" content="<?= htmlspecialchars($page_og_title) ?>">
     <meta property="og:description" content="<?= htmlspecialchars($page_og_description) ?>">
-    <?php if ($page_og_image !== ''): ?>
-    <meta property="og:image" content="<?= htmlspecialchars($page_og_image) ?>">
-    <?php endif; ?>
     <?php if ($page_og_url !== ''): ?>
     <meta property="og:url" content="<?= htmlspecialchars($page_og_url) ?>">
+    <?php endif; ?>
+    <?php if ($page_og_image !== ''): ?>
+    <meta property="og:image" content="<?= htmlspecialchars($page_og_image) ?>">
+    <meta property="og:image:secure_url" content="<?= htmlspecialchars($page_og_image) ?>">
+    <?php if (!empty($page_og_image_width) && !empty($page_og_image_height)): ?>
+    <meta property="og:image:width" content="<?= (int) $page_og_image_width ?>">
+    <meta property="og:image:height" content="<?= (int) $page_og_image_height ?>">
+    <?php endif; ?>
+    <meta property="og:image:alt" content="<?= htmlspecialchars($page_og_image_alt) ?>">
     <?php endif; ?>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?= htmlspecialchars($page_og_title) ?>">
     <meta name="twitter:description" content="<?= htmlspecialchars($page_og_description) ?>">
+    <?php if ($page_og_image !== ''): ?>
+    <meta name="twitter:image" content="<?= htmlspecialchars($page_og_image) ?>">
+    <?php endif; ?>
     <?php if (!empty($page_schema_json)): ?>
     <script type="application/ld+json"><?= $page_schema_json ?></script>
     <?php endif; ?>

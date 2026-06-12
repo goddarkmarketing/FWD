@@ -14,6 +14,7 @@ $queryJson = $argv[4] ?? '{}';
 
 putenv('FWD_STATIC_BUILD=1');
 putenv('FWD_BASE_URL=' . $baseUrl);
+putenv('FWD_SITE_ORIGIN=https://goddarkmarketing.github.io');
 
 $get = json_decode($queryJson, true);
 if (!is_array($get)) {

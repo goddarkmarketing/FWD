@@ -16,6 +16,7 @@ if ($baseUrl === '/') {
 
 putenv('FWD_STATIC_BUILD=1');
 putenv('FWD_BASE_URL=' . $baseUrl);
+putenv('FWD_SITE_ORIGIN=https://goddarkmarketing.github.io');
 
 $dist = $root . '/docs';
 
