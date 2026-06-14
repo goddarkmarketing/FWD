@@ -1,0 +1,71 @@
+# Deploy โปรเจกต์ PHP ทั้งหมด (หน้าบ้าน + admin + ฟอร์ม) ไปโฮสต์จริง
+#
+# GitHub Pages ยัง deploy หน้าบ้านแบบ static จาก workflow pages.yml
+# Workflow นี้ใช้เมื่อมีโดเมน/โฮสต์ PHP ต้องการให้ /admin/ ใช้งานได้
+#
+# GitHub Secrets (Settings → Secrets → Actions):
+#   FTP_SERVER           เช่น ftp.yourdomain.com
+#   FTP_USERNAME
+#   FTP_PASSWORD
+#   FTP_REMOTE_DIR         เช่น /public_html/ หรือ /public_html/fwd/ (ลงท้าย /)
+#   DEPLOY_ADMIN_EMAIL     อีเมล login แอดมิน
+#   DEPLOY_ADMIN_PASSWORD  รหัสผ่านแอดมิน
+
+name: Deploy PHP (Production)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: fwd-php-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: ${{ secrets.FTP_SERVER != '' && secrets.FTP_USERNAME != '' && secrets.FTP_PASSWORD != '' && secrets.FTP_REMOTE_DIR != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: zip, mbstring
+          ini-values: disable_functions=""
+
+      - name: Prepare CMS auth for CI
+        run: php scripts/prepare-ci-auth.php
+
+      - name: Run CMS tests
+        run: php scripts/run-cms-tests.php
+
+      - name: Generate admin auth for host
+        env:
+          DEPLOY_ADMIN_EMAIL: ${{ secrets.DEPLOY_ADMIN_EMAIL }}
+          DEPLOY_ADMIN_PASSWORD: ${{ secrets.DEPLOY_ADMIN_PASSWORD }}
+        run: php scripts/generate-deploy-auth.php
+
+      - name: Deploy to host (FTP)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/.cursor/**
+            **/docs/**
+            **/tests/**
+            **/node_modules/**
+            **/data/backups/**
+            **/data/form-submissions/**
+            **/*.md
+            **/agent-transcripts/**
+            .ftp-deploy-sync-state

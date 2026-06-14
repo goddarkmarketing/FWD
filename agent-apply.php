@@ -49,9 +49,19 @@ $education_levels = $p['education_levels'] ?? [
                             <label for="agent_phone">เบอร์โทรศัพท์ <span class="required">*</span></label>
                             <input type="tel" id="agent_phone" name="phone" required autocomplete="tel" placeholder="08xxxxxxxx">
                         </div>
-                        <div class="form-group form-group--full">
+                        <div class="form-group">
                             <label for="agent_email">อีเมล <span class="required">*</span></label>
                             <input type="email" id="agent_email" name="email" required autocomplete="email" placeholder="name@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="agent_preferred_time">เวลาที่สะดวกให้ติดต่อกลับ</label>
+                            <select id="agent_preferred_time" name="preferred_time">
+                                <option value="">เลือกเวลา</option>
+                                <option value="09-12">09:00 – 12:00</option>
+                                <option value="12-15">12:00 – 15:00</option>
+                                <option value="15-18">15:00 – 18:00</option>
+                                <option value="19-21">19:00 – 21:00</option>
+                            </select>
                         </div>
                     </div>
                 </div>

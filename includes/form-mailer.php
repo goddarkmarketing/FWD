@@ -94,6 +94,7 @@ function form_label_map(string $type): array
             'age' => 'อายุ',
             'phone' => 'เบอร์โทรศัพท์',
             'email' => 'อีเมล',
+            'preferred_time' => 'เวลาที่สะดวกให้ติดต่อกลับ',
             'address_no' => 'บ้านเลขที่ / หมู่',
             'street' => 'ถนน',
             'subdistrict' => 'ตำบล / แขวง',

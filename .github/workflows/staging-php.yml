@@ -45,7 +45,7 @@ jobs:
         env:
           STAGING_ADMIN_EMAIL: ${{ secrets.STAGING_ADMIN_EMAIL }}
           STAGING_ADMIN_PASSWORD: ${{ secrets.STAGING_ADMIN_PASSWORD }}
-        run: php scripts/generate-staging-auth.php
+        run: php scripts/generate-deploy-auth.php
 
       - name: Deploy to staging (FTP)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

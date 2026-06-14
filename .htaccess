@@ -2,9 +2,8 @@ DirectoryIndex index.php index.html
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /fwd/
 
-    # Optional: remove .php extension
+    # Optional: remove .php extension (works at domain root or subfolder)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}\.php -f
     RewriteRule ^([^/]+)/?$ $1.php [L]

@@ -136,3 +136,28 @@ commit data/cms/ + push main → หน้า GitHub Pages อัปเดตต
 - ไฟล์ `data/cms/auth.json` ไม่ commit ใน git — workflow สร้างจาก Secrets ตอน deploy (หรือรัน `php scripts/setup-cms.php` บนเซิร์ฟเวอร์ครั้งแรก)
 - แก้ในแอดมิน staging แล้วอยากให้ **GitHub Pages** ตรงกัน → commit `data/cms/*.json` แล้ว push `main`
 - โฮสต์ staging ต้องรัน **PHP 8+** และ Apache mod_rewrite (หรือตั้ง Document Root ชี้โฟลเดอร์โปรเจกต์)
+
+## หลังบ้านบนโดเมนจริง (Production PHP)
+
+ใช้ workflow **Deploy PHP (Production)** — ส่งโค้ด PHP ทั้งหมด (หน้าบ้าน + `admin/` + ฟอร์ม) ขึ้นโฮสต์ cPanel/FTP
+
+| ส่วน | URL ตัวอย่าง |
+|------|----------------|
+| **หน้าบ้าน PHP** | `https://yourdomain.com/` |
+| **หลังบ้าน CMS** | `https://yourdomain.com/admin/` |
+| **ฟอร์มส่งอีเมล** | `https://yourdomain.com/submit-form.php` |
+
+### GitHub Secrets สำหรับโดเมนจริง
+
+| Secret | ตัวอย่าง |
+|--------|----------|
+| `FTP_SERVER` | `ftp.yourdomain.com` |
+| `FTP_USERNAME` | ชื่อ FTP |
+| `FTP_PASSWORD` | รหัส FTP |
+| `FTP_REMOTE_DIR` | `/public_html/` (ลงท้าย `/`) |
+| `DEPLOY_ADMIN_EMAIL` | `Supakitraksorn@gmail.com` |
+| `DEPLOY_ADMIN_PASSWORD` | รหัสผ่านแอดมิน |
+
+เมื่อตั้ง Secrets ครบแล้ว ทุกครั้งที่ push `main` จะ deploy PHP ขึ้นโฮสต์อัตโนมัติ (หรือกด **Actions → Deploy PHP (Production) → Run workflow**)
+
+> ถ้ายังไม่ได้ตั้ง FTP Secrets workflow จะข้ามขั้นตอน deploy — GitHub Pages ยังทำงานตามปกติ
