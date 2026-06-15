@@ -153,6 +153,11 @@ function plan_detail_from_catalog(string $slug): ?array
 
 function plan_detail(string $slug): ?array
 {
+    require_once __DIR__ . '/cms-plan-meta.php';
+    if (plan_detail_is_hidden($slug)) {
+        return null;
+    }
+
     $details = plan_details_all();
     $plan = $details[$slug] ?? null;
     if ($plan === null) {
