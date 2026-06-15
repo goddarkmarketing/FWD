@@ -776,6 +776,11 @@ body.admin-body {
     color: var(--admin-orange-dark);
 }
 
+.admin-badge--muted {
+    background: #eef1f4;
+    color: #667085;
+}
+
 /* —— Login —— */
 body.admin-login-body {
     margin: 0;

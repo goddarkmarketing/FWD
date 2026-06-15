@@ -2,9 +2,16 @@
 require_once __DIR__ . '/_bootstrap.php';
 admin_require_login();
 require_once dirname(__DIR__) . '/includes/plan-helpers.php';
+require_once dirname(__DIR__) . '/includes/cms-plan-meta.php';
 
 $slug = trim((string) ($_GET['slug'] ?? ''));
 $item = plan_catalog_by_slug($slug);
+if ($item === null) {
+    $meta = cms_catalog_meta();
+    if ($slug !== '' && isset($meta['custom'][$slug])) {
+        $item = $meta['custom'][$slug];
+    }
+}
 if ($item === null) {
     admin_flash('error', 'ไม่พบแผน: ' . $slug);
     admin_redirect('catalog.php');
@@ -23,6 +30,12 @@ $data = array_merge([
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && admin_csrf_verify()) {
     $action = admin_post_string('action');
+    if ($action === 'delete') {
+        $isBuiltin = plan_catalog_is_builtin($slug);
+        cms_catalog_delete($slug);
+        admin_flash('success', $isBuiltin ? 'ซ่อนแผนแล้ว' : 'ลบแผนแล้ว');
+        admin_redirect('catalog.php');
+    }
     if ($action === 'reset') {
         unset($overrides[$slug]);
         cms_save('catalog', $overrides);
@@ -59,7 +72,10 @@ ob_start();
     <div class="admin-actions">
         <a href="<?= admin_h(admin_url('catalog.php')) ?>" class="admin-btn admin-btn--outline">กลับ</a>
         <button type="submit" class="admin-btn admin-btn--primary">บันทึก</button>
-        <button type="submit" name="action" value="reset" class="admin-btn admin-btn--danger" onclick="return confirm('รีเซ็ตการแก้ไข CMS ของแผนนี้?')">รีเซ็ต</button>
+        <?php if (!empty($overrides[$slug])): ?>
+        <button type="submit" name="action" value="reset" class="admin-btn admin-btn--outline" onclick="return confirm('รีเซ็ตการแก้ไข CMS ของแผนนี้?')">รีเซ็ต</button>
+        <?php endif; ?>
+        <button type="submit" name="action" value="delete" class="admin-btn admin-btn--danger" onclick="return confirm('<?= plan_catalog_is_builtin($slug) ? 'ลบแผนนี้จากเว็บไซต์? (กู้คืนได้จากปุ่ม แสดงอีกครั้ง)' : 'ลบแผนนี้ถาวร?' ?>')">ลบแผน</button>
     </div>
 </form>
 <?php

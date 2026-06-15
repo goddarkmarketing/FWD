@@ -16,6 +16,9 @@ function cms_file_path(string $key): string
     if (preg_match('#^plans/([a-z0-9\-]+)$#', $key, $m)) {
         return cms_root() . '/plans/' . $m[1] . '.json';
     }
+    if (preg_match('#^_meta/([a-z0-9\-]+)$#', $key, $m)) {
+        return cms_root() . '/' . $m[1] . '-meta.json';
+    }
 
     $map = [
         'site' => 'site.json',

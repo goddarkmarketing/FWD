@@ -26,6 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && admin_csrf_verify()) {
         admin_redirect('category-edit.php?id=' . urlencode($id));
     }
 
+    if (admin_post_string('action') === 'delete') {
+        require_once dirname(__DIR__) . '/includes/cms-plan-meta.php';
+        if ($id === 'all') {
+            admin_flash('error', 'ไม่สามารถลบหมวด "ทั้งหมด" ได้');
+        } else {
+            $isBuiltin = plan_category_is_builtin($id);
+            cms_category_delete($id);
+            admin_flash('success', $isBuiltin ? 'ซ่อนหมวดหมู่แล้ว' : 'ลบหมวดหมู่แล้ว');
+            admin_redirect('categories.php');
+        }
+    }
+
     $data[$id]['title'] = admin_post_string('title');
     $data[$id]['lead'] = admin_post_string('lead');
     $data[$id]['mega_desc'] = admin_post_string('mega_desc');
@@ -77,6 +89,21 @@ ob_start();
         'ลบการแก้ไข CMS ของหมวดนี้และใช้ค่าเริ่มต้น?',
         'admin-btn admin-btn--danger'
     ); ?>
+</div>
+<?php endif; ?>
+<?php if ($id !== 'all'): ?>
+<div class="admin-actions" style="margin-top:0;padding-top:0;border-top:0">
+    <?php
+    require_once dirname(__DIR__) . '/includes/cms-plan-meta.php';
+    admin_inline_post_form(
+        ['action' => 'delete'],
+        'ลบหมวดหมู่',
+        plan_category_is_builtin($id)
+            ? 'ลบหมวดหมู่นี้จากเว็บไซต์? (กู้คืนได้จากปุ่ม แสดงอีกครั้ง)'
+            : 'ลบหมวดหมู่นี้ถาวร?',
+        'admin-btn admin-btn--danger'
+    );
+    ?>
 </div>
 <?php endif; ?>
 <?php

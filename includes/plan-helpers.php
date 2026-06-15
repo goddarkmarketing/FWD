@@ -14,16 +14,30 @@ function plan_categories(): array
     static $categories;
     if ($categories === null) {
         require_once __DIR__ . '/cms-loader.php';
-        $defaults = require __DIR__ . '/plan-categories.php';
+        require_once __DIR__ . '/cms-plan-meta.php';
+        $defaults = plan_category_defaults();
         $cms = cms_load('categories');
-        $categories = cms_merge_defaults($defaults, is_array($cms) ? $cms : null);
+        $merged = cms_merge_defaults($defaults, is_array($cms) ? $cms : null);
+        $hidden = cms_categories_meta()['hidden'] ?? [];
+        foreach ($hidden as $id) {
+            unset($merged[$id]);
+        }
+        $categories = $merged;
     }
     return $categories;
 }
 
 function plan_category_menu_order(): array
 {
-    return ['all', 'life-accident', 'health', 'critical', 'investment', 'savings'];
+    require_once __DIR__ . '/cms-plan-meta.php';
+    $meta = cms_categories_meta();
+    $order = $meta['order'] ?? [];
+    if ($order === []) {
+        $order = plan_category_default_order();
+    }
+    $cats = plan_categories();
+
+    return array_values(array_filter($order, static fn(string $id): bool => isset($cats[$id])));
 }
 
 function plan_category_page_url(string $categoryId): string

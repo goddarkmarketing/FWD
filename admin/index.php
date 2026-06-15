@@ -36,18 +36,6 @@ ob_start();
     </a>
     <?php endforeach; ?>
 </div>
-
-<div class="admin-card">
-    <div class="admin-card__head">
-        <h2 class="admin-card__title">คำแนะนำ</h2>
-        <span class="admin-badge admin-badge--live">Live on XAMPP</span>
-    </div>
-    <p style="margin:0;color:var(--admin-muted);font-size:0.92rem;line-height:1.6">
-        หลังแก้ไขเนื้อหา หน้าเว็บจะอัปเดตทันทีบน XAMPP
-        · สำหรับ GitHub Pages ให้รัน <code>php scripts/build-static.php</code> แล้ว deploy
-        · ทดสอบระบบด้วย <code>php scripts/run-cms-tests.php</code>
-    </p>
-</div>
 <?php
 $content = ob_get_clean();
 require __DIR__ . '/_layout.php';

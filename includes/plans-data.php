@@ -105,6 +105,7 @@ function plans_build_catalog(): array
     }
 
     require_once __DIR__ . '/cms-loader.php';
+    require_once __DIR__ . '/cms-plan-meta.php';
     $overrides = cms_load('catalog', []);
     if (is_array($overrides) && $overrides !== []) {
         foreach ($catalog as $i => $item) {
@@ -122,6 +123,45 @@ function plans_build_catalog(): array
                 $catalog[$i]['tags'] = $o['tags'];
             }
         }
+    }
+
+    $meta = cms_catalog_meta();
+    $hidden = $meta['hidden'] ?? [];
+    if ($hidden !== []) {
+        $catalog = array_values(array_filter($catalog, static function (array $item) use ($hidden): bool {
+            return !in_array($item['slug'] ?? '', $hidden, true);
+        }));
+    }
+
+    $categories = plan_categories();
+    foreach ($meta['custom'] ?? [] as $slug => $entry) {
+        if (!is_array($entry) || in_array($slug, $hidden, true)) {
+            continue;
+        }
+        $categoryId = (string) ($entry['category'] ?? 'health');
+        $item = [
+            'slug' => $slug,
+            'category' => $categoryId,
+            'category_label' => $categories[$categoryId]['title'] ?? ($entry['category_label'] ?? $categoryId),
+            'title' => (string) ($entry['title'] ?? $slug),
+            'desc' => (string) ($entry['desc'] ?? ''),
+            'discount' => $entry['discount'] ?? null,
+            'tags' => $entry['tags'] ?? plan_default_tags($categoryId, $slug),
+            'url' => $entry['url'] ?? ('plan.php?slug=' . rawurlencode($slug)),
+            'image' => (string) ($entry['image'] ?? plan_mock_image_path($categoryId, count($catalog) + 1)),
+        ];
+        if (!empty($overrides[$slug]) && is_array($overrides[$slug])) {
+            $o = $overrides[$slug];
+            foreach (['title', 'desc', 'discount', 'image'] as $field) {
+                if (isset($o[$field]) && $o[$field] !== '') {
+                    $item[$field] = $o[$field];
+                }
+            }
+            if (!empty($o['tags']) && is_array($o['tags'])) {
+                $item['tags'] = $o['tags'];
+            }
+        }
+        $catalog[] = $item;
     }
 
     return $catalog;

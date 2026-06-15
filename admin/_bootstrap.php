@@ -91,6 +91,14 @@ function admin_post_int(string $key, int $default = 0): int
     return (int) ($_POST[$key] ?? $default);
 }
 
+function admin_slugify(string $text): string
+{
+    $text = strtolower(trim($text));
+    $text = preg_replace('/[^a-z0-9\-]+/', '-', $text);
+
+    return trim($text, '-');
+}
+
 function admin_verify_password(string $password): bool
 {
     $auth = admin_auth_config();
