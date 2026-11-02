@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือภาพ — เพิ่ม / ยกเลิกสินค้า | FWD CMS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap');
+  :root {
+    --orange: #f36c00;
+    --ink: #111;
+    --muted: #667085;
+    --line: #e4e7ec;
+    --soft: #f8f9fb;
+    --ok: #039855;
+    --danger: #d92d20;
+    --blue: #1570ef;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Sarabun', 'Segoe UI', Tahoma, sans-serif;
+    color: var(--ink);
+    background: #fff;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 24px 18px 56px; }
+
+  .hero {
+    background: linear-gradient(135deg, #1a1a1a, #333 50%, #f36c00);
+    color: #fff;
+    border-radius: 18px;
+    padding: 36px 28px;
+    margin-bottom: 28px;
+  }
+  .hero h1 { margin: 0 0 8px; font-size: 1.85rem; font-weight: 800; line-height: 1.25; }
+  .hero p { margin: 0; opacity: .92; max-width: 560px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .hero-tags span {
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.22);
+    padding: 5px 12px; border-radius: 999px; font-size: .85rem;
+  }
+
+  h2 {
+    font-size: 1.35rem; margin: 36px 0 8px;
+    padding-bottom: 6px; border-bottom: 3px solid var(--orange);
+    display: inline-block; font-weight: 800;
+  }
+  .lead { color: var(--muted); margin: 0 0 18px; }
+
+  /* Flow overview */
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 8px;
+    align-items: center;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    margin: 14px 0 24px;
+  }
+  .flow-box {
+    background: #fff;
+    border: 2px solid var(--orange);
+    border-radius: 12px;
+    padding: 12px 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: .88rem;
+    min-height: 72px;
+    display: flex; flex-direction: column; justify-content: center; gap: 4px;
+  }
+  .flow-box small { font-weight: 500; color: var(--muted); font-size: .75rem; }
+  .flow-arrow {
+    font-size: 1.6rem; color: var(--orange); font-weight: 800; text-align: center;
+  }
+
+  /* Step card = one "ภาพ" */
+  .step {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0 0 22px;
+    box-shadow: 0 6px 20px rgba(16,24,40,.05);
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .step-head {
+    display: flex; align-items: center; gap: 12px;
+    background: #111; color: #fff; padding: 12px 16px;
+  }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--orange); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.05rem; flex-shrink: 0;
+  }
+  .step-head h3 { margin: 0; font-size: 1.05rem; font-weight: 700; }
+  .step-head p { margin: 2px 0 0; font-size: .82rem; opacity: .8; }
+  .step-body { padding: 16px; background: #fff; }
+
+  .mock {
+    background: var(--soft);
+    border: 1.5px solid #d0d5dd;
+    border-radius: 12px;
+    padding: 14px;
+    position: relative;
+  }
+  .mock-title {
+    font-size: .78rem; color: var(--muted); font-weight: 600;
+    margin: 0 0 10px; letter-spacing: .02em;
+  }
+  .ui-bar {
+    background: #1a1a1a; color: #fff; border-radius: 10px 10px 0 0;
+    padding: 8px 12px; font-size: .8rem; display: flex; gap: 8px; align-items: center;
+  }
+  .ui-bar .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+  .ui-panel {
+    background: #fff; border: 1px solid #d0d5dd; border-top: 0;
+    border-radius: 0 0 10px 10px; padding: 14px;
+  }
+  .layout { display: grid; grid-template-columns: 150px 1fr; min-height: 200px; }
+  .side {
+    background: #1a1a1a; color: #ccc; padding: 10px; font-size: .72rem; border-radius: 8px 0 0 8px;
+  }
+  .side .active {
+    background: rgba(243,108,0,.25); color: #ffb070;
+    outline: 2px solid var(--orange); border-radius: 6px; padding: 6px 8px; font-weight: 700;
+  }
+  .side .item { padding: 6px 8px; margin: 2px 0; }
+  .main { padding: 12px; background: #fff; border: 1px solid #eaecf0; border-left: 0; border-radius: 0 8px 8px 0; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 12px; border-radius: 8px; font-weight: 700; font-size: .82rem;
+    border: 1.5px solid transparent;
+  }
+  .btn.primary { background: var(--orange); color: #fff; }
+  .btn.outline { background: #fff; border-color: #d0d5dd; color: #333; }
+  .btn.danger { background: var(--danger); color: #fff; }
+  .btn.ok { background: var(--ok); color: #fff; }
+
+  .mark {
+    outline: 2.5px solid var(--orange);
+    outline-offset: 3px;
+    border-radius: 6px;
+    position: relative;
+  }
+  .mark-blue { outline-color: var(--blue); }
+  .mark-red { outline-color: var(--danger); }
+  .mark-green { outline-color: var(--ok); }
+
+  .pointer {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-top: 12px; background: #fff7ed;
+    border: 1px solid #fdba74; border-left: 4px solid var(--orange);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .pointer.blue { background: #eff8ff; border-color: #b2ddff; border-left-color: var(--blue); }
+  .pointer.red { background: #fef3f2; border-color: #fecdca; border-left-color: var(--danger); }
+  .pointer.green { background: #ecfdf3; border-color: #abefc6; border-left-color: var(--ok); }
+  .pointer .arr {
+    font-size: 1.35rem; font-weight: 800; color: var(--orange); line-height: 1; margin-top: 2px;
+  }
+  .pointer.blue .arr { color: var(--blue); }
+  .pointer.red .arr { color: var(--danger); }
+  .pointer.green .arr { color: var(--ok); }
+  .pointer strong { display: block; font-size: .95rem; }
+  .pointer span { font-size: .86rem; color: var(--muted); }
+
+  table.ui { width: 100%; border-collapse: collapse; font-size: .78rem; margin-top: 8px; }
+  table.ui th { text-align: left; background: #f9fafb; padding: 7px; color: #667085; border-bottom: 1px solid #eaecf0; }
+  table.ui td { padding: 8px 7px; border-bottom: 1px solid #f2f4f7; }
+  .field { margin-bottom: 10px; }
+  .field label { display: block; font-size: .75rem; color: var(--muted); margin-bottom: 4px; }
+  .field .box {
+    border: 1.5px solid #d0d5dd; border-radius: 8px; padding: 8px 10px;
+    background: #fff; color: #444; font-size: .82rem;
+  }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .note {
+    background: #fffaeb; border: 1px solid #fedf89; border-radius: 12px;
+    padding: 12px 14px; margin: 12px 0 20px; font-size: .9rem;
+  }
+  .note strong { display: block; margin-bottom: 4px; color: #93370d; }
+
+  .checklist {
+    list-style: none; padding: 0; margin: 10px 0 0;
+  }
+  .checklist li {
+    padding: 10px 12px 10px 42px; position: relative;
+    border: 1px solid var(--line); border-radius: 10px; margin-bottom: 8px; background: #fff;
+  }
+  .checklist li::before {
+    content: '✓';
+    position: absolute; left: 12px; top: 10px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ok); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .75rem; font-weight: 800;
+  }
+
+  .footer {
+    margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
+    text-align: center; color: var(--muted); font-size: .85rem;
+  }
+
+  @media print {
+    body { font-size: 12.5px; }
+    .wrap { max-width: none; padding: 0; }
+    .hero { border-radius: 0; break-after: page; }
+    .step { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; }
+  }
+  @page { size: A4; margin: 12mm; }
+
+  @media (max-width: 700px) {
+    .flow { grid-template-columns: 1fr; }
+    .flow-arrow { transform: rotate(90deg); }
+    .layout { grid-template-columns: 1fr; }
+    .side { display: none; }
+    .split { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>คู่มือภาพขั้นตอน<br>เพิ่มสินค้า / ยกเลิกสินค้า</h1>
+    <p>สอนทีละขั้น พร้อมภาพจำลองหน้าจอหลังบ้าน กรอบสี และลูกศรชี้จุดที่ต้องกด — สำหรับ FWD Content Studio</p>
+    <div class="hero-tags">
+      <span>เมนู: แคตตาล็อกแผน</span>
+      <span>เพิ่มแผนใหม่</span>
+      <span>ลบ / ซ่อนแผนเดิม</span>
+    </div>
+  </header>
+
+  <!-- ========== ADD PRODUCT ========== -->
+  <h2>ส่วนที่ 1 — เพิ่มสินค้า (แผนประกันใหม่)</h2>
+  <p class="lead">ใช้เมื่อต้องการเอาแผนใหม่ขึ้นโชว์บนเว็บไซต์</p>
+
+  <figure style="margin:0 0 18px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff">
+    <img src="guide-add-product.jpg" alt="สรุปขั้นตอนเพิ่มสินค้า" style="display:block;width:100%;height:auto">
+    <figcaption style="padding:10px 14px;font-size:.85rem;color:var(--muted);background:var(--soft)">ภาพสรุป — เพิ่มสินค้า 4 ขั้นตอน</figcaption>
+  </figure>
+
+  <div class="flow">
+    <div class="flow-box">เข้าแอดมิน<small>ล็อกอิน</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">แคตตาล็อก<small>ผลิตภัณฑ์</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">+ เพิ่มแผน<small>กรอกข้อมูล</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">บันทึก<small>ขึ้นเว็บ</small></div>
+  </div>
+
+  <!-- Step 1 -->
+  <article class="step">
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <div>
+        <h3>เปิดเมนูแคตตาล็อก</h3>
+        <p>หลังเข้าสู่ระบบแล้ว ไปที่เมนูซ้าย</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="mock">
+        <p class="mock-title">ภาพหน้าจอ — เมนูด้านซ้าย</p>
+        <div class="layout">
+          <aside class="side">
+            <div style="color:#fff;font-weight:700;margin-bottom:10px">FWD Content Studio</div>
+            <div class="item">แดชบอร์ด</div>
+            <div style="color:#888;font-size:.65rem;margin:8px 4px 2px">ผลิตภัณฑ์</div>
+            <div class="item">หมวดหมู่แผน</div>
+            <div class="active">แคตตาล็อก (37 แผน)</div>
+            <div class="item">รายละเอียดแผน</div>
+          </aside>
+          <div class="main">
+            <strong>แคตตาล็อกแผนประกัน</strong>
+            <p style="color:var(--muted);font-size:.82rem;margin:6px 0 0">รายการแผนทั้งหมดที่แสดงเป็นการ์ดบนเว็บ</p>
+          </div>
+        </div>
+      </div>
+      <div class="pointer">
+        <div class="arr">↘</div>
+        <div>
+          <strong>คลิก “แคตตาล็อก (37 แผน)”</strong>
+          <span>อยู่ภายใต้หัวข้อ “ผลิตภัณฑ์” ในเมนูซ้าย — กรอบส้มคือตำแหน่งที่ต้องกด</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Step 2 -->
+  <article class="step">
+    <div class="step-head">
+      <div class="step-num">2</div>
+      <div>
+        <h3>กดปุ่ม + เพิ่มแผน</h3>
+        <p>มุมขวาบนของหน้ารายการแคตตาล็อก</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="mock">
+        <p class="mock-title">ภาพหน้าจอ — หน้ารายการแคตตาล็อก</p>
+        <div class="ui-bar"><span class="dot"></span> แคตตาล็อกแผนประกัน</div>
+        <div class="ui-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <strong>แคตตาล็อกแผนประกัน</strong>
+            <span class="mark btn primary">+ เพิ่มแผน</span>
+          </div>
+          <table class="ui">
+            <thead><tr><th>แผน</th><th>หมวด</th><th>จัดการ</th></tr></thead>
+            <tbody>
+              <tr><td>Precious Care</td><td>สุขภาพ</td><td><span class="btn outline" style="padding:4px 8px">แก้ไข</span></td></tr>
+              <tr><td>CI All-in-One</td><td>โรคร้ายแรง</td><td><span class="btn outline" style="padding:4px 8px">แก้ไข</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pointer">
+        <div class="arr">↖</div>
+        <div>
+          <strong>กดปุ่มส้ม “+ เพิ่มแผน”</strong>
+          <span>ระบบจะพาไปหน้าฟอร์มกรอกข้อมูลแผนใหม่</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Step 3 -->
+  <article class="step">
+    <div class="step-head">
+      <div class="step-num">3</div>
+      <div>
+        <h3>กรอกข้อมูลแผนใหม่</h3>
+        <p>ช่องที่มี * ต้องกรอกให้ครบ</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="mock">
+        <p class="mock-title">ภาพหน้าจอ — ฟอร์มเพิ่มแผน</p>
+        <div class="ui-bar"><span class="dot"></span> เพิ่มแผนประกัน</div>
+        <div class="ui-panel">
+          <div class="split">
+            <div class="field mark">
+              <label>Slug แผน *</label>
+              <div class="box">my-new-plan</div>
+            </div>
+            <div class="field mark mark-blue">
+              <label>หมวดหมู่ *</label>
+              <div class="box">ประกันสุขภาพ ▾</div>
+            </div>
+          </div>
+          <div class="field mark mark-green">
+            <label>ชื่อแผน *</label>
+            <div class="box">ชื่อแผนประกันที่ต้องการแสดง</div>
+          </div>
+          <div class="field">
+            <label>คำอธิบาย</label>
+            <div class="box" style="min-height:48px">รายละเอียดสั้น ๆ ของแผน</div>
+          </div>
+          <div class="split">
+            <div class="field">
+              <label>ส่วนลด</label>
+              <div class="box">เช่น ลด 15%</div>
+            </div>
+            <div class="field">
+              <label>แท็ก</label>
+              <div class="box">ค่ารักษา, ไม่สำรองจ่าย</div>
+            </div>
+          </div>
+          <div style="margin-top:8px">
+            <span class="btn outline">ยกเลิก</span>
+            <span class="mark mark-red btn primary" style="margin-left:6px">เพิ่มแผน</span>
+          </div>
+        </div>
+      </div>
+      <div class="pointer">
+        <div class="arr">→</div>
+        <div><strong>① Slug</strong><span>รหัสภาษาอังกฤษ เช่น <code>health-family-plus</code> (ใช้ a-z, 0-9, - เท่านั้น)</span></div>
+      </div>
+      <div class="pointer blue">
+        <div class="arr">→</div>
+        <div><strong>② หมวดหมู่</strong><span>เลือกหมวดที่แผนจะไปแสดง เช่น สุขภาพ / ชีวิต / โรคร้ายแรง</span></div>
+      </div>
+      <div class="pointer green">
+        <div class="arr">→</div>
+        <div><strong>③ ชื่อแผน</strong><span>ชื่อที่ลูกค้าเห็นบนการ์ดสินค้า</span></div>
+      </div>
+      <div class="pointer red">
+        <div class="arr">→</div>
+        <div><strong>④ กด “เพิ่มแผน”</strong><span>บันทึกเข้าแคตตาล็อก แล้วจะพาไปหน้าแก้ไขต่อได้</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Step 4 -->
+  <article class="step">
+    <div class="step-head">
+      <div class="step-num">4</div>
+      <div>
+        <h3>ตรวจผลบนเว็บไซต์</h3>
+        <p>เปิดหน้าหมวดสินค้าแล้วรีเฟรช</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <ul class="checklist">
+        <li>เปิดเว็บ <strong>https://fwdagentthailand.com/</strong> (เว็บที่ผูกกับแอดมิน)</li>
+        <li>เข้าหมวดที่เลือกไว้ แล้วหาการ์ดแผนใหม่</li>
+        <li>ถ้าไม่เห็น ให้กด <strong>Ctrl + F5</strong> รีเฟรชแรง ๆ</li>
+        <li>(ถ้าต้องการ) ไปเมนู <strong>รายละเอียดแผน</strong> เพื่อใส่จุดเด่น / FAQ ให้ครบ</li>
+      </ul>
+      <div class="note">
+        <strong>หมายเหตุ</strong>
+        เว็บ GitHub Pages (<code>github.io</code>) เป็นไฟล์นิ่ง — จะไม่เห็นแผนใหม่จนกว่าจะ build ใหม่<br>
+        ให้ตรวจที่ <strong>fwdagentthailand.com</strong> เป็นหลัก
+      </div>
+    </div>
+  </article>
+
+  <!-- ========== REMOVE PRODUCT ========== -->
+  <h2>ส่วนที่ 2 — ยกเลิก / ซ่อนสินค้าที่มีอยู่</h2>
+  <p class="lead">ใช้เมื่อไม่ต้องการให้แผนนั้นโชว์บนเว็บอีกต่อไป</p>
+
+  <figure style="margin:0 0 18px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff">
+    <img src="guide-remove-product.jpg" alt="สรุปขั้นตอนยกเลิกสินค้า" style="display:block;width:100%;height:auto">
+    <figcaption style="padding:10px 14px;font-size:.85rem;color:var(--muted);background:var(--soft)">ภาพสรุป — ยกเลิก / ซ่อนสินค้า 4 ขั้นตอน</figcaption>
+  </figure>
+
+  <div class="flow">
+    <div class="flow-box">แคตตาล็อก<small>หรือรายละเอียดแผน</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">หาแผน<small>ค้นหาชื่อ</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">กด “ลบ”<small>ยืนยัน</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">หายจากเว็บ<small>กู้คืนได้*</small></div>
+  </div>
+
+  <div class="note">
+    <strong>ลบแล้วเกิดอะไร?</strong>
+    • แผนเดิมที่มีมากับระบบ → <strong>ซ่อน</strong> (กด “แสดงอีกครั้ง” เพื่อกู้คืนได้)<br>
+    • แผนที่คุณเพิ่มเอง → <strong>ลบถาวร</strong>
+  </div>
+
+  <!-- Remove step 1 -->
+  <article class="step">
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <div>
+        <h3>เปิดแคตตาล็อก แล้วหาแผน</h3>
+        <p>ผลิตภัณฑ์ → แคตตาล็อก (37 แผน)</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="mock">
+        <p class="mock-title">ภาพหน้าจอ — ค้นหาแผนที่ต้องการยกเลิก</p>
+        <div class="ui-bar"><span class="dot"></span> แคตตาล็อกแผนประกัน</div>
+        <div class="ui-panel">
+          <div style="display:flex;gap:8px;margin-bottom:12px">
+            <span class="mark mark-blue" style="flex:1">
+              <div class="box" style="border:0;padding:8px 10px;background:#fff;border:1.5px solid #d0d5dd;border-radius:8px">ค้นหาชื่อหรือ slug...</div>
+            </span>
+            <span class="btn outline">ค้นหา</span>
+          </div>
+          <table class="ui">
+            <thead><tr><th>แผน</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>แผนที่ต้องการยกเลิก</strong><br><code style="color:#888">old-plan</code></td>
+                <td><span style="background:#ecfdf3;color:#039855;padding:2px 8px;border-radius:999px;font-size:.72rem;font-weight:700">แสดง</span></td>
+                <td>
+                  <span class="btn outline" style="padding:4px 8px">แก้ไข</span>
+                  <span class="mark mark-red btn danger" style="padding:4px 8px">ลบ</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pointer blue">
+        <div class="arr">↘</div>
+        <div><strong>พิมพ์ชื่อแผนในช่องค้นหา</strong><span>ช่วยหาแผนจากรายการยาว ๆ ได้เร็วขึ้น</span></div>
+      </div>
+      <div class="pointer red">
+        <div class="arr">↖</div>
+        <div><strong>กดปุ่มแดง “ลบ”</strong><span>อยู่คอลัมน์ “จัดการ” ของแถวนั้น</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Remove step 2 -->
+  <article class="step">
+    <div class="step-head">
+      <div class="step-num">2</div>
+      <div>
+        <h3>ยืนยันการลบ / ซ่อน</h3>
+        <p>เบราว์เซอร์จะถามยืนยันก่อนทำงาน</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="mock" style="max-width:420px;margin:0 auto">
+        <p class="mock-title">ภาพ — กล่องยืนยัน</p>
+        <div style="background:#fff;border:1.5px solid #d0d5dd;border-radius:12px;padding:20px;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.08)">
+          <div style="font-size:2rem;margin-bottom:8px">⚠️</div>
+          <strong>ลบแผนนี้จากเว็บไซต์?</strong>
+          <p style="color:var(--muted);font-size:.86rem;margin:8px 0 16px">(แผนเดิมกู้คืนได้จากปุ่ม แสดงอีกครั้ง)</p>
+          <div style="display:flex;gap:8px;justify-content:center">
+            <span class="btn outline">ยกเลิก</span>
+            <span class="mark mark-red btn danger">ตกลง / OK</span>
+          </div>
+        </div>
+      </div>
+      <div class="pointer red">
+        <div class="arr">→</div>
+        <div><strong>กดตกลง</strong><span>แผนจะหายจากการ์ดสินค้าบนเว็บ</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Remove step 3 -->
+  <article class="step">
+    <div class="step-head">
+      <div class="step-num">3</div>
+      <div>
+        <h3>กู้คืนได้ถ้าต้องการ</h3>
+        <p>สำหรับแผนเดิมของระบบที่ถูกซ่อนไว้</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="mock">
+        <p class="mock-title">ภาพหน้าจอ — แผนที่ถูกซ่อน</p>
+        <div class="ui-bar"><span class="dot"></span> แคตตาล็อกแผนประกัน</div>
+        <div class="ui-panel">
+          <table class="ui">
+            <thead><tr><th>แผน</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>แผนที่ซ่อนไว้</td>
+                <td><span style="background:#f2f4f7;color:#667085;padding:2px 8px;border-radius:999px;font-size:.72rem;font-weight:700">ซ่อนอยู่</span></td>
+                <td><span class="mark mark-green btn ok" style="padding:4px 10px">แสดงอีกครั้ง</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pointer green">
+        <div class="arr">↖</div>
+        <div>
+          <strong>กด “แสดงอีกครั้ง”</strong>
+          <span>แผนจะกลับมาโชว์บนเว็บเหมือนเดิม</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Also plans.php -->
+  <article class="step">
+    <div class="step-head">
+      <div class="step-num">★</div>
+      <div>
+        <h3>ทางเลือก: ลบจาก “รายละเอียดแผน”</h3>
+        <p>ผลเหมือนกัน — ซ่อนทั้งการ์ดและหน้า plan.php</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="mock">
+        <p class="mock-title">เมนูผลิตภัณฑ์ → รายละเอียดแผน → คอลัมน์จัดการ → ลบ</p>
+        <div class="ui-panel" style="border:1px solid #d0d5dd;border-radius:10px">
+          <table class="ui" style="margin:0">
+            <thead><tr><th>แผน</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Precious Care</td>
+                <td>แสดง</td>
+                <td>
+                  <span class="btn outline" style="padding:4px 8px">แก้ไข</span>
+                  <span class="mark mark-red btn danger" style="padding:4px 8px">ลบ</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pointer">
+        <div class="arr">→</div>
+        <div>
+          <strong>แนะนำ</strong>
+          <span>ถ้าต้องการเอาแผนออกจากเว็บทั้งการ์ดและหน้ารายละเอียด ให้ลบจากเมนูใดเมนูหนึ่งก็พอ — ระบบซิงก์กันแล้ว</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <h2>สรุปสั้น ๆ</h2>
+  <div class="split">
+    <div class="step" style="margin:0">
+      <div class="step-head" style="background:var(--ok)">
+        <div class="step-num" style="background:#fff;color:var(--ok)">+</div>
+        <div><h3>เพิ่มสินค้า</h3><p>แคตตาล็อก → + เพิ่มแผน → กรอก → บันทึก</p></div>
+      </div>
+    </div>
+    <div class="step" style="margin:0">
+      <div class="step-head" style="background:var(--danger)">
+        <div class="step-num" style="background:#fff;color:var(--danger)">−</div>
+        <div><h3>ยกเลิกสินค้า</h3><p>แคตตาล็อก → หาแผน → ลบ → ยืนยัน</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    FWD Content Studio · คู่มือเพิ่ม / ยกเลิกสินค้า<br>
+    เปิดไฟล์นี้ในเบราว์เซอร์ หรือพิมพ์เป็น PDF (Ctrl+P → Save as PDF)
+  </div>
+</div>
+</body>
+</html>

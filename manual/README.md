@@ -1,16 +1,19 @@
 # คู่มือระบบหลังบ้าน (FWD Content Studio)
 
+## คู่มือเพิ่ม / ยกเลิกสินค้า (แนะนำเริ่มที่นี่)
+
 | ไฟล์ | คำอธิบาย |
 |------|----------|
-| [คู่มือระบบหลังบ้าน-FWD-CMS.pdf](./คู่มือระบบหลังบ้าน-FWD-CMS.pdf) | **เปิดดูคู่มือ (แนะนำ)** |
-| [FWD-CMS-Admin-Manual.pdf](./FWD-CMS-Admin-Manual.pdf) | ชื่อไฟล์ภาษาอังกฤษ (เนื้อหาเดียวกัน) |
-| [admin-manual.html](./admin-manual.html) | เวอร์ชัน HTML — เปิดในเบราว์เซอร์ / พิมพ์ PDF ใหม่ได้ |
+| [คู่มือเพิ่ม-ยกเลิกสินค้า-FWD.pdf](./คู่มือเพิ่ม-ยกเลิกสินค้า-FWD.pdf) | **PDF ขั้นตอนเพิ่ม/ซ่อนสินค้า** |
+| [product-steps.html](./product-steps.html) | เวอร์ชัน HTML พร้อมภาพ |
+| [guide-add-product.jpg](./guide-add-product.jpg) | ภาพสรุป: เพิ่มสินค้า |
+| [guide-remove-product.jpg](./guide-remove-product.jpg) | ภาพสรุป: ยกเลิกสินค้า |
 
-## วิธีเปิด
-1. ดับเบิลคลิกไฟล์ `.pdf` หรือ
-2. เปิด `admin-manual.html` ใน Chrome/Edge
-3. จากแอดมิน: เมนู **คู่มือการใช้งาน**
+## คู่มือหลังบ้านทั้งหมด
 
-## URL หลังบ้าน
-- Production: `https://fwdagentthailand.com/admin/`
-- Local: `http://localhost/fwd/admin/`
+| ไฟล์ | คำอธิบาย |
+|------|----------|
+| [คู่มือระบบหลังบ้าน-FWD-CMS.pdf](./คู่มือระบบหลังบ้าน-FWD-CMS.pdf) | คู่มือทุกเมนู |
+| [admin-manual.html](./admin-manual.html) | เวอร์ชัน HTML |
+
+เปิดจากแอดมินได้ที่เมนู **ระบบ → คู่มือการใช้งาน**
