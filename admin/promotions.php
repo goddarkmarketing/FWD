@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && admin_csrf_verify()) {
 
 ob_start();
 ?>
-<form method="post" class="admin-form admin-card" style="margin-bottom:1rem">
+<form method="post" class="admin-form admin-card" style="margin-bottom:1rem" data-tour="promo-home-count">
     <input type="hidden" name="_csrf" value="<?= admin_h(admin_csrf_token()) ?>">
     <input type="hidden" name="action" value="save_settings">
     <div class="form-row" style="max-width:200px">
@@ -42,7 +42,7 @@ ob_start();
 <div class="admin-card">
     <div class="admin-card__head">
         <h2 class="admin-card__title">รายการโปรโมชัน</h2>
-        <a href="<?= admin_h(admin_url('promotion-edit.php?new=1')) ?>" class="admin-btn admin-btn--primary admin-btn--sm">+ เพิ่มโปรโมชัน</a>
+        <a href="<?= admin_h(admin_url('promotion-edit.php?new=1')) ?>" class="admin-btn admin-btn--primary admin-btn--sm" data-tour="promo-add-btn">+ เพิ่มโปรโมชัน</a>
     </div>
     <div class="admin-table-wrap">
         <table class="admin-table">
@@ -66,7 +66,7 @@ ob_start();
                 <td><?= admin_h($p['title'] ?? '') ?></td>
                 <td><?= admin_h($p['date'] ?? '') ?></td>
                 <td class="admin-table-actions">
-                    <a href="<?= admin_h(admin_url('promotion-edit.php?idx=' . $i)) ?>" class="admin-btn admin-btn--outline admin-btn--sm">แก้ไข</a>
+                    <a href="<?= admin_h(admin_url('promotion-edit.php?idx=' . $i)) ?>" class="admin-btn admin-btn--outline admin-btn--sm"<?= $i === 0 ? ' data-tour="promo-edit-btn"' : '' ?>>แก้ไข</a>
                     <?php admin_inline_post_form(
                         ['action' => 'delete', 'idx' => (string) $i],
                         'ลบ',

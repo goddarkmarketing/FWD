@@ -66,11 +66,11 @@ ob_start();
     <?php endif; ?>
     <div class="admin-card">
         <div class="form-grid-2">
-            <div class="form-row">
+            <div class="form-row" data-tour="add-slug">
                 <label for="slug">Slug แผน <span class="required">*</span></label>
                 <input type="text" id="slug" name="slug" value="<?= admin_h(admin_post_string('slug')) ?>" required pattern="[a-z0-9\-]+" placeholder="เช่น my-new-plan">
             </div>
-            <div class="form-row">
+            <div class="form-row" data-tour="add-category">
                 <label for="category">หมวดหมู่ <span class="required">*</span></label>
                 <select id="category" name="category" required>
                     <option value="">เลือกหมวด</option>
@@ -81,8 +81,8 @@ ob_start();
                 </select>
             </div>
         </div>
-        <div class="form-row"><label>ชื่อแผน <span class="required">*</span></label><input type="text" name="title" value="<?= admin_h(admin_post_string('title')) ?>" required></div>
-        <div class="form-row"><label>คำอธิบาย</label><textarea name="desc"><?= admin_h(admin_post_string('desc')) ?></textarea></div>
+        <div class="form-row" data-tour="add-title"><label>ชื่อแผน <span class="required">*</span></label><input type="text" name="title" value="<?= admin_h(admin_post_string('title')) ?>" required></div>
+        <div class="form-row" data-tour="add-desc"><label>คำอธิบาย</label><textarea name="desc"><?= admin_h(admin_post_string('desc')) ?></textarea></div>
         <div class="form-grid-2">
             <div class="form-row"><label>ส่วนลด</label><input type="text" name="discount" value="<?= admin_h(admin_post_string('discount')) ?>" placeholder="เช่น ลด 15%"></div>
             <div class="form-row"><label>แท็ก (คั่นด้วย comma)</label><input type="text" name="tags" value="<?= admin_h(admin_post_string('tags')) ?>"></div>
@@ -91,7 +91,7 @@ ob_start();
     </div>
     <div class="admin-actions">
         <a href="<?= admin_h(admin_url('catalog.php')) ?>" class="admin-btn admin-btn--outline">ยกเลิก</a>
-        <button type="submit" class="admin-btn admin-btn--primary">เพิ่มแผน</button>
+        <button type="submit" class="admin-btn admin-btn--primary" data-tour="add-submit">เพิ่มแผน</button>
     </div>
 </form>
 <?php

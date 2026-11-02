@@ -67,9 +67,9 @@ ob_start();
 <div class="admin-card">
     <div class="admin-card__head">
         <h2 class="admin-card__title">แคตตาล็อกแผนประกัน</h2>
-        <a href="<?= admin_h(admin_url('catalog-add.php')) ?>" class="admin-btn admin-btn--primary admin-btn--sm">+ เพิ่มแผน</a>
+        <a href="<?= admin_h(admin_url('catalog-add.php')) ?>" class="admin-btn admin-btn--primary admin-btn--sm" data-tour="catalog-add-btn">+ เพิ่มแผน</a>
     </div>
-    <form method="get" class="admin-form admin-toolbar">
+    <form method="get" class="admin-form admin-toolbar" data-tour="catalog-search">
         <div class="form-row">
             <label for="q">ค้นหาแผน</label>
             <input type="search" id="q" name="q" value="<?= admin_h($q) ?>" placeholder="ชื่อหรือ slug...">
@@ -82,12 +82,20 @@ ob_start();
                 <tr><th>แผน</th><th>หมวด</th><th>ส่วนลด</th><th>สถานะ</th><th>จัดการ</th></tr>
             </thead>
             <tbody>
-            <?php foreach ($allSlugs as $slug):
+            <?php
+            $tourDeleteMarked = false;
+            $tourUnhideMarked = false;
+            $tourStatusMarked = false;
+            foreach ($allSlugs as $slug):
                 $p = $catalogBySlug[$slug] ?? ($meta['custom'][$slug] ?? null);
                 $isHidden = in_array($slug, $hidden, true);
                 $hasOverride = !empty($overrides[$slug]);
                 $isBuiltin = plan_catalog_is_builtin($slug);
                 $isCustom = isset($meta['custom'][$slug]);
+                $statusTour = !$tourStatusMarked ? ' data-tour="catalog-status"' : '';
+                if (!$tourStatusMarked) {
+                    $tourStatusMarked = true;
+                }
             ?>
             <tr>
                 <td>
@@ -97,7 +105,7 @@ ob_start();
                 </td>
                 <td><?= admin_h($p['category_label'] ?? $p['category'] ?? '—') ?></td>
                 <td><?= admin_h($p['discount'] ?? $overrides[$slug]['discount'] ?? '—') ?></td>
-                <td>
+                <td<?= $statusTour ?>>
                     <?php if ($isHidden): ?>
                     <span class="admin-badge admin-badge--muted">ซ่อนอยู่</span>
                     <?php else: ?>
@@ -119,21 +127,35 @@ ob_start();
                     ); ?>
                     <?php endif; ?>
                     <?php if ($isHidden): ?>
-                    <?php admin_inline_post_form(
+                    <span<?= !$tourUnhideMarked ? ' data-tour="catalog-unhide-btn"' : '' ?>>
+                    <?php
+                    if (!$tourUnhideMarked) {
+                        $tourUnhideMarked = true;
+                    }
+                    admin_inline_post_form(
                         ['action' => 'unhide', 'slug' => $slug],
                         'แสดงอีกครั้ง',
                         'นำแผนนี้กลับมาแสดงบนเว็บไซต์?',
                         'admin-btn admin-btn--outline admin-btn--sm'
-                    ); ?>
+                    );
+                    ?>
+                    </span>
                     <?php else: ?>
-                    <?php admin_inline_post_form(
+                    <span<?= !$tourDeleteMarked ? ' data-tour="catalog-delete-btn"' : '' ?>>
+                    <?php
+                    if (!$tourDeleteMarked) {
+                        $tourDeleteMarked = true;
+                    }
+                    admin_inline_post_form(
                         ['action' => 'delete', 'slug' => $slug],
                         'ลบ',
                         $isBuiltin
                             ? 'ลบแผนนี้จากเว็บไซต์? (กู้คืนได้จากปุ่ม แสดงอีกครั้ง)'
                             : 'ลบแผนนี้ถาวร?',
                         'admin-btn admin-btn--danger admin-btn--sm'
-                    ); ?>
+                    );
+                    ?>
+                    </span>
                     <?php endif; ?>
                 </td>
             </tr>

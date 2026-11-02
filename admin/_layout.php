@@ -19,6 +19,7 @@ $userInitial = $userEmail !== '' ? strtoupper(mb_substr($userEmail, 0, 1, 'UTF-8
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= admin_h($page_title) ?> — CMS</title>
     <link rel="stylesheet" href="<?= admin_h('../assets/css/admin.css') ?>?v=3">
+    <link rel="stylesheet" href="<?= admin_h('../assets/css/admin-tour.css') ?>?v=1">
 </head>
 <body class="admin-body" data-admin-csrf="<?= admin_h(admin_csrf_token()) ?>" data-admin-upload-url="<?= admin_h(admin_url('media-upload.php')) ?>">
     <div class="admin-sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
@@ -45,7 +46,20 @@ $userInitial = $userEmail !== '' ? strtoupper(mb_substr($userEmail, 0, 1, 'UTF-8
                                 || (str_contains($item['file'], 'page-edit.php') && ($active_file === 'page-edit.php') && str_contains($_SERVER['REQUEST_URI'] ?? '', $item['file']));
                         ?>
                         <li>
-                            <a href="<?= admin_h($href) ?>" class="admin-nav__link<?= $isActive ? ' is-active' : '' ?>">
+                            <?php
+                            $tourAttr = '';
+                            $fileBase = explode('?', $item['file'])[0];
+                            if ($fileBase === 'catalog.php') {
+                                $tourAttr = ' data-tour="nav-catalog"';
+                            } elseif ($fileBase === 'promotions.php') {
+                                $tourAttr = ' data-tour="nav-promotions"';
+                            } elseif ($fileBase === 'categories.php') {
+                                $tourAttr = ' data-tour="nav-categories"';
+                            } elseif ($fileBase === 'plans.php') {
+                                $tourAttr = ' data-tour="nav-plans"';
+                            }
+                            ?>
+                            <a href="<?= admin_h($href) ?>" class="admin-nav__link<?= $isActive ? ' is-active' : '' ?>"<?= $tourAttr ?>>
                                 <span class="admin-nav__icon"><?= admin_icon($icon) ?></span>
                                 <span><?= admin_h($item['label']) ?></span>
                             </a>
@@ -94,5 +108,6 @@ $userInitial = $userEmail !== '' ? strtoupper(mb_substr($userEmail, 0, 1, 'UTF-8
         </div>
     </div>
     <script src="<?= admin_h('../assets/js/admin.js') ?>?v=5"></script>
+    <script src="<?= admin_h('../assets/js/admin-tour.js') ?>?v=1"></script>
 </body>
 </html>
