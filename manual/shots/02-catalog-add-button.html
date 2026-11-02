@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>2 — กดปุ่มเพิ่มแผน</title>
+<link rel="stylesheet" href="../../assets/css/admin.css?v=3">
+<link rel="stylesheet" href="annotate.css">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="shot-page admin-body">
+<div class="shot-caption">
+  ขั้นตอนที่ 2 — กดปุ่ม “+ เพิ่มแผน”
+  <small>มุมขวาบนของหน้ารายการแคตตาล็อก</small>
+</div>
+<div class="shot-frame">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__brand">
+        <a href="#"><span class="admin-sidebar__logo">FWD</span>
+          <span><span class="admin-sidebar__title">Content Studio</span>
+          <span class="admin-sidebar__subtitle">FWD AGENT ประเทศไทย</span></span></a>
+      </div>
+      <nav class="admin-nav">
+        <div class="admin-nav__section">
+          <p class="admin-nav__label">ผลิตภัณฑ์</p>
+          <ul>
+            <li><a class="admin-nav__link" href="#"><span>หมวดหมู่แผน</span></a></li>
+            <li><a class="admin-nav__link is-active" href="#"><span>แคตตาล็อก (37 แผน)</span></a></li>
+            <li><a class="admin-nav__link" href="#"><span>รายละเอียดแผน</span></a></li>
+          </ul>
+        </div>
+        <div class="admin-nav__section">
+          <p class="admin-nav__label">เนื้อหา</p>
+          <ul>
+            <li><a class="admin-nav__link" href="#"><span>บทความ</span></a></li>
+            <li><a class="admin-nav__link" href="#"><span>โปรโมชัน</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="admin-topbar__title-wrap">
+          <p class="admin-topbar__eyebrow">FWD CMS</p>
+          <h1 class="admin-topbar__title">แคตตาล็อกแผนประกัน</h1>
+        </div>
+        <div class="admin-user-chip"><span class="admin-user-chip__avatar">S</span><span class="admin-user-chip__email">supakitraksorn@gmail.com</span></div>
+      </header>
+      <div class="admin-content">
+        <div class="admin-card">
+          <div class="admin-card__head">
+            <h2 class="admin-card__title">แคตตาล็อกแผนประกัน</h2>
+            <a href="#" class="admin-btn admin-btn--primary admin-btn--sm" data-ann="2|กดปุ่มส้ม\n+ เพิ่มแผน|left">+ เพิ่มแผน</a>
+          </div>
+          <form class="admin-form admin-toolbar" style="margin-bottom:1rem">
+            <div class="form-row" style="flex:1;margin:0">
+              <label>ค้นหาแผน</label>
+              <input type="search" placeholder="ชื่อหรือ slug...">
+            </div>
+            <button type="button" class="admin-btn admin-btn--outline">ค้นหา</button>
+          </form>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>แผน</th><th>หมวด</th><th>ส่วนลด</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>Precious Care</strong><br><code style="font-size:.8rem;color:var(--admin-muted)">precious-care</code></td>
+                  <td>ประกันสุขภาพ</td>
+                  <td>—</td>
+                  <td><span class="admin-badge admin-badge--live">แสดง</span></td>
+                  <td class="admin-table-actions">
+                    <a class="admin-btn admin-btn--outline admin-btn--sm">แก้ไข</a>
+                    <button type="button" class="admin-btn admin-btn--danger admin-btn--sm">ลบ</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>CI All-in-One</strong><br><code style="font-size:.8rem;color:var(--admin-muted)">ci-all-in-one</code></td>
+                  <td>โรคร้ายแรง</td>
+                  <td>—</td>
+                  <td><span class="admin-badge admin-badge--live">แสดง</span></td>
+                  <td class="admin-table-actions">
+                    <a class="admin-btn admin-btn--outline admin-btn--sm">แก้ไข</a>
+                    <button type="button" class="admin-btn admin-btn--danger admin-btn--sm">ลบ</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Cancer Knockout</strong><br><code style="font-size:.8rem;color:var(--admin-muted)">cancer-knockout</code></td>
+                  <td>โรคร้ายแรง</td>
+                  <td>—</td>
+                  <td><span class="admin-badge admin-badge--live">แสดง</span></td>
+                  <td class="admin-table-actions">
+                    <a class="admin-btn admin-btn--outline admin-btn--sm">แก้ไข</a>
+                    <button type="button" class="admin-btn admin-btn--danger admin-btn--sm">ลบ</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="annotate.js"></script>
+</body>
+</html>

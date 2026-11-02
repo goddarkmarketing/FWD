@@ -8,8 +8,9 @@ $active_file = 'manual.php';
 $pdfTh = '../manual/' . rawurlencode('คู่มือระบบหลังบ้าน-FWD-CMS.pdf');
 $pdfEn = '../manual/FWD-CMS-Admin-Manual.pdf';
 $html = '../manual/admin-manual.html';
-$productHtml = '../manual/product-steps.html';
-$productPdf = '../manual/' . rawurlencode('คู่มือเพิ่ม-ยกเลิกสินค้า-FWD.pdf');
+$productHtml = '../manual/product-guide-visual.html';
+$productPdf = '../manual/' . rawurlencode('คู่มือเพิ่ม-ยกเลิกสินค้า-หน้าจอจริง.pdf');
+$productSteps = '../manual/product-steps.html';
 
 ob_start();
 ?>
@@ -18,12 +19,13 @@ ob_start();
         <h2 class="admin-card__title">คู่มือภาพ — เพิ่ม / ยกเลิกสินค้า</h2>
     </div>
     <p style="margin:0 0 1rem;color:var(--admin-muted);line-height:1.6">
-        สอนทีละขั้นพร้อมภาพ กรอบสี และลูกศรชี้ปุ่มที่ต้องกด
+        แบบเห็นหน้าจอระบบหลังบ้านจริง พร้อมกรอบแดงและหมายเลขชี้จุด
         สำหรับเพิ่มแผนใหม่ หรือซ่อน/ลบแผนที่มีอยู่บนเว็บ
     </p>
     <div class="admin-actions" style="margin-top:0;padding-top:0;border-top:0">
-        <a href="<?= admin_h($productHtml) ?>" target="_blank" rel="noopener" class="admin-btn admin-btn--primary">เปิดคู่มือเพิ่ม/ยกเลิกสินค้า</a>
+        <a href="<?= admin_h($productHtml) ?>" target="_blank" rel="noopener" class="admin-btn admin-btn--primary">เปิดคู่มือแบบหน้าจอจริง</a>
         <a href="<?= admin_h($productPdf) ?>" target="_blank" rel="noopener" class="admin-btn admin-btn--outline">ดาวน์โหลด PDF</a>
+        <a href="<?= admin_h($productSteps) ?>" target="_blank" rel="noopener" class="admin-btn admin-btn--outline">เวอร์ชันสรุปขั้นตอน</a>
     </div>
 </div>
 

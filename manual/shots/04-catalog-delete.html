@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>4 — ยกเลิกสินค้า กดลบ</title>
+<link rel="stylesheet" href="../../assets/css/admin.css?v=3">
+<link rel="stylesheet" href="annotate.css">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="shot-page admin-body">
+<div class="shot-caption">
+  ขั้นตอนที่ 4 — ยกเลิกสินค้าที่มีอยู่ (กดปุ่มลบ)
+  <small>ค้นหาแผน → กด “ลบ” สีแดง → ยืนยัน</small>
+</div>
+<div class="shot-frame">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__brand">
+        <a href="#"><span class="admin-sidebar__logo">FWD</span>
+          <span><span class="admin-sidebar__title">Content Studio</span>
+          <span class="admin-sidebar__subtitle">FWD AGENT ประเทศไทย</span></span></a>
+      </div>
+      <nav class="admin-nav">
+        <div class="admin-nav__section">
+          <p class="admin-nav__label">ผลิตภัณฑ์</p>
+          <ul>
+            <li><a class="admin-nav__link is-active" href="#"><span>แคตตาล็อก (37 แผน)</span></a></li>
+            <li><a class="admin-nav__link" href="#"><span>รายละเอียดแผน</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="admin-topbar__title-wrap">
+          <p class="admin-topbar__eyebrow">FWD CMS</p>
+          <h1 class="admin-topbar__title">แคตตาล็อกแผนประกัน</h1>
+        </div>
+        <div class="admin-user-chip"><span class="admin-user-chip__avatar">S</span><span class="admin-user-chip__email">supakitraksorn@gmail.com</span></div>
+      </header>
+      <div class="admin-content">
+        <div class="admin-card">
+          <div class="admin-card__head">
+            <h2 class="admin-card__title">แคตตาล็อกแผนประกัน</h2>
+            <a href="#" class="admin-btn admin-btn--primary admin-btn--sm">+ เพิ่มแผน</a>
+          </div>
+          <form class="admin-form admin-toolbar" style="margin-bottom:1rem">
+            <div class="form-row" style="flex:1;margin:0" data-ann="7|พิมพ์ชื่อแผน\nในช่องค้นหา|down">
+              <label>ค้นหาแผน</label>
+              <input type="search" value="precious-care" placeholder="ชื่อหรือ slug...">
+            </div>
+            <button type="button" class="admin-btn admin-btn--outline">ค้นหา</button>
+          </form>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>แผน</th><th>หมวด</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>Precious Care</strong><br><code style="font-size:.8rem;color:var(--admin-muted)">precious-care</code></td>
+                  <td>ประกันสุขภาพ</td>
+                  <td><span class="admin-badge admin-badge--live">แสดง</span></td>
+                  <td class="admin-table-actions">
+                    <a class="admin-btn admin-btn--outline admin-btn--sm">แก้ไข</a>
+                    <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-ann="8|กดปุ่มแดง“ลบ”\nแล้วกดตกลงยืนยัน|left">ลบ</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="annotate.js"></script>
+</body>
+</html>

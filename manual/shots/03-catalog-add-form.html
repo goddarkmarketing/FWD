@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>3 — กรอกฟอร์มเพิ่มแผน</title>
+<link rel="stylesheet" href="../../assets/css/admin.css?v=3">
+<link rel="stylesheet" href="annotate.css">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="shot-page admin-body">
+<div class="shot-caption">
+  ขั้นตอนที่ 3 — กรอกข้อมูลแผนใหม่ แล้วกด “เพิ่มแผน”
+  <small>หน้าเพิ่มแผนประกัน · ช่องที่มี * ต้องกรอก</small>
+</div>
+<div class="shot-frame">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__brand">
+        <a href="#"><span class="admin-sidebar__logo">FWD</span>
+          <span><span class="admin-sidebar__title">Content Studio</span>
+          <span class="admin-sidebar__subtitle">FWD AGENT ประเทศไทย</span></span></a>
+      </div>
+      <nav class="admin-nav">
+        <div class="admin-nav__section">
+          <p class="admin-nav__label">ผลิตภัณฑ์</p>
+          <ul>
+            <li><a class="admin-nav__link is-active" href="#"><span>แคตตาล็อก (37 แผน)</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="admin-topbar__title-wrap">
+          <p class="admin-topbar__eyebrow">FWD CMS</p>
+          <h1 class="admin-topbar__title">เพิ่มแผนประกัน</h1>
+        </div>
+        <div class="admin-user-chip"><span class="admin-user-chip__avatar">S</span><span class="admin-user-chip__email">supakitraksorn@gmail.com</span></div>
+      </header>
+      <div class="admin-content">
+        <form class="admin-form">
+          <div class="admin-card">
+            <div class="form-grid-2">
+              <div class="form-row" data-ann="3|กรอกSlugแผน\n(รหัสภาษาอังกฤษ)|down">
+                <label>Slug แผน <span class="required">*</span></label>
+                <input type="text" value="my-new-plan" readonly>
+                <p class="form-hint">ใช้ตัวพิมพ์เล็ก a-z, ตัวเลข และ -</p>
+              </div>
+              <div class="form-row" data-ann="4|เลือกหมวดหมู่|down">
+                <label>หมวดหมู่ <span class="required">*</span></label>
+                <select><option>ประกันสุขภาพ</option><option>ประกันชีวิตและอุบัติเหตุ</option><option>โรคร้ายแรง</option></select>
+              </div>
+            </div>
+            <div class="form-row" data-ann="5|กรอกชื่อแผน\nที่ลูกค้าเห็น|right">
+              <label>ชื่อแผน <span class="required">*</span></label>
+              <input type="text" value="ชื่อแผนประกันที่ต้องการแสดง">
+            </div>
+            <div class="form-row">
+              <label>คำอธิบาย</label>
+              <textarea rows="3">รายละเอียดสั้น ๆ ของแผน</textarea>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-row">
+                <label>ส่วนลด</label>
+                <input type="text" placeholder="เช่น ลด 15%">
+              </div>
+              <div class="form-row">
+                <label>แท็ก (คั่นด้วย comma)</label>
+                <input type="text" value="ค่ารักษา, ไม่สำรองจ่าย">
+              </div>
+            </div>
+          </div>
+          <div class="admin-actions">
+            <a href="#" class="admin-btn admin-btn--outline">ยกเลิก</a>
+            <button type="button" class="admin-btn admin-btn--primary" data-ann="6|กด“เพิ่มแผน”\nเพื่อบันทึก|up">เพิ่มแผน</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="annotate.js"></script>
+</body>
+</html>

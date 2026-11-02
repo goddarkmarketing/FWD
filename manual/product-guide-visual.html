@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>คู่มือภาพ — เพิ่ม / ยกเลิกสินค้า (หน้าจอหลังบ้านจริง)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap');
+  body { margin:0; font-family:'Sarabun',sans-serif; color:#111; background:#fff; }
+  .wrap { max-width:980px; margin:0 auto; padding:24px 16px 48px; }
+  .hero {
+    background:linear-gradient(135deg,#111,#333 55%,#f36c00);
+    color:#fff; border-radius:16px; padding:32px 28px; margin-bottom:24px;
+  }
+  .hero h1 { margin:0 0 8px; font-size:1.8rem; font-weight:800; line-height:1.25; }
+  .hero p { margin:0; opacity:.9; }
+  h2 { font-size:1.25rem; border-bottom:3px solid #f36c00; display:inline-block; margin:28px 0 8px; }
+  .lead { color:#667085; margin:0 0 14px; }
+  .shot {
+    margin:0 0 22px; border:1px solid #e4e7ec; border-radius:14px; overflow:hidden;
+    box-shadow:0 8px 24px rgba(16,24,40,.06); break-inside:avoid; page-break-inside:avoid;
+  }
+  .shot img { display:block; width:100%; height:auto; }
+  .note {
+    background:#fffaeb; border:1px solid #fedf89; border-radius:12px;
+    padding:12px 14px; margin:12px 0 20px; font-size:.92rem;
+  }
+  .footer { margin-top:28px; text-align:center; color:#667085; font-size:.85rem; border-top:1px solid #e4e7ec; padding-top:14px; }
+  @media print {
+    .hero { border-radius:0; break-after:page; }
+    .shot { break-inside:avoid; }
+  }
+  @page { size:A4; margin:10mm; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>คู่มือภาพขั้นตอน<br>เพิ่มสินค้า / ยกเลิกสินค้า</h1>
+    <p>แบบเห็นหน้าจอระบบหลังบ้านจริง พร้อมกรอบแดงและหมายเลขชี้จุด — สไตล์เดียวกับคู่มือตัวอย่าง</p>
+  </header>
+
+  <h2>ส่วนที่ 1 — เพิ่มสินค้า</h2>
+  <p class="lead">ผลิตภัณฑ์ → แคตตาล็อก → + เพิ่มแผน → กรอกข้อมูล → บันทึก</p>
+
+  <figure class="shot">
+    <img src="shots/01-catalog-menu.png" alt="ขั้นตอน 1 เปิดเมนูแคตตาล็อก">
+  </figure>
+  <figure class="shot">
+    <img src="shots/02-catalog-add-button.png" alt="ขั้นตอน 2 กดเพิ่มแผน">
+  </figure>
+  <figure class="shot">
+    <img src="shots/03-catalog-add-form.png" alt="ขั้นตอน 3 กรอกฟอร์ม">
+  </figure>
+
+  <div class="note">
+    <strong>ตรวจผล:</strong> เปิดเว็บ <code>https://fwdagentthailand.com/</code> ในหมวดที่เลือก แล้วรีเฟรช (Ctrl+F5)
+  </div>
+
+  <h2>ส่วนที่ 2 — ยกเลิก / ซ่อนสินค้า</h2>
+  <p class="lead">ค้นหาแผน → กด “ลบ” → ยืนยัน · แผนเดิมกู้คืนด้วย “แสดงอีกครั้ง”</p>
+
+  <figure class="shot">
+    <img src="shots/04-catalog-delete.png" alt="ขั้นตอน 4 กดลบ">
+  </figure>
+  <figure class="shot">
+    <img src="shots/05-catalog-restore.png" alt="ขั้นตอน 5 กู้คืน">
+  </figure>
+
+  <div class="note">
+    <strong>สำคัญ:</strong> แผนเดิมในระบบเมื่อกดลบ = <strong>ซ่อน</strong> (กู้คืนได้) · แผนที่เพิ่มเอง = <strong>ลบถาวร</strong>
+  </div>
+
+  <div class="footer">FWD Content Studio · คู่มือเพิ่ม/ยกเลิกสินค้าแบบหน้าจอจริง</div>
+</div>
+</body>
+</html>
