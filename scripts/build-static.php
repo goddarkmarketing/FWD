@@ -231,5 +231,11 @@ for ($n = 1; $n <= 5; $n++) {
 write_file($dist . '/.nojekyll', '');
 write_file($dist . '/404.html', redirect_html($baseUrl . '/'));
 
+$manualSrc = $root . '/manual';
+if (is_dir($manualSrc)) {
+    echo "  copying manual/\n";
+    rcopy($manualSrc, $dist . '/manual');
+}
+
 echo "Done. " . count(glob($dist . '/**/*.html', GLOB_BRACE) ?: []) . "+ HTML files in docs/\n";
 echo "Preview URL: https://goddarkmarketing.github.io" . ($baseUrl ?: '') . "/\n";

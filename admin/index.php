@@ -17,6 +17,7 @@ $dashCards = [
     ['href' => 'footer.php', 'icon' => 'footer', 'title' => 'Footer', 'desc' => 'CTA ลิขสิทธิ์ Cookie banner'],
     ['href' => 'media.php', 'icon' => 'image', 'title' => 'สื่อ & รูปภาพ', 'desc' => 'อัปโหลด Hero ใบอนุญาต รูปอื่นๆ'],
     ['href' => 'backup.php', 'icon' => 'backup', 'title' => 'สำรอง & กู้คืน', 'desc' => 'ดาวน์โหลดและกู้คืนข้อมูล CMS + รูปภาพ'],
+    ['href' => 'manual.php', 'icon' => 'page', 'title' => 'คู่มือการใช้งาน', 'desc' => 'เปิดคู่มือทีละเมนู พร้อมภาพและลูกศร'],
 ];
 
 ob_start();

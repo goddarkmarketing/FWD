@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือใช้งานระบบหลังบ้าน — FWD Content Studio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
+
+  :root {
+    --orange: #f36c00;
+    --orange-dark: #d45a00;
+    --ink: #1a1a1a;
+    --muted: #5c5c5c;
+    --line: #e5e5e5;
+    --soft: #f7f7f8;
+    --card: #ffffff;
+    --callout: #fff4eb;
+    --callout-border: #f36c00;
+    --ok: #0a7a3e;
+    --warn: #9a6700;
+    --danger: #b42318;
+    --blue: #175cd3;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Sarabun', 'Segoe UI', Tahoma, sans-serif;
+    color: var(--ink);
+    background: #fff;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 28px 24px 64px;
+  }
+
+  /* Cover */
+  .cover {
+    background: linear-gradient(145deg, #1a1a1a 0%, #333 55%, #f36c00 160%);
+    color: #fff;
+    border-radius: 20px;
+    padding: 48px 40px;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    right: -40px; bottom: -40px;
+    width: 220px; height: 220px;
+    background: rgba(243,108,0,.35);
+    border-radius: 50%;
+  }
+  .cover-logo {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .cover-logo span {
+    background: var(--orange); color: #fff;
+    font-weight: 700; padding: 8px 12px; border-radius: 8px;
+    letter-spacing: .04em;
+  }
+  .cover h1 {
+    margin: 0 0 10px; font-size: 2.1rem; font-weight: 700; line-height: 1.3;
+  }
+  .cover p { margin: 0; opacity: .9; font-size: 1.05rem; max-width: 520px; }
+  .cover-meta {
+    margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .cover-meta span {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    padding: 6px 12px; border-radius: 999px; font-size: .88rem;
+  }
+
+  h2 {
+    font-size: 1.45rem; margin: 42px 0 14px;
+    padding-bottom: 8px; border-bottom: 3px solid var(--orange);
+    display: inline-block;
+  }
+  h3 { font-size: 1.12rem; margin: 26px 0 10px; color: #222; }
+  p { margin: 0 0 12px; color: #333; }
+  ul, ol { margin: 0 0 14px; padding-left: 1.3rem; }
+  li { margin: 4px 0; }
+
+  .toc {
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin: 20px 0 28px;
+  }
+  .toc h2 { margin-top: 0; border: 0; padding: 0; font-size: 1.15rem; }
+  .toc ol { columns: 2; gap: 24px; }
+  .toc a { color: var(--orange-dark); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  .note, .tip, .warn {
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 14px 0 18px;
+    border: 1px solid;
+  }
+  .note { background: #eff6ff; border-color: #bfdbfe; }
+  .tip { background: #ecfdf3; border-color: #abefc6; }
+  .warn { background: #fffaeb; border-color: #fedf89; }
+  .note strong, .tip strong, .warn strong { display: block; margin-bottom: 4px; }
+
+  /* Annotated UI mock */
+  .anno {
+    margin: 18px 0 28px;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .anno-title {
+    font-weight: 700; font-size: .95rem; margin: 0 0 12px;
+    color: var(--muted); letter-spacing: .02em;
+  }
+  .mock {
+    background: #fff;
+    border: 1.5px solid #d0d5dd;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(16,24,40,.06);
+    position: relative;
+  }
+  .mock-bar {
+    background: #111;
+    color: #fff;
+    padding: 10px 14px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: .85rem;
+  }
+  .mock-bar .dot { width: 8px; height: 8px; border-radius: 50%; background: #f36c00; }
+  .mock-body { display: grid; grid-template-columns: 180px 1fr; min-height: 280px; }
+  .mock-side {
+    background: #1a1a1a; color: #ddd; padding: 12px 10px; font-size: .78rem;
+  }
+  .mock-side .brand {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 14px; color: #fff; font-weight: 700;
+  }
+  .mock-side .brand b {
+    background: var(--orange); padding: 3px 7px; border-radius: 5px; font-size: .75rem;
+  }
+  .mock-side .sec { color: #888; font-size: .68rem; margin: 10px 6px 4px; text-transform: uppercase; letter-spacing: .06em; }
+  .mock-side .item {
+    padding: 7px 8px; border-radius: 7px; margin: 2px 0; display: block;
+  }
+  .mock-side .item.active {
+    background: rgba(243,108,0,.22); color: #ffb070; font-weight: 600;
+    outline: 2px solid var(--orange); outline-offset: 0;
+  }
+  .mock-main { padding: 16px; position: relative; }
+  .mock-main h4 { margin: 0 0 4px; font-size: 1.05rem; }
+  .mock-main .sub { color: var(--muted); font-size: .82rem; margin-bottom: 14px; }
+
+  .ui-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+  .ui-input {
+    border: 1.5px solid #d0d5dd; border-radius: 8px;
+    padding: 8px 10px; font-size: .82rem; background: #fff; color: #555;
+    min-width: 140px;
+  }
+  .ui-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 8px; padding: 8px 12px; font-size: .8rem; font-weight: 600;
+    border: 1.5px solid transparent; text-decoration: none;
+  }
+  .ui-btn.primary { background: var(--orange); color: #fff; }
+  .ui-btn.outline { background: #fff; border-color: #d0d5dd; color: #333; }
+  .ui-btn.danger { background: #dc2626; color: #fff; }
+  .ui-table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+  .ui-table th {
+    text-align: left; background: #f9fafb; border-bottom: 1px solid #eaecf0;
+    padding: 8px; color: #667085; font-weight: 600;
+  }
+  .ui-table td { padding: 9px 8px; border-bottom: 1px solid #f2f4f7; }
+  .badge {
+    display: inline-block; background: #fff4eb; color: var(--orange-dark);
+    border-radius: 999px; padding: 2px 8px; font-size: .72rem; font-weight: 600;
+  }
+  .badge.live { background: #ecfdf3; color: var(--ok); }
+  .badge.muted { background: #f2f4f7; color: #667085; }
+
+  /* Callout markers */
+  .mark {
+    position: relative;
+    outline: 2.5px solid var(--orange);
+    outline-offset: 3px;
+    border-radius: 6px;
+    z-index: 1;
+  }
+  .mark-blue { outline-color: var(--blue); }
+  .mark-green { outline-color: var(--ok); }
+  .mark-red { outline-color: var(--danger); }
+
+  .callouts {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .callout {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 10px;
+    align-items: start;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--orange);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .callout.blue { border-left-color: var(--blue); }
+  .callout.green { border-left-color: var(--ok); }
+  .callout.red { border-left-color: var(--danger); }
+  .num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--orange); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .85rem; flex-shrink: 0;
+  }
+  .callout.blue .num { background: var(--blue); }
+  .callout.green .num { background: var(--ok); }
+  .callout.red .num { background: var(--danger); }
+  .callout strong { display: block; font-size: .92rem; margin-bottom: 2px; }
+  .callout span { font-size: .86rem; color: var(--muted); }
+
+  .arrow-row {
+    display: flex; align-items: center; gap: 10px;
+    margin: 8px 0 14px; font-size: .9rem; color: var(--muted);
+  }
+  .arrow-row .arr {
+    color: var(--orange); font-weight: 700; font-size: 1.2rem;
+  }
+
+  .steps {
+    counter-reset: step;
+    list-style: none; padding: 0; margin: 12px 0 18px;
+  }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 12px 14px 12px 54px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute; left: 14px; top: 12px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--orange); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .85rem;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .card-mini {
+    border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: #fff;
+  }
+  .card-mini h4 { margin: 0 0 6px; font-size: .95rem; }
+  .card-mini p { margin: 0; font-size: .86rem; color: var(--muted); }
+
+  .url-box {
+    font-family: ui-monospace, Consolas, monospace;
+    background: #111; color: #ffd7b0;
+    padding: 10px 14px; border-radius: 8px;
+    font-size: .88rem; word-break: break-all;
+    margin: 8px 0 14px;
+  }
+
+  table.info {
+    width: 100%; border-collapse: collapse; margin: 12px 0 18px; font-size: .9rem;
+  }
+  table.info th, table.info td {
+    border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top;
+  }
+  table.info th { background: var(--soft); width: 32%; }
+
+  .footer-doc {
+    margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: .85rem; text-align: center;
+  }
+
+  @media print {
+    body { font-size: 12.5px; }
+    .page { max-width: none; padding: 0; }
+    .cover { break-after: page; border-radius: 0; }
+    h2 { break-after: avoid; }
+    .anno, .mock, .callout, .steps li { break-inside: avoid; }
+    .toc ol { columns: 2; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+  @page { margin: 14mm 12mm; size: A4; }
+
+  @media (max-width: 720px) {
+    .mock-body { grid-template-columns: 1fr; }
+    .mock-side { display: none; }
+    .toc ol { columns: 1; }
+    .two-col { grid-template-columns: 1fr; }
+    .cover { padding: 32px 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <section class="cover">
+    <div class="cover-logo">
+      <span>FWD</span>
+      <div>Content Studio · คู่มือผู้ดูแลระบบ</div>
+    </div>
+    <h1>คู่มือการใช้งาน<br>ระบบหลังบ้าน CMS</h1>
+    <p>อธิบายทีละส่วน พร้อมภาพจำลอง กรอบสี และลูกศรชี้จุดสำคัญ ให้แก้ไขเว็บได้เองโดยไม่ต้องเขียนโค้ด</p>
+    <div class="cover-meta">
+      <span>FWD AGENT ประเทศไทย</span>
+      <span>อัปเดต พ.ย. 2026</span>
+      <span>เปิดด้วยเบราว์เซอร์ หรือพิมพ์เป็น PDF</span>
+    </div>
+  </section>
+
+  <nav class="toc">
+    <h2>สารบัญ</h2>
+    <ol>
+      <li><a href="#login">เข้าสู่ระบบ</a></li>
+      <li><a href="#layout">โครงสร้างหน้าจอ</a></li>
+      <li><a href="#dashboard">แดชบอร์ด</a></li>
+      <li><a href="#site">ข้อมูลเว็บไซต์</a></li>
+      <li><a href="#homepage">หน้าแรก</a></li>
+      <li><a href="#media">สื่อ &amp; รูปภาพ</a></li>
+      <li><a href="#categories">หมวดหมู่แผน</a></li>
+      <li><a href="#catalog">แคตตาล็อกแผน</a></li>
+      <li><a href="#plans">รายละเอียดแผน</a></li>
+      <li><a href="#articles">บทความ</a></li>
+      <li><a href="#promotions">โปรโมชัน</a></li>
+      <li><a href="#pages">หน้าเว็บ (เกี่ยวกับ / เคลม / ติดต่อ / สมัครตัวแทน)</a></li>
+      <li><a href="#backup">สำรอง &amp; กู้คืน</a></li>
+      <li><a href="#account">บัญชี &amp; รหัสผ่าน</a></li>
+      <li><a href="#tips">ข้อควรรู้สำคัญ</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1 LOGIN -->
+  <h2 id="login">1. เข้าสู่ระบบ</h2>
+  <p>เปิดเบราว์เซอร์แล้วไปที่ URL หลังบ้าน:</p>
+  <div class="url-box">https://fwdagentthailand.com/admin/</div>
+  <p>หรือบนเครื่องตัวเอง (XAMPP):</p>
+  <div class="url-box">http://localhost/fwd/admin/</div>
+
+  <div class="anno">
+    <p class="anno-title">ภาพจำลอง — หน้าเข้าสู่ระบบ</p>
+    <div class="mock" style="max-width:420px;margin:0 auto">
+      <div class="mock-bar"><span class="dot"></span> เข้าสู่ระบบ — CMS</div>
+      <div style="padding:28px 24px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px">
+          <span style="background:var(--orange);color:#fff;padding:4px 8px;border-radius:6px;font-weight:700;font-size:.8rem">FWD</span>
+          <strong>Content Studio</strong>
+        </div>
+        <h4 style="margin:0 0 4px">เข้าสู่ระบบ</h4>
+        <p class="sub">ใช้อีเมลและรหัสผ่านของผู้ดูแลระบบ</p>
+        <div class="mark" style="margin-bottom:12px;padding:6px;display:block">
+          <div style="font-size:.75rem;margin-bottom:4px;color:#667085">อีเมล</div>
+          <div class="ui-input" style="width:100%">supakitraksorn@gmail.com</div>
+        </div>
+        <div class="mark mark-blue" style="margin-bottom:14px;padding:6px;display:block">
+          <div style="font-size:.75rem;margin-bottom:4px;color:#667085">รหัสผ่าน</div>
+          <div class="ui-input" style="width:100%">••••••••</div>
+        </div>
+        <div class="mark mark-green ui-btn primary" style="width:100%;justify-content:center">เข้าสู่ระบบ</div>
+      </div>
+    </div>
+    <div class="callouts">
+      <div class="callout"><div class="num">1</div><div><strong>ช่องอีเมล</strong><span>ใส่เป็นอีเมลเต็ม เช่น <code>supakitraksorn@gmail.com</code> — อย่าใส่คำว่า admin</span></div></div>
+      <div class="callout blue"><div class="num">2</div><div><strong>ช่องรหัสผ่าน</strong><span>รหัสผ่านที่ตั้งไว้ในระบบ (เปลี่ยนได้หลังเข้าแล้ว)</span></div></div>
+      <div class="callout green"><div class="num">3</div><div><strong>ปุ่มเข้าสู่ระบบ</strong><span>กดแล้วจะไปหน้าแดชบอร์ด</span></div></div>
+    </div>
+  </div>
+
+  <!-- 2 LAYOUT -->
+  <h2 id="layout">2. โครงสร้างหน้าจอหลังบ้าน</h2>
+  <p>ทุกหน้าในระบบใช้โครงเดียวกัน มีเมนูซ้ายและพื้นที่แก้ไขด้านขวา</p>
+
+  <div class="anno">
+    <p class="anno-title">ภาพจำลอง — โครงหน้าจอหลัก</p>
+    <div class="mock">
+      <div class="mock-bar"><span class="dot"></span> FWD CMS · แดชบอร์ด</div>
+      <div class="mock-body">
+        <aside class="mock-side">
+          <div class="brand"><b>FWD</b> Content Studio</div>
+          <div class="sec">ภาพรวม</div>
+          <div class="item active">แดชบอร์ด</div>
+          <div class="sec">ตั้งค่าเว็บ</div>
+          <div class="item">ข้อมูลเว็บไซต์</div>
+          <div class="item">หน้าแรก</div>
+          <div class="item">Footer &amp; Cookie</div>
+          <div class="item">สื่อ &amp; รูปภาพ</div>
+          <div class="sec">ผลิตภัณฑ์</div>
+          <div class="item">หมวดหมู่แผน</div>
+          <div class="item">แคตตาล็อก</div>
+          <div class="item">รายละเอียดแผน</div>
+          <div class="sec">เนื้อหา</div>
+          <div class="item">บทความ</div>
+          <div class="item">โปรโมชัน</div>
+        </aside>
+        <div class="mock-main">
+          <div class="mark" style="display:inline-block;padding:4px 8px;margin-bottom:10px">
+            <div style="font-size:.7rem;color:#888">FWD CMS</div>
+            <strong>ชื่อหน้าปัจจุบัน</strong>
+          </div>
+          <div style="float:right" class="mark mark-blue" style="padding:6px 10px;border-radius:20px;background:#f2f4f7;font-size:.75rem">
+            อีเมลผู้ใช้
+          </div>
+          <div style="clear:both"></div>
+          <div class="mark mark-green" style="display:block;padding:16px;background:#fafafa;border-radius:10px;margin-top:16px;min-height:120px">
+            พื้นที่แก้ไขเนื้อหาของแต่ละเมนู
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="callouts">
+      <div class="callout"><div class="num">1</div><div><strong>เมนูด้านซ้าย</strong><span>เลือกส่วนที่ต้องการแก้ — รายการที่มีกรอบส้มคือหน้าปัจจุบัน</span></div></div>
+      <div class="callout blue"><div class="num">2</div><div><strong>ชื่อผู้ใช้มุมขวาบน</strong><span>แสดงอีเมลที่ล็อกอินอยู่</span></div></div>
+      <div class="callout green"><div class="num">3</div><div><strong>พื้นที่ทำงาน</strong><span>ฟอร์ม ตาราง และปุ่มบันทึกอยู่ตรงนี้</span></div></div>
+    </div>
+  </div>
+
+  <!-- 3 DASHBOARD -->
+  <h2 id="dashboard">3. แดชบอร์ด</h2>
+  <p>หน้าแรกหลังล็อกอิน เป็นทางลัดไปยังงานที่ทำบ่อย</p>
+  <div class="arrow-row"><span class="arr">→</span> เมนูซ้าย: <strong>แดชบอร์ด</strong></div>
+  <ul>
+    <li>คลิกการ์ด เช่น “โปรโมชัน” หรือ “แคตตาล็อก” เพื่อเปิดหน้าแก้ไขทันที</li>
+    <li>เหมาะสำหรับเริ่มงานเร็ว โดยไม่ต้องไล่หาในเมนูยาวๆ</li>
+  </ul>
+
+  <!-- 4 SITE -->
+  <h2 id="site">4. ข้อมูลเว็บไซต์</h2>
+  <div class="arrow-row"><span class="arr">→</span> ตั้งค่าเว็บ → <strong>ข้อมูลเว็บไซต์</strong></div>
+  <p>แก้ชื่อเว็บ เบอร์โทร อีเมล ใบอนุญาต โลโก้ และข้อมูลติดต่อที่ใช้ทั่วทั้งไซต์</p>
+  <ol class="steps">
+    <li>เปิดเมนู <strong>ข้อมูลเว็บไซต์</strong></li>
+    <li>แก้ช่องที่ต้องการ เช่น ชื่อเว็บ / เบอร์โทร / อีเมล</li>
+    <li>กดปุ่ม <strong>บันทึก</strong> สีส้มด้านล่าง</li>
+    <li>เปิดหน้าเว็บจริงแล้วรีเฟรช (Ctrl+F5) เพื่อตรวจผล</li>
+  </ol>
+
+  <!-- 5 HOMEPAGE -->
+  <h2 id="homepage">5. หน้าแรก</h2>
+  <div class="arrow-row"><span class="arr">→</span> ตั้งค่าเว็บ → <strong>หน้าแรก</strong></div>
+  <p>จัดการส่วนต่างๆ บนหน้าแรก เช่น Hero, แผนแนะนำ, รีวิว, ทำไมต้องเลือกเรา</p>
+  <div class="tip"><strong>เคล็ดลับ</strong>แก้ทีละส่วน แล้วกดบันทึก — ไม่จำเป็นต้องแก้ทุกช่องพร้อมกัน</div>
+
+  <!-- 6 MEDIA -->
+  <h2 id="media">6. สื่อ &amp; รูปภาพ</h2>
+  <div class="arrow-row"><span class="arr">→</span> ตั้งค่าเว็บ → <strong>สื่อ &amp; รูปภาพ</strong></div>
+  <p>อัปโหลดรูปที่ใช้ในเว็บ เช่น Hero, ใบอนุญาต, รูปสินค้า</p>
+  <ol class="steps">
+    <li>กดอัปโหลด / เลือกไฟล์รูป</li>
+    <li>รอจนอัปโหลดเสร็จ</li>
+    <li>คัดลอก path หรือเลือกใช้รูปจากหน้าแก้ไขอื่น ๆ</li>
+  </ol>
+  <div class="warn"><strong>แนะนำ</strong>ใช้ไฟล์ JPG/PNG/WebP ขนาดไม่ใหญ่เกินไป เพื่อให้เว็บโหลดเร็ว</div>
+
+  <!-- 7 CATEGORIES -->
+  <h2 id="categories">7. หมวดหมู่แผน</h2>
+  <div class="arrow-row"><span class="arr">→</span> ผลิตภัณฑ์ → <strong>หมวดหมู่แผน</strong></div>
+  <p>จัดการหมวด เช่น สุขภาพ ชีวิต โรคร้ายแรง — ทั้งเพิ่ม แก้ไข ซ่อน/ลบ</p>
+
+  <div class="anno">
+    <p class="anno-title">ภาพจำลอง — หมวดหมู่แผน</p>
+    <div class="mock">
+      <div class="mock-bar"><span class="dot"></span> หมวดหมู่แผน</div>
+      <div style="padding:16px">
+        <div class="ui-row" style="justify-content:space-between">
+          <strong>หมวดหมู่แผนประกัน</strong>
+          <span class="mark ui-btn primary">+ เพิ่มหมวดหมู่</span>
+        </div>
+        <table class="ui-table">
+          <thead><tr><th>หมวดหมู่</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>ประกันสุขภาพ<br><code style="font-size:.7rem;color:#888">health</code></td>
+              <td><span class="badge live">แสดง</span></td>
+              <td>
+                <span class="mark mark-blue ui-btn outline" style="padding:5px 8px">แก้ไข</span>
+                <span class="mark mark-red ui-btn danger" style="padding:5px 8px">ลบ</span>
+              </td>
+            </tr>
+            <tr>
+              <td>ประกันชีวิต…</td>
+              <td><span class="badge live">แสดง</span></td>
+              <td><span class="ui-btn outline" style="padding:5px 8px">แก้ไข</span> <span class="ui-btn danger" style="padding:5px 8px">ลบ</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="callouts">
+      <div class="callout"><div class="num">1</div><div><strong>+ เพิ่มหมวดหมู่</strong><span>สร้างหมวดใหม่ กรอก slug และชื่อหมวด</span></div></div>
+      <div class="callout blue"><div class="num">2</div><div><strong>แก้ไข</strong><span>เปลี่ยนชื่อ / คำอธิบายที่โชว์บนเว็บและเมนู</span></div></div>
+      <div class="callout red"><div class="num">3</div><div><strong>ลบ</strong><span>หมวดเดิมในระบบ = ซ่อน (กู้คืนได้) · หมวดที่เพิ่มเอง = ลบถาวร</span></div></div>
+    </div>
+  </div>
+
+  <!-- 8 CATALOG -->
+  <h2 id="catalog">8. แคตตาล็อกแผน</h2>
+  <div class="arrow-row"><span class="arr">→</span> ผลิตภัณฑ์ → <strong>แคตตาล็อก (37 แผน)</strong></div>
+  <p>ควบคุม “การ์ดแผน” ที่แสดงในหน้าหมวดสินค้า เช่น ชื่อ คำอธิบาย ส่วนลด รูป</p>
+
+  <div class="anno">
+    <p class="anno-title">ภาพจำลอง — แคตตาล็อก</p>
+    <div class="mock">
+      <div class="mock-bar"><span class="dot"></span> แคตตาล็อกแผนประกัน</div>
+      <div style="padding:16px">
+        <div class="ui-row" style="justify-content:space-between">
+          <strong>แคตตาล็อกแผนประกัน</strong>
+          <span class="mark ui-btn primary">+ เพิ่มแผน</span>
+        </div>
+        <div class="ui-row">
+          <span class="mark mark-blue ui-input">ค้นหาชื่อหรือ slug...</span>
+          <span class="ui-btn outline">ค้นหา</span>
+        </div>
+        <table class="ui-table">
+          <thead><tr><th>แผน</th><th>หมวด</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Precious Care<br><code style="font-size:.7rem;color:#888">precious-care</code></td>
+              <td>สุขภาพ</td>
+              <td><span class="badge live">แสดง</span></td>
+              <td>
+                <span class="mark mark-green ui-btn outline" style="padding:5px 8px">แก้ไข</span>
+                <span class="mark mark-red ui-btn danger" style="padding:5px 8px">ลบ</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="callouts">
+      <div class="callout"><div class="num">1</div><div><strong>+ เพิ่มแผน</strong><span>เพิ่มแผนใหม่เข้าแคตตาล็อก</span></div></div>
+      <div class="callout blue"><div class="num">2</div><div><strong>ค้นหา</strong><span>พิมพ์ชื่อหรือ slug เพื่อหาแผนเร็วขึ้น</span></div></div>
+      <div class="callout green"><div class="num">3</div><div><strong>แก้ไข</strong><span>แก้ชื่อ คำอธิบาย ส่วนลด รูปภาพ</span></div></div>
+      <div class="callout red"><div class="num">4</div><div><strong>ลบ</strong><span>ซ่อนแผนเดิมจากเว็บ (กู้คืนด้วย “แสดงอีกครั้ง”) หรือลบแผนที่สร้างเองถาวร</span></div></div>
+    </div>
+  </div>
+
+  <!-- 9 PLANS -->
+  <h2 id="plans">9. รายละเอียดแผน</h2>
+  <div class="arrow-row"><span class="arr">→</span> ผลิตภัณฑ์ → <strong>รายละเอียดแผน</strong></div>
+  <p>หน้านี้แก้เนื้อหาเต็มของ <code>plan.php?slug=...</code> เช่น จุดเด่น เงื่อนไข FAQ</p>
+  <div class="two-col">
+    <div class="card-mini">
+      <h4>แคตตาล็อก</h4>
+      <p>คุมการ์ดสั้น ๆ ในหน้ารวมสินค้า</p>
+    </div>
+    <div class="card-mini">
+      <h4>รายละเอียดแผน</h4>
+      <p>คุมหน้าแผนเต็ม ที่ลูกค้ากด “ดูรายละเอียด”</p>
+    </div>
+  </div>
+  <div class="note"><strong>สำคัญ</strong>ปุ่ม <strong>ลบ</strong> ที่นี่จะซ่อนทั้งหน้ารายละเอียดและการ์ดในแคตตาล็อกพร้อมกัน (แผนเดิมกู้คืนได้)</div>
+  <p>ปุ่ม <strong>รีเซ็ต CMS</strong> = ลบเฉพาะการแก้ไขเนื้อหา แล้วย้อนกลับค่าเดิม — ไม่ได้ลบแผนออกจากเว็บ</p>
+
+  <!-- 10 ARTICLES -->
+  <h2 id="articles">10. บทความ</h2>
+  <div class="arrow-row"><span class="arr">→</span> เนื้อหา → <strong>บทความ</strong></div>
+  <ol class="steps">
+    <li>กด <strong>+ เพิ่มบทความ</strong> หรือปุ่ม <strong>แก้ไข</strong> ของบทความที่มีอยู่</li>
+    <li>กรอกหัวข้อ slug รูปปก และเนื้อหาในตัวแก้ไข</li>
+    <li>ตรวจ SEO title / description ถ้ามี</li>
+    <li>กด <strong>บันทึก</strong></li>
+  </ol>
+
+  <!-- 11 PROMOTIONS -->
+  <h2 id="promotions">11. โปรโมชัน</h2>
+  <div class="arrow-row"><span class="arr">→</span> เนื้อหา → <strong>โปรโมชัน</strong></div>
+
+  <div class="anno">
+    <p class="anno-title">ภาพจำลอง — หน้าโปรโมชัน (จุดที่มักสับสน)</p>
+    <div class="mock">
+      <div class="mock-bar"><span class="dot"></span> โปรโมชัน</div>
+      <div style="padding:16px">
+        <div class="mark" style="display:block;padding:12px;background:#fafafa;border-radius:10px;margin-bottom:14px">
+          <div style="font-size:.78rem;color:#667085;margin-bottom:6px">จำนวนโปรโมชันบนหน้าแรก</div>
+          <div class="ui-row">
+            <span class="ui-input" style="width:80px;text-align:center">2</span>
+            <span class="ui-btn outline">บันทึกการตั้งค่า</span>
+          </div>
+        </div>
+        <div class="ui-row" style="justify-content:space-between">
+          <strong>รายการโปรโมชัน</strong>
+          <span class="mark mark-blue ui-btn primary">+ เพิ่มโปรโมชัน</span>
+        </div>
+        <table class="ui-table">
+          <thead><tr><th>Badge</th><th>หัวข้อ</th><th>วันที่</th><th>จัดการ</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="badge">แนะนำ</span></td>
+              <td>FWD Precious Care…</td>
+              <td class="mark mark-green" style="display:table-cell">ถึง 31 ธ.ค. 2026</td>
+              <td>
+                <span class="mark mark-red ui-btn outline" style="padding:5px 8px">แก้ไข</span>
+                <span class="ui-btn danger" style="padding:5px 8px">ลบ</span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge">โรคร้ายแรง</span></td>
+              <td>CI All-in-One…</td>
+              <td>ถึง 31 ธ.ค. 2026</td>
+              <td><span class="ui-btn outline" style="padding:5px 8px">แก้ไข</span> <span class="ui-btn danger" style="padding:5px 8px">ลบ</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="callouts">
+      <div class="callout"><div class="num">1</div><div><strong>จำนวนบนหน้าแรก</strong><span>กำหนดว่าหน้าแรกโชว์กี่อัน (เช่น 2) — ไม่ได้จำกัดจำนวนในรายการทั้งหมด</span></div></div>
+      <div class="callout blue"><div class="num">2</div><div><strong>+ เพิ่มโปรโมชัน</strong><span>เปิดหน้าฟอร์มเพิ่มรายการใหม่</span></div></div>
+      <div class="callout green"><div class="num">3</div><div><strong>คอลัมน์วันที่</strong><span>ข้อความวันที่บนการ์ดเว็บ เช่น “ถึง 31 ธ.ค. 2026”</span></div></div>
+      <div class="callout red"><div class="num">4</div><div><strong>แก้ไข</strong><span>เปิดหน้าแก้ไขแยก — แก้แล้วกดบันทึก จะอัปเดตบนเว็บ PHP ทันที</span></div></div>
+    </div>
+  </div>
+
+  <div class="warn">
+    <strong>ทำไมแก้แล้วบางเว็บไม่เปลี่ยน?</strong>
+    แอดมินอัปเดตเว็บ <strong>fwdagentthailand.com</strong> ทันที<br>
+    แต่เว็บ <strong>goddarkmarketing.github.io</strong> เป็นไฟล์ static — จะไม่เปลี่ยนเองจนกว่าจะ build ใหม่จาก Git
+  </div>
+
+  <!-- 12 PAGES -->
+  <h2 id="pages">12. หน้าเว็บอื่น ๆ</h2>
+  <div class="arrow-row"><span class="arr">→</span> เมนู <strong>หน้าเว็บ</strong></div>
+  <table class="info">
+    <tr><th>เกี่ยวกับเรา</th><td>ข้อความแนะนำบริษัท / ทีม</td></tr>
+    <tr><th>การเคลม</th><td>ขั้นตอนและข้อมูลการเคลม</td></tr>
+    <tr><th>ติดต่อเรา</th><td>ข้อความหน้าติดต่อ / หัวข้อสนใจในฟอร์ม</td></tr>
+    <tr><th>สมัครตัวแทน</th><td>เนื้อหาหน้าสมัครตัวแทน</td></tr>
+  </table>
+  <p>วิธีใช้เหมือนกัน: เปิดหน้า → แก้ข้อความ → กด <strong>บันทึก</strong></p>
+
+  <!-- 13 BACKUP -->
+  <h2 id="backup">13. สำรอง &amp; กู้คืน</h2>
+  <div class="arrow-row"><span class="arr">→</span> ระบบ → <strong>สำรอง &amp; กู้คืน</strong></div>
+  <ol class="steps">
+    <li>กดสร้างไฟล์สำรองก่อนแก้ข้อมูลสำคัญ</li>
+    <li>ดาวน์โหลดเก็บไว้ในเครื่อง</li>
+    <li>ถ้าต้องการย้อนกลับ ให้กู้คืนจากไฟล์สำรอง</li>
+  </ol>
+  <div class="tip"><strong>แนะนำ</strong>สำรองทุกครั้งก่อนลบหมวด / แผน / โปรโมชันจำนวนมาก</div>
+
+  <!-- 14 ACCOUNT -->
+  <h2 id="account">14. บัญชี &amp; รหัสผ่าน</h2>
+  <div class="arrow-row"><span class="arr">→</span> บัญชี → <strong>เปลี่ยนรหัสผ่าน</strong></div>
+  <p>กรอกรหัสเดิม รหัสใหม่ ยืนยันรหัสใหม่ แล้วบันทึก</p>
+  <p>เมนู <strong>ออกจากระบบ</strong> ใช้เมื่อเลิกใช้งานบนเครื่องสาธารณะ</p>
+
+  <!-- 15 TIPS -->
+  <h2 id="tips">15. ข้อควรรู้สำคัญ</h2>
+  <table class="info">
+    <tr>
+      <th>หลังบันทึกแล้วไม่เห็นผล</th>
+      <td>รีเฟรชหน้าเว็บแรง ๆ (Ctrl+F5) หรือลองเปิดแบบไม่ระบุตัวตน</td>
+    </tr>
+    <tr>
+      <th>ดูผลที่เว็บไหน?</th>
+      <td>ถ้าเข้าแอดมินที่ <code>fwdagentthailand.com/admin/</code> ให้ดูผลที่ <code>fwdagentthailand.com</code></td>
+    </tr>
+    <tr>
+      <th>GitHub Pages</th>
+      <td>เป็นเว็บสำเนาแบบไฟล์นิ่ง ไม่ดึงข้อมูลสดจากแอดมินอัตโนมัติ</td>
+    </tr>
+    <tr>
+      <th>ปุ่มลบ vs รีเซ็ต</th>
+      <td><strong>ลบ/ซ่อน</strong> = ไม่โชว์บนเว็บ · <strong>รีเซ็ต CMS</strong> = ย้อนเนื้อหาที่แก้กลับค่าเดิม</td>
+    </tr>
+    <tr>
+      <th>หมวด “ทั้งหมด”</th>
+      <td>ลบไม่ได้ เพราะเป็นหมวดพิเศษของระบบ</td>
+    </tr>
+  </table>
+
+  <h3>สรุปทางลัดงานที่ใช้บ่อย</h3>
+  <ul>
+    <li>เปลี่ยนวันที่โปรโมชัน → <strong>โปรโมชัน → แก้ไข → บันทึก</strong></li>
+    <li>ซ่อนแผนที่ไม่ขายแล้ว → <strong>แคตตาล็อก หรือ รายละเอียดแผน → ลบ</strong></li>
+    <li>เปลี่ยนเบอร์โทรทั่วเว็บ → <strong>ข้อมูลเว็บไซต์</strong></li>
+    <li>เปลี่ยนรูป Hero หน้าแรก → <strong>หน้าแรก / สื่อ &amp; รูปภาพ</strong></li>
+  </ul>
+
+  <div class="footer-doc">
+    FWD Content Studio · คู่มือระบบหลังบ้าน<br>
+    ไฟล์นี้เปิดด้วยเบราว์เซอร์ได้ทันที หรือพิมพ์เป็น PDF (Ctrl+P → บันทึกเป็น PDF)
+  </div>
+</div>
+</body>
+</html>

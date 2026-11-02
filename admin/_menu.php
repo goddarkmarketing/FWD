@@ -26,6 +26,7 @@ return [
     ]],
     ['section' => 'ระบบ', 'items' => [
         ['label' => 'สำรอง & กู้คืน', 'file' => 'backup.php', 'icon' => 'backup'],
+        ['label' => 'คู่มือการใช้งาน', 'file' => 'manual.php', 'icon' => 'page'],
     ]],
     ['section' => 'บัญชี', 'items' => [
         ['label' => 'เปลี่ยนรหัสผ่าน', 'file' => 'change-password.php', 'icon' => 'lock'],
