@@ -122,7 +122,7 @@ ob_start();
 <form method="post" class="admin-form">
     <input type="hidden" name="_csrf" value="<?= admin_h(admin_csrf_token()) ?>">
 
-    <div class="admin-card">
+    <div class="admin-card" data-tour="plan-basic">
         <p style="margin:0 0 1rem">
             <code><?= admin_h($slug) ?></code>
             <?php if ($hasCms): ?><span class="admin-badge" style="margin-left:.5rem">มีการแก้ไข CMS</span><?php endif; ?>
@@ -152,7 +152,7 @@ ob_start();
         </div>
     </div>
 
-    <div class="admin-card">
+    <div class="admin-card" data-tour="plan-hero">
         <div class="admin-card__head">
             <h2 class="admin-card__title">จุดเด่น Hero</h2>
             <button type="button" class="admin-btn admin-btn--outline admin-btn--sm" data-repeater-add="#hero-bullets-list">+ เพิ่มข้อ</button>
@@ -173,7 +173,7 @@ ob_start();
         </div>
     </div>
 
-    <div class="admin-card">
+    <div class="admin-card" data-tour="plan-highlights">
         <div class="admin-card__head">
             <h2 class="admin-card__title">จุดเด่น (แท็บ Highlights)</h2>
             <button type="button" class="admin-btn admin-btn--outline admin-btn--sm" data-repeater-add="#highlights-list">+ เพิ่มจุดเด่น</button>
@@ -259,7 +259,7 @@ ob_start();
         </div>
     </div>
 
-    <div class="admin-actions">
+    <div class="admin-actions" data-tour="plan-submit">
         <a href="<?= admin_h(admin_url('plans.php')) ?>" class="admin-btn admin-btn--outline">กลับ</a>
         <button type="submit" class="admin-btn admin-btn--primary">บันทึก</button>
         <?php if ($hasCms): ?>

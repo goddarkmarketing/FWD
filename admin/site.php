@@ -26,7 +26,7 @@ ob_start();
 <form method="post" class="admin-form">
     <input type="hidden" name="_csrf" value="<?= admin_h(admin_csrf_token()) ?>">
 
-    <div class="admin-card">
+    <div class="admin-card" data-tour="site-brand">
         <h2>แบรนด์</h2>
         <div class="form-grid-2">
             <div class="form-row">
@@ -45,7 +45,7 @@ ob_start();
         </div>
     </div>
 
-    <div class="admin-card">
+    <div class="admin-card" data-tour="site-contact">
         <h2>ติดต่อ</h2>
         <div class="form-grid-2">
             <div class="form-row">
@@ -83,7 +83,7 @@ ob_start();
         </div>
     </div>
 
-    <div class="admin-card">
+    <div class="admin-card" data-tour="site-license">
         <h2>ตัวแทน / ใบอนุญาต</h2>
         <div class="form-row">
             <label for="agent_office_name">ชื่อสำนักงาน</label>
@@ -95,7 +95,7 @@ ob_start();
         </div>
     </div>
 
-    <div class="admin-actions">
+    <div class="admin-actions" data-tour="site-submit">
         <button type="submit" class="admin-btn admin-btn--primary">บันทึก</button>
     </div>
 </form>

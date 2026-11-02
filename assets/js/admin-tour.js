@@ -116,6 +116,137 @@
                     text: 'กดแก้ไขเพื่อเปิดหน้าฟอร์ม เปลี่ยนข้อความวันที่ เช่น “ถึง 31 ธ.ค. 2026” แล้วกดบันทึก'
                 }
             ]
+        },
+        'edit-plan': {
+            title: 'แก้ไขรายละเอียดแผน',
+            steps: [
+                {
+                    page: 'plans.php',
+                    selector: '[data-tour="nav-plans"]',
+                    title: 'เปิดเมนูรายละเอียดแผน',
+                    text: 'เมนูนี้แก้เนื้อหาเต็มของหน้า plan.php เช่น จุดเด่น เงื่อนไข FAQ — คนละส่วนกับแคตตาล็อกที่เป็นการ์ดสั้น ๆ'
+                },
+                {
+                    page: 'plans.php',
+                    selector: '[data-tour="plans-search"]',
+                    title: 'ค้นหาแผน',
+                    text: 'พิมพ์ชื่อแผนหรือ slug เพื่อหาแผนที่ต้องการแก้ไข'
+                },
+                {
+                    page: 'plans.php',
+                    selector: '[data-tour="plans-edit-btn"]',
+                    title: 'กดปุ่มแก้ไข',
+                    text: 'กดแก้ไขเพื่อเปิดหน้าฟอร์มเนื้อหาแผน ขั้นตอนถัดไปจะพาไปตัวอย่างหน้าแก้ไข'
+                },
+                {
+                    page: 'plan-edit.php',
+                    selector: '[data-tour="plan-basic"]',
+                    title: 'ข้อมูลหลัก',
+                    text: 'แก้ชื่อแผน Tagline ป้ายส่วนลด และ Meta description ที่แสดงด้านบนหน้าเว็บ',
+                    go: 'plan-edit.php?slug=precious-care'
+                },
+                {
+                    page: 'plan-edit.php',
+                    selector: '[data-tour="plan-hero"]',
+                    title: 'จุดเด่น Hero',
+                    text: 'รายการ bullet ใต้ชื่อแผนบนหน้าเว็บ กด + เพิ่มข้อ เพื่อเพิ่มข้อความได้'
+                },
+                {
+                    page: 'plan-edit.php',
+                    selector: '[data-tour="plan-highlights"]',
+                    title: 'แท็บจุดเด่น',
+                    text: 'การ์ดจุดเด่นในแท็บบนหน้าแผน แต่ละข้อมีหัวข้อและคำอธิบาย'
+                },
+                {
+                    page: 'plan-edit.php',
+                    selector: '[data-tour="plan-submit"]',
+                    title: 'บันทึกการแก้ไข',
+                    text: 'กดบันทึกเมื่อแก้เสร็จ แล้วเปิดดูหน้าเว็บเพื่อตรวจผล (Ctrl+F5 หากยังไม่เปลี่ยน)'
+                }
+            ]
+        },
+        'articles': {
+            title: 'เพิ่ม / แก้ไขบทความ',
+            steps: [
+                {
+                    page: 'articles.php',
+                    selector: '[data-tour="nav-articles"]',
+                    title: 'เปิดเมนูบทความ',
+                    text: 'เมนูนี้จัดการบทความทั้งหมดบนเว็บ ทั้งเพิ่ม แก้ไข และลบ'
+                },
+                {
+                    page: 'articles.php',
+                    selector: '[data-tour="articles-add-btn"]',
+                    title: 'เพิ่มบทความใหม่',
+                    text: 'กดปุ่มนี้เพื่อสร้างบทความใหม่ หรือกดแก้ไขในตารางถ้าต้องการแก้บทความเดิม'
+                },
+                {
+                    page: 'article-edit.php',
+                    selector: '[data-tour="article-title"]',
+                    title: 'กรอกหัวข้อบทความ',
+                    text: 'หัวข้อนี้แสดงเป็นชื่อบทความบนเว็บ และใช้เป็นค่าเริ่มต้นของ SEO title',
+                    go: 'article-edit.php?new=1'
+                },
+                {
+                    page: 'article-edit.php',
+                    selector: '[data-tour="article-slug"]',
+                    title: 'ตั้งค่า Slug และหมวด',
+                    text: 'Slug คือรหัสใน URL เช่น health-guide หมวดใช้จัดกลุ่มบทความ'
+                },
+                {
+                    page: 'article-edit.php',
+                    selector: '[data-tour="article-content"]',
+                    title: 'เขียนเนื้อหา',
+                    text: 'ใช้ตัวแก้ไขข้อความจัดรูปแบบได้ เช่น หัวข้อ รายการ ลิงก์ และรูปภาพ'
+                },
+                {
+                    page: 'article-edit.php',
+                    selector: '[data-tour="article-seo"]',
+                    title: 'ตรวจ SEO',
+                    text: 'ใส่ Meta title / description และ Focus keyword เพื่อให้ Google หาเจอง่ายขึ้น ดูคะแนน SEO ด้านบนขวา'
+                },
+                {
+                    page: 'article-edit.php',
+                    selector: '[data-tour="article-submit"]',
+                    title: 'บันทึกบทความ',
+                    text: 'กดบันทึกเมื่อพร้อม บทความจะขึ้นบนเว็บ PHP ทันที'
+                }
+            ]
+        },
+        'site-info': {
+            title: 'ข้อมูลเว็บไซต์',
+            steps: [
+                {
+                    page: 'site.php',
+                    selector: '[data-tour="nav-site"]',
+                    title: 'เปิดเมนูข้อมูลเว็บไซต์',
+                    text: 'เมนูนี้ตั้งค่าชื่อเว็บ เบอร์โทร อีเมล และข้อมูลติดต่อที่ใช้ทั่วทั้งไซต์'
+                },
+                {
+                    page: 'site.php',
+                    selector: '[data-tour="site-brand"]',
+                    title: 'แบรนด์',
+                    text: 'แก้ชื่อเว็บไซต์ Tagline และโลโก้ ที่แสดงในหัวเว็บและหน้าต่างเบราว์เซอร์'
+                },
+                {
+                    page: 'site.php',
+                    selector: '[data-tour="site-contact"]',
+                    title: 'ข้อมูลติดต่อ',
+                    text: 'เบอร์โทร อีเมล Facebook และ LINE ที่แสดงในหน้าติดต่อและ footer'
+                },
+                {
+                    page: 'site.php',
+                    selector: '[data-tour="site-license"]',
+                    title: 'ตัวแทน / ใบอนุญาต',
+                    text: 'ชื่อสำนักงานและเลขใบอนุญาตตัวแทนที่แสดงบนเว็บ'
+                },
+                {
+                    page: 'site.php',
+                    selector: '[data-tour="site-submit"]',
+                    title: 'บันทึก',
+                    text: 'กดบันทึกเมื่อแก้เสร็จ ข้อมูลจะอัปเดตทั่วทั้งเว็บ PHP ทันที'
+                }
+            ]
         }
     };
 

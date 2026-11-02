@@ -30,10 +30,28 @@ ob_start();
             <button type="button" class="admin-btn admin-btn--primary admin-btn--sm" data-start-tour="remove-plan">เริ่มทัวร์</button>
         </div>
         <div class="admin-tour-card">
+            <span class="admin-tour-card__badge">ผลิตภัณฑ์</span>
+            <h3>แก้ไขรายละเอียดแผน</h3>
+            <p>สอนแก้ชื่อ Tagline จุดเด่น Hero และแท็บ Highlights บนหน้า plan</p>
+            <button type="button" class="admin-btn admin-btn--primary admin-btn--sm" data-start-tour="edit-plan">เริ่มทัวร์</button>
+        </div>
+        <div class="admin-tour-card">
+            <span class="admin-tour-card__badge">เนื้อหา</span>
+            <h3>เพิ่ม / แก้ไขบทความ</h3>
+            <p>สอนเพิ่มบทความ กรอกหัวข้อ slug เขียนเนื้อหา และตั้งค่า SEO</p>
+            <button type="button" class="admin-btn admin-btn--primary admin-btn--sm" data-start-tour="articles">เริ่มทัวร์</button>
+        </div>
+        <div class="admin-tour-card">
             <span class="admin-tour-card__badge">เนื้อหา</span>
             <h3>แก้ไขโปรโมชัน</h3>
             <p>สอนความหมายของจำนวนบนหน้าแรก การเพิ่ม และการแก้ไขวันที่/หัวข้อ</p>
             <button type="button" class="admin-btn admin-btn--primary admin-btn--sm" data-start-tour="promotions">เริ่มทัวร์</button>
+        </div>
+        <div class="admin-tour-card">
+            <span class="admin-tour-card__badge">ตั้งค่าเว็บ</span>
+            <h3>ข้อมูลเว็บไซต์</h3>
+            <p>สอนแก้ชื่อเว็บ โลโก้ เบอร์โทร อีเมล Facebook LINE และใบอนุญาต</p>
+            <button type="button" class="admin-btn admin-btn--primary admin-btn--sm" data-start-tour="site-info">เริ่มทัวร์</button>
         </div>
     </div>
 

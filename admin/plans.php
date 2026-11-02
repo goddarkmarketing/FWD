@@ -67,7 +67,7 @@ ob_start();
     <p class="admin-card__lead" style="margin-top:0">
         หน้า <code>plan.php?slug=...</code> · ปุ่ม <strong>ลบ</strong> จะซ่อนทั้งหน้ารายละเอียดและการ์ดในแคตตาล็อก (กู้คืนได้)
     </p>
-    <form method="get" class="admin-form admin-toolbar">
+    <form method="get" class="admin-form admin-toolbar" data-tour="plans-search">
         <div class="form-row">
             <label for="q">ค้นหาแผน</label>
             <input type="search" id="q" name="q" value="<?= admin_h($q) ?>" placeholder="ชื่อหรือ slug...">
@@ -108,7 +108,8 @@ ob_start();
                 </td>
                 <td class="admin-table-actions">
                     <?php if (!$isHidden && $plan !== null): ?>
-                    <a href="<?= admin_h(admin_url('plan-edit.php?slug=' . urlencode($slug))) ?>" class="admin-btn admin-btn--outline admin-btn--sm">แก้ไข</a>
+                    <a href="<?= admin_h(admin_url('plan-edit.php?slug=' . urlencode($slug))) ?>" class="admin-btn admin-btn--outline admin-btn--sm"<?= empty($plansEditTourMarked) ? ' data-tour="plans-edit-btn"' : '' ?>>แก้ไข</a>
+                    <?php if (empty($plansEditTourMarked)) { $plansEditTourMarked = true; } ?>
                     <?php endif; ?>
                     <?php if ($hasCms && !$isHidden): ?>
                     <?php admin_inline_post_form(

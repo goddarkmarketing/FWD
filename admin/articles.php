@@ -54,7 +54,7 @@ ob_start();
 
         <h2 style="margin:0">รายการบทความ (<?= count($items) ?>)</h2>
 
-        <a href="<?= admin_h(admin_url('article-edit.php?new=1')) ?>" class="admin-btn admin-btn--primary admin-btn--sm">+ เพิ่มบทความ</a>
+        <a href="<?= admin_h(admin_url('article-edit.php?new=1')) ?>" class="admin-btn admin-btn--primary admin-btn--sm" data-tour="articles-add-btn">+ เพิ่มบทความ</a>
 
     </div>
 
@@ -126,7 +126,8 @@ ob_start();
 
                 <td class="admin-table-actions">
 
-                    <a href="<?= admin_h(admin_url('article-edit.php?slug=' . urlencode($a['slug'] ?? ''))) ?>" class="admin-btn admin-btn--outline admin-btn--sm">แก้ไข</a>
+                    <a href="<?= admin_h(admin_url('article-edit.php?slug=' . urlencode($a['slug'] ?? ''))) ?>" class="admin-btn admin-btn--outline admin-btn--sm"<?= empty($articlesEditTourMarked) ? ' data-tour="articles-edit-btn"' : '' ?>>แก้ไข</a>
+                    <?php if (empty($articlesEditTourMarked)) { $articlesEditTourMarked = true; } ?>
 
                     <a href="../article.php?slug=<?= urlencode($a['slug'] ?? '') ?>" target="_blank" rel="noopener" class="admin-btn admin-btn--outline admin-btn--sm">ดู ↗</a>
 

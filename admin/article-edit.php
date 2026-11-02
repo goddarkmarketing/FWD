@@ -236,7 +236,7 @@ ob_start();
 
         </div>
 
-        <div class="form-row">
+        <div class="form-row" data-tour="article-title">
 
             <label for="title">หัวข้อบทความ <span class="req">*</span></label>
 
@@ -244,7 +244,7 @@ ob_start();
 
         </div>
 
-        <div class="form-grid-2">
+        <div class="form-grid-2" data-tour="article-slug">
 
             <div class="form-row">
 
@@ -336,7 +336,7 @@ ob_start();
 
 
 
-    <div class="admin-card">
+    <div class="admin-card" data-tour="article-content">
 
         <h2 class="admin-card__title">เนื้อหาบทความ</h2>
 
@@ -348,7 +348,7 @@ ob_start();
 
 
 
-    <div class="admin-card admin-seo-panel">
+    <div class="admin-card admin-seo-panel" data-tour="article-seo">
 
         <div class="admin-card__head">
 
@@ -440,7 +440,7 @@ ob_start();
 
 
 
-    <div class="admin-actions">
+    <div class="admin-actions" data-tour="article-submit">
 
         <a href="<?= admin_h(admin_url('articles.php')) ?>" class="admin-btn admin-btn--outline">กลับ</a>
 

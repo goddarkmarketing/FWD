@@ -57,6 +57,10 @@ $userInitial = $userEmail !== '' ? strtoupper(mb_substr($userEmail, 0, 1, 'UTF-8
                                 $tourAttr = ' data-tour="nav-categories"';
                             } elseif ($fileBase === 'plans.php') {
                                 $tourAttr = ' data-tour="nav-plans"';
+                            } elseif ($fileBase === 'articles.php') {
+                                $tourAttr = ' data-tour="nav-articles"';
+                            } elseif ($fileBase === 'site.php') {
+                                $tourAttr = ' data-tour="nav-site"';
                             }
                             ?>
                             <a href="<?= admin_h($href) ?>" class="admin-nav__link<?= $isActive ? ' is-active' : '' ?>"<?= $tourAttr ?>>
@@ -108,6 +112,6 @@ $userInitial = $userEmail !== '' ? strtoupper(mb_substr($userEmail, 0, 1, 'UTF-8
         </div>
     </div>
     <script src="<?= admin_h('../assets/js/admin.js') ?>?v=5"></script>
-    <script src="<?= admin_h('../assets/js/admin-tour.js') ?>?v=1"></script>
+    <script src="<?= admin_h('../assets/js/admin-tour.js') ?>?v=2"></script>
 </body>
 </html>
