@@ -3,6 +3,13 @@ DirectoryIndex index.php index.html
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Pretty URLs for LINE / social share (og:url + canonical use these paths)
+    # /plan/health-family-sharing/ → plan.php?slug=health-family-sharing
+    RewriteRule ^plan/([^/]+)/?$ plan.php?slug=$1 [L,QSA]
+
+    # /article/some-slug/ → article.php?slug=some-slug
+    RewriteRule ^article/([^/]+)/?$ article.php?slug=$1 [L,QSA]
+
     # Optional: remove .php extension (works at domain root or subfolder)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}\.php -f
