@@ -150,11 +150,25 @@ function current_canonical_url(): string
     if ($file === 'index.php') {
         return ensure_absolute_url(BASE_URL === '' ? '/' : rtrim(BASE_URL, '/') . '/');
     }
+    // Prefer pretty /plan/{slug}/ when available (routers + .htaccess).
+    // Keep plan.php?slug= as absolute fallback for hosts that only have the PHP file.
     if ($file === 'plan.php' && !empty($_GET['slug'])) {
-        return ensure_absolute_url(rtrim(BASE_URL, '/') . '/plan/' . rawurlencode((string) $_GET['slug']) . '/');
+        $slug = rawurlencode((string) $_GET['slug']);
+        $pretty = rtrim(BASE_URL, '/') . '/plan/' . $slug . '/';
+        $prettyFs = dirname(__DIR__) . '/plan/' . rawurldecode($slug) . '/index.php';
+        if (is_file($prettyFs)) {
+            return ensure_absolute_url($pretty);
+        }
+        return ensure_absolute_url(page_url('plan.php?slug=' . $slug));
     }
     if ($file === 'article.php' && !empty($_GET['slug'])) {
-        return ensure_absolute_url(rtrim(BASE_URL, '/') . '/article/' . rawurlencode((string) $_GET['slug']) . '/');
+        $slug = rawurlencode((string) $_GET['slug']);
+        $pretty = rtrim(BASE_URL, '/') . '/article/' . $slug . '/';
+        $prettyFs = dirname(__DIR__) . '/article/' . rawurldecode($slug) . '/index.php';
+        if (is_file($prettyFs)) {
+            return ensure_absolute_url($pretty);
+        }
+        return ensure_absolute_url(page_url('article.php?slug=' . $slug));
     }
 
     return ensure_absolute_url(page_url($file));
